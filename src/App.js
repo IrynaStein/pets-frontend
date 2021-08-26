@@ -1,18 +1,18 @@
 import './App.css';
+import { Switch, Route } from "react-router-dom"
+import Login from './Login'
+import Signup from './Signup';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Welcome to Petz</h1>
-      <form>
-      <input className="login-input" placeholder="user name..."></input>
-      <br/>
-      <input className="login-input" placeholder="password..."></input>
-      <br/>
-      <button>Login</button>
-      <button>Signup</button>
-      </form>
-    </div>
+    <Switch>
+      <Route exact path="/">
+        <Login />
+      </Route>
+      <Route path="/signup">
+        <Signup />
+      </Route>
+    </Switch>
   );
 }
 

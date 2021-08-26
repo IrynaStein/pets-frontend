@@ -1,10 +1,4 @@
 body {
-  /* margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; */
   display: block;
   background-image: url('https://i.imgur.com/27vvVmw.gif');
   background-repeat: no-repeat;
@@ -14,12 +8,34 @@ body {
   margin-right: auto;
   height: 500px;
   width: 500px;
-  border: 1px solid black;
+  border: 2px solid #B78E44;
+  font: 15px Indie Flower;
+  font-weight: bold;
+  
 }
 
-.in
+.centered-form{
+  position: relative;
+  top: 210px;
+}
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.input-field{
+  border-radius: 20px;
+  color: #B78E44;
+  border-style: solid;
+  border-width: 1px;
+  border-color:white;
+  padding: 5px;
+  text-align: center;
+  margin: 5px;
+  box-shadow: 1px 2px 3px 3px #DCB56D;
+  font: 15px Indie Flower;
+  font-weight: bold;
+}
+
+.input-field:focus, textarea { outline: none ! important; } 
+
+.input-field:focus {
+  color: #B78E44;
+  /* background-color: bisque; */
 }
