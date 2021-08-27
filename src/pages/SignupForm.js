@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-function Signup(){
+function SignupForm({onLogin}){
   const defaultForm = {
     username: "",
     password: "",
@@ -45,7 +45,8 @@ function Signup(){
       <br/>
       <button type="submit">Signup</button>
       </form>
+      <button type="submit">Back</button>
     </div>
     )
 }
-export default Signup;
+export default SignupForm;
