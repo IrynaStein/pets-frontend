@@ -1,35 +1,23 @@
-.container {
-  display: block;
-  background-image: url("https://live.staticflickr.com/65535/51406868660_f93cc6e3d9_b.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 500px;
-  margin-left: auto;
-  margin-right: auto;
-  height: 500px;
-  width: 500px;
-  border: 2px solid #636363;
-  font: 15px Indie Flower;
-  font-weight: bold;
-  /* justify-content: center; */
-  text-align: center;
+.main-container {
+    background-image: url("https://live.staticflickr.com/65535/51406868660_f93cc6e3d9_b.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 500px;
+    width: 500px;
+    border: 3px solid #5A6266;
+    font: 15px Indie Flower;
+    font-weight: bold;
+}
+.wrapper {
+    display: flex
 }
 
-.pet-container {
-    display: flex;
-    /* align-items: center; */
-    justify-content: center;
-    gap: 20px;
+.wrapper > div {
+    margin: .1em;
+    padding: .3em;
+    border-radius: 3px;
+    flex: 1; 
 }
-.user-container {
-    display: flex;
-}
-.pet-window {
-    height: 100px;
-    width: 100px;
-    /* border: 2px dotted #636363; */
-    box-shadow: 4px 12px 20px -4px #86A1B3;
-    padding: 5px;
-    border-radius: 70px;
-}
-
