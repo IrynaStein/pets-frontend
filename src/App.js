@@ -1,9 +1,9 @@
-import './App.css';
-import { Switch, Route } from "react-router-dom"
-import Login from './Login'
-import Signup from './Signup';
-import User from './User';
-import {useState, useEffect} from 'react'
+import "./App.css";
+import { Switch, Route, Redirect } from "react-router-dom";
+import LoginForm from "./pages/LoginForm";
+import SignupForm from "./pages/SignupForm";
+import User from "./User";
+import { useState, useEffect } from "react";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -17,17 +17,24 @@ function App() {
     });
   }, []);
 
-  console.log(user)
+  console.log(user);
 
-  if (!user) return <Login onLogin={setUser}/>;
+  // if (!user) return <Login onLogin={setUser}/>
 
   return (
     <Switch>
-      <Route path="/">
-        <User user={user} onLogout={setUser}/>
+      <Route exact path="/">
+        {user ? (
+          <User user={user} onLogout={setUser} />
+        ) : (
+          <Redirect to="/login" />
+        )}
       </Route>
       <Route path="/signup">
-        <Signup />
+        {!user ? <SignupForm onLogin={setUser} /> : <Redirect to="/" />}
+      </Route>
+      <Route exact path="/login">
+        {!user ? <LoginForm onLogin={setUser} /> : <Redirect to="/" />}
       </Route>
     </Switch>
   );

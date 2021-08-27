@@ -1,8 +1,9 @@
 import{useState, useEffect} from 'react'
+import './User.css'
 
 function User({user, onLogout}){
     const [pets, setPets] = useState([])
-
+console.log('user component')
     useEffect(() => {
        fetch('/pets')
        .then(resp => resp.json())
@@ -20,10 +21,14 @@ function User({user, onLogout}){
     }
 
     return (
-        <div>
+        <div className="container">
         <p>Hello {user.user_name}</p>
-        <button onClick={handleClick}>Logout</button>
+        <button className="button" onClick={handleClick}>Logout</button>
         <p>{pets.greeting}</p>
+        <img className="pet-container" src="https://i.imgur.com/1wfdSmO.gif"/>
+        <img className="pet-container" src="https://i.imgur.com/1wfdSmO.gif"/>
+        <img className="pet-container" src="https://i.imgur.com/1wfdSmO.gif"/>
+        
         </div>
     )
 }

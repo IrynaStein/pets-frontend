@@ -1,0 +1,27 @@
+.container {
+  display: block;
+  background-image: url("https://live.staticflickr.com/65535/51406868660_f93cc6e3d9_b.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 500px;
+  width: 500px;
+  border: 2px solid #636363;
+  font: 15px Indie Flower;
+  font-weight: bold;
+  justify-content: center;
+}
+
+.pet-container {
+  /* display: flexbox;
+  direction: flex-start; */
+  height: 100px;
+  width: 100px;
+  border: 2px solid #636363;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 50px;
+}
+

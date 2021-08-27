@@ -1,41 +1,56 @@
 body {
   display: block;
-  background-image: url('https://i.imgur.com/27vvVmw.gif');
+  background-image: url("https://i.imgur.com/27vvVmw.gif");
   background-repeat: no-repeat;
-  background-position: center; 
+  background-position: center;
   background-size: 500px;
   margin-left: auto;
   margin-right: auto;
   height: 500px;
   width: 500px;
-  border: 2px solid #B78E44;
+  border: 2px solid #b78e44;
   font: 15px Indie Flower;
   font-weight: bold;
-  
 }
 
-.centered-form{
+.centered-form {
   position: relative;
   top: 210px;
 }
 
-.input-field{
+.input-field {
   border-radius: 20px;
-  color: #B78E44;
+  color: #b78e44;
   border-style: solid;
   border-width: 1px;
-  border-color:white;
+  border-color: white;
   padding: 5px;
   text-align: center;
   margin: 5px;
-  box-shadow: 1px 2px 3px 3px #DCB56D;
+  box-shadow: 1px 2px 3px 3px #dcb56d;
   font: 15px Indie Flower;
   font-weight: bold;
 }
 
-.input-field:focus, textarea { outline: none ! important; } 
+.input-field:focus,
+textarea {
+  outline: none !important;
+}
 
 .input-field:focus {
-  color: #B78E44;
+  color: #b78e44;
   /* background-color: bisque; */
+}
+
+.button {
+  border: none;
+  background: none;
+  font: 20px Indie Flower;
+  margin-left: 5px;
+  margin-right: 5px;
+  color: white;
+}
+button:hover {
+  color: black;
+  cursor: pointer;
 }

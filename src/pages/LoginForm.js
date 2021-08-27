@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-function Login({onLogin}) {
+function LoginForm({onLogin}) {
   const [errors, setErrors] = useState([]);
   const [formData, setFormData] = useState({
     username: "",
@@ -57,9 +57,9 @@ function Login({onLogin}) {
           placeholder="password..."
         ></input>
         <br />
-        <button>Login</button>
+        <button className="button">Login</button>
         <Link to="/signup">
-          <button type="submit">Signup</button>
+          <button onClick={()=>console.log("signing up...")} className="button" type="submit">Signup</button>
         </Link>
         {errors.map((err) => <p>{err}</p>)}
       </form>
@@ -67,4 +67,4 @@ function Login({onLogin}) {
   );
 }
 
-export default Login;
+export default LoginForm;
