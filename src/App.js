@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import LoginForm from "./pages/LoginForm";
 import SignupForm from "./pages/SignupForm";
 import { useState, useEffect } from "react";
-import UserContainer from "./UserContainer";
+import HomePage from "./HomePage";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -25,7 +25,7 @@ function App() {
     <Switch>
       <Route exact path="/">
         {user ? (
-          <UserContainer user={user} onLogout={setUser} />
+          <HomePage user={user} onLogout={setUser} />
         ) : (
           <Redirect to="/login" />
         )}

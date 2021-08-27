@@ -1,6 +1,6 @@
 import{useState, useEffect} from 'react'
 import Header from './sections/Header'
-import './UserContainer.css'
+import './HomePage.css'
 import User from './sections/User'
 import PetsContainer from './sections/PetContainer'
 
