@@ -2,8 +2,8 @@ import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
 import LoginForm from "./pages/LoginForm";
 import SignupForm from "./pages/SignupForm";
-import User from "./User";
 import { useState, useEffect } from "react";
+import HomePage from "./HomePage";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -25,7 +25,7 @@ function App() {
     <Switch>
       <Route exact path="/">
         {user ? (
-          <User user={user} onLogout={setUser} />
+          <HomePage user={user} onLogout={setUser} />
         ) : (
           <Redirect to="/login" />
         )}

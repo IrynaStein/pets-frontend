@@ -1,8 +1,10 @@
 import{useState, useEffect} from 'react'
 import Header from './sections/Header'
-import './User.css'
+import './HomePage.css'
+import User from './sections/User'
+import PetsContainer from './sections/PetContainer'
 
-function User({user, onLogout}){
+export default function UserContainer({user, onLogout}){
     const [pets, setPets] = useState([])
 console.log('user component')
     useEffect(() => {
@@ -12,7 +14,7 @@ console.log('user component')
     }, [])
 
 
-    function handleClick(){
+    function handleLogout(){
         fetch('/logout', { method: 'DELETE' })
         .then(resp => {
             if (resp.ok){
@@ -23,19 +25,13 @@ console.log('user component')
 
     return (
         <div className="container">
-            <Header/>
-        <h1>Hello {user.user_name} !</h1>
-      
-        <button className="button" onClick={handleClick}>Logout</button>
+            <Header handleLogout={handleLogout}/>
+            <User user={user}/>
+            <PetsContainer pets={pets}/>
         <p>{pets.greeting}</p>
-        <div className='pet-container'>
-        <img className="pet-window" src='https://i.imgur.com/HEZ30TE.gif' />
-        <img className="pet-window" src="https://i.imgur.com/1wfdSmO.gif"/>
-        <img className="pet-window" src="https://i.imgur.com/1wfdSmO.gif"/>
-        </div>
+        
         
         </div>
     )
 }
 
-export default User;
