@@ -1,4 +1,5 @@
 import{useState, useEffect} from 'react'
+import Header from './sections/Header'
 import './User.css'
 
 function User({user, onLogout}){
@@ -22,12 +23,16 @@ console.log('user component')
 
     return (
         <div className="container">
-        <p>Hello {user.user_name}</p>
+            <Header/>
+        <h1>Hello {user.user_name} !</h1>
+      
         <button className="button" onClick={handleClick}>Logout</button>
         <p>{pets.greeting}</p>
-        <img className="pet-container" src="https://i.imgur.com/1wfdSmO.gif"/>
-        <img className="pet-container" src="https://i.imgur.com/1wfdSmO.gif"/>
-        <img className="pet-container" src="https://i.imgur.com/1wfdSmO.gif"/>
+        <div className='pet-container'>
+        <img className="pet-window" src='https://i.imgur.com/HEZ30TE.gif' />
+        <img className="pet-window" src="https://i.imgur.com/1wfdSmO.gif"/>
+        <img className="pet-window" src="https://i.imgur.com/1wfdSmO.gif"/>
+        </div>
         
         </div>
     )

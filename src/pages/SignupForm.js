@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 function SignupForm({onLogin}){
   const defaultForm = {
@@ -34,6 +35,7 @@ function SignupForm({onLogin}){
   }
     return (
         <div className="App">
+          <Link to='login'><button className="button">&#8592;Back to Login</button></Link>
       <form className="centered-form" onSubmit={handleSubmit}>
       <input className="input-field" name="username" value={formData.user_name} onChange={(e)=>handleChange(e)} placeholder="user name..."></input>
       <br/>
@@ -43,9 +45,9 @@ function SignupForm({onLogin}){
       <br/>
       <input className="input-field" name="email" value={formData.email} onChange={(e)=>handleChange(e)} placeholder="email..."></input>
       <br/>
-      <button type="submit">Signup</button>
+      <button className="button" type="submit">Signup</button>
       </form>
-      <button type="submit">Back</button>
+      
     </div>
     )
 }

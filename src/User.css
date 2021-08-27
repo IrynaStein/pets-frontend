@@ -11,17 +11,25 @@
   border: 2px solid #636363;
   font: 15px Indie Flower;
   font-weight: bold;
-  justify-content: center;
+  /* justify-content: center; */
+  text-align: center;
 }
 
 .pet-container {
-  /* display: flexbox;
-  direction: flex-start; */
-  height: 100px;
-  width: 100px;
-  border: 2px solid #636363;
-  margin-left: 10px;
-  margin-right: 10px;
-  border-radius: 50px;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    gap: 20px;
+}
+.user-container {
+    display: flex;
+}
+.pet-window {
+    height: 100px;
+    width: 100px;
+    /* border: 2px dotted #636363; */
+    box-shadow: 4px 12px 20px -4px #86A1B3;
+    padding: 5px;
+    border-radius: 70px;
 }
 
