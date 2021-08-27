@@ -1,6 +1,6 @@
 import '../sections/Header.css'
 
-export default function Header(){
+export default function Header({handleLogout}){
     return(
         <div className='header-container'>
         <div className="dropdown" style={{float:"right"}}>
@@ -8,7 +8,7 @@ export default function Header(){
             <div class="dropdown-content">
     <a href="#">Game rules</a>
     <a href="#">Visit Cemetery</a>
-    <a href="#">Logout</a>
+    <a href="#" onClick={handleLogout}>Logout</a>
   </div>
             </div>
         </div>
