@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import Header from "./sections/Header";
+import Header from "../sections/Header";
 import "./HomePage.css";
-import User from "./sections/User";
-import PetsContainer from "./sections/PetContainer";
-import { Route, Switch } from "react-router";
-import GameContainer from "./GameContainer";
-import CreatePet from "./CreatePet";
+import User from "../sections/User";
+import PetsContainer from "../sections/PetContainer";
+// import { Route, Switch } from "react-router";
+// import GameContainer from "./GameContainer";
+// import CreatePet from "./CreatePet";
 
 export default function UserContainer({ user, onLogout }) {
   const [pets, setPets] = useState([]);
@@ -26,9 +26,9 @@ export default function UserContainer({ user, onLogout }) {
 
   return (
     <div className="main-container">
-      <div className="wrapper">
+      <nav className="wrapper">
         <Header handleLogout={handleLogout} />
-      </div>
+      </nav>
       <div className="wrapper">
         <User user={user} />
       </div>

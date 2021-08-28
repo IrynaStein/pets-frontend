@@ -3,9 +3,9 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import LoginForm from "./pages/LoginForm";
 import SignupForm from "./pages/SignupForm";
 import { useState, useEffect } from "react";
-import HomePage from "./HomePage";
-import GameContainer from "./GameContainer";
-import CreatePet from "./CreatePet";
+import HomePage from "./pages/HomePage";
+import GameContainer from "./pages/GameContainer";
+import CreatePet from "./pages/CreatePet";
 
 function App() {
   const [user, setUser] = useState(null);
