@@ -4,6 +4,8 @@ import LoginForm from "./pages/LoginForm";
 import SignupForm from "./pages/SignupForm";
 import { useState, useEffect } from "react";
 import HomePage from "./HomePage";
+import GameContainer from "./GameContainer";
+import CreatePet from "./CreatePet";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -35,6 +37,12 @@ function App() {
       </Route>
       <Route exact path="/login">
         {!user ? <LoginForm onLogin={setUser} /> : <Redirect to="/" />}
+      </Route>
+      <Route exact path='/game'>
+        <GameContainer/>
+      </Route>
+      <Route exact path='/create_pet'>
+        <CreatePet/>
       </Route>
     </Switch>
   );

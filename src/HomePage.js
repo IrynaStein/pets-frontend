@@ -5,6 +5,7 @@ import User from "./sections/User";
 import PetsContainer from "./sections/PetContainer";
 import { Route, Switch } from "react-router";
 import GameContainer from "./GameContainer";
+import CreatePet from "./CreatePet";
 
 export default function UserContainer({ user, onLogout }) {
   const [pets, setPets] = useState([]);
@@ -34,11 +35,6 @@ export default function UserContainer({ user, onLogout }) {
       <div className="wrapper">
         <PetsContainer pets={pets} />
       </div>
-      {/* <Switch>
-      <Route exact path ='/game'>
-          <GameContainer/>
-      </Route>
-      </Switch> */}
     </div>
   );
 }

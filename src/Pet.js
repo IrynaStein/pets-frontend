@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Redirect } from "react-router-dom";
-import './Pet.css'
+import { Link } from "react-router-dom";
+import "./Pet.css";
 
 export default function Pet({ pet }) {
   const [infoCard, setInfoCard] = useState(false);
@@ -11,8 +11,8 @@ export default function Pet({ pet }) {
   // const date = [(today.getMonth() + 1), today.getDate()]
   const age = birthday.split("-").slice(1);
 
-   const currentAge = today - age[1]
- 
+  const currentAge = today - age[1];
+
   console.log(age);
   console.log(today);
   console.log(currentAge);
@@ -34,19 +34,27 @@ export default function Pet({ pet }) {
 
   return (
     <div>
-      <Redirect path='/game'><img className="pet-window" src={image()} /></Redirect>
-      <p style ={{cursor: "pointer"}} onClick={()=> setInfoCard(mUV => !mUV)}>{infoCard ? `show less info about ${name}`: `show more info about ${name}`}</p>
-      {infoCard? <div className="info-card">
-        <p>Name: {name}</p>
-        <p>Breed: {pet.breed.name}</p>
-        <p>Age: {currentAge} </p>
-        <p>Favorite food: {pet.food.name}</p>
-        <p>Favorite activity: {pet.activity.name}</p>
-        
-      </div>
-      :
-      null
-      }
+        <Link to='/create_pet'><button>Create new pet</button></Link>
+         <button className="button">x</button>
+      <Link to='/game'><img className="pet-window" src={image()} /></Link>
+     
+      <p
+        style={{ cursor: "pointer" }}
+        onClick={() => setInfoCard((mUV) => !mUV)}
+      >
+        {infoCard
+          ? `show less info about ${name}`
+          : `show more info about ${name}`}
+      </p>
+      {infoCard ? (
+        <div className="info-card">
+          <p>Name: {name}</p>
+          <p>Breed: {pet.breed.name}</p>
+          <p>Age: {currentAge} </p>
+          <p>Favorite food: {pet.food.name}</p>
+          <p>Favorite activity: {pet.activity.name}</p>
+        </div>
+      ) : null}
       
     </div>
   );
