@@ -1,0 +1,7 @@
+.info-card {
+  background: rgba(255, 255, 255, 0.7);
+  overflow: scroll;
+  height: 90px;
+  border: 1px solid black;
+  padding-left: 5px;
+}

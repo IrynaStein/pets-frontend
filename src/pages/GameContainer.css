@@ -1,0 +1,13 @@
+.game-container{
+    background-image: url("https://live.staticflickr.com/65535/51407109978_5a63923b81_o.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 500px;
+    width: 500px;
+    border: 3px solid #50AB6E;
+    font: 15px Indie Flower;
+    font-weight: bold;
+}
