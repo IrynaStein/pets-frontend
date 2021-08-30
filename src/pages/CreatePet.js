@@ -16,7 +16,6 @@ export default function CreatePet() {
       <form className="createform-container">
         <label>Choose your pet's breed</label>
         <input
-          className="input-field"
           onClick={handleClick}
           type="radio"
           id="tibbar"
@@ -26,7 +25,7 @@ export default function CreatePet() {
         <label for="tibbar">Tibbar</label>
 
         <input
-        //   className="input-field"
+        className="input-field"
           onClick={handleClick}
           type="radio"
           id="drazzil"
@@ -37,16 +36,13 @@ export default function CreatePet() {
         <br />
         <label for="name">Name your pet</label>
         <input
-          className="input-field"
           id="name"
           name="name"
           placeholder="pet name..."
         ></input>
-
         <br />
 
         <input
-          className="input-field"
           type="radio"
           id="avocado"
           name="food"
@@ -60,7 +56,7 @@ export default function CreatePet() {
         </label>
 
         <input
-          className="input-field"
+         
           type="radio"
           id="icecream"
           name="food"
@@ -74,7 +70,7 @@ export default function CreatePet() {
         </label>
 
         <input
-          className="input-field"
+        
           type="radio"
           id="charcoal"
           name="food"
@@ -88,7 +84,7 @@ export default function CreatePet() {
         </label>
 
         <input
-          className="input-field"
+        
           type="radio"
           id="strawberry"
           name="food"
@@ -103,7 +99,7 @@ export default function CreatePet() {
 
         <br />
         <input
-          className="input-field"
+          
           type="radio"
           id="swimming"
           name="activity"
@@ -111,7 +107,7 @@ export default function CreatePet() {
         <label for="swimming">swimming</label>
 
         <input
-          className="input-field"
+      
           type="radio"
           id="coding"
           name="activity"
@@ -119,7 +115,7 @@ export default function CreatePet() {
         <label for="coding">coding</label>
 
         <input
-          className="input-field"
+       
           type="radio"
           id="hiking"
           name="activity"
@@ -127,7 +123,7 @@ export default function CreatePet() {
         <label for="hiking">hiking</label>
 
         <input
-          className="input-field"
+       
           type="radio"
           id="ball"
           name="activity"
