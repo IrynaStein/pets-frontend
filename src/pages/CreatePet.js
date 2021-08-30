@@ -13,7 +13,7 @@ export default function CreatePet() {
     <div>
       <h1>create new pet</h1>
 
-      <form className="creatform-container">
+      <form className="createform-container">
         <label>Choose your pet's breed</label>
         <input
           className="input-field"
@@ -26,7 +26,7 @@ export default function CreatePet() {
         <label for="tibbar">Tibbar</label>
 
         <input
-          className="input-field"
+        //   className="input-field"
           onClick={handleClick}
           type="radio"
           id="drazzil"
@@ -47,9 +47,9 @@ export default function CreatePet() {
 
         <input
           className="input-field"
-          type="checkbox"
+          type="radio"
           id="avocado"
-          name="avocado"
+          name="food"
         ></input>
         <label for="avocado">
           <img
@@ -61,9 +61,9 @@ export default function CreatePet() {
 
         <input
           className="input-field"
-          type="checkbox"
+          type="radio"
           id="icecream"
-          name="icecream"
+          name="food"
         ></input>
         <label for="icecream">
           <img
@@ -75,9 +75,9 @@ export default function CreatePet() {
 
         <input
           className="input-field"
-          type="checkbox"
+          type="radio"
           id="charcoal"
-          name="charcoal"
+          name="food"
         ></input>
         <label for="charcoal">
           <img
@@ -89,9 +89,9 @@ export default function CreatePet() {
 
         <input
           className="input-field"
-          type="checkbox"
+          type="radio"
           id="strawberry"
-          name="strawberry"
+          name="food"
         ></input>
         <label for="strawberry">
           <img
@@ -104,37 +104,37 @@ export default function CreatePet() {
         <br />
         <input
           className="input-field"
-          type="checkbox"
+          type="radio"
           id="swimming"
-          name="swimming"
+          name="activity"
         ></input>
         <label for="swimming">swimming</label>
 
         <input
           className="input-field"
-          type="checkbox"
+          type="radio"
           id="coding"
-          name="coding"
+          name="activity"
         ></input>
         <label for="coding">coding</label>
 
         <input
           className="input-field"
-          type="checkbox"
+          type="radio"
           id="hiking"
-          name="hiking"
+          name="activity"
         ></input>
         <label for="hiking">hiking</label>
 
         <input
           className="input-field"
-          type="checkbox"
+          type="radio"
           id="ball"
-          name="ball"
+          name="activity"
         ></input>
         <label for="ball">ball</label>
         <br />
-        <button className="button" type="submit">
+        <button className="button-inv" type="submit">
           Create
         </button>
       </form>
