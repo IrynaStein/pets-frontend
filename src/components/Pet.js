@@ -5,7 +5,6 @@ import "./Pet.css";
 export default function Pet({ pet }) {
   const [infoCard, setInfoCard] = useState(false);
 
-  console.log(pet);
   const { name, avatar, birthday } = pet;
   const today = new Date().getDate();
   // const date = [(today.getMonth() + 1), today.getDate()]
@@ -34,10 +33,14 @@ export default function Pet({ pet }) {
 
   return (
     <div>
-        <Link to='/create_pet'><button>Create new pet</button></Link>
-         <button className="button">x</button>
-      <Link to='/game'><img className="pet-window" src={image()} /></Link>
-     
+      <Link to="/create_pet">
+        <button>Create new pet</button>
+      </Link>
+      <button className="button">x</button>
+      <Link to={`/game/${pet.name}`}>
+        <img className="pet-window" src={image()} alt ="pet"/>
+      </Link>
+
       <p
         style={{ cursor: "pointer" }}
         onClick={() => setInfoCard((mUV) => !mUV)}
@@ -55,7 +58,6 @@ export default function Pet({ pet }) {
           <p>Favorite activity: {pet.activity.name}</p>
         </div>
       ) : null}
-      
     </div>
   );
 }

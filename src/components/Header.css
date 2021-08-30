@@ -19,11 +19,17 @@
   z-index: 1;
 }
 
+
+
 .dropdown-content a {
   color: black;
   padding: 5px 10px;
   text-decoration: none;
   display: block;
+}
+
+.dropdown-content a.active {
+    color: blue
 }
 
 .dropdown-content a:hover {
@@ -32,10 +38,6 @@
 
 .dropdown:hover .dropdown-content {
   display: block;
-}
-
-.dropdown:hover .dropbtn {
-  background-color: #3e8e41;
 }
 
 .menu {

@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
-import Header from "../sections/Header";
+import Header from "../components/Header";
 import "./HomePage.css";
-import User from "../sections/User";
-import PetsContainer from "../sections/PetContainer";
+import User from "../components/User";
+import PetContainer from "../components/PetContainer";
 // import { Route, Switch } from "react-router";
-// import GameContainer from "./GameContainer";
-// import CreatePet from "./CreatePet";
+import GameContainer from "./GameContainer";
+import CreatePet from "./CreatePet";
+import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
+import { Fragment } from "react";
 
 export default function UserContainer({ user, onLogout }) {
   const [pets, setPets] = useState([]);
+  let match = useRouteMatch();
   console.log("user component");
   useEffect(() => {
     fetch("/pets")
@@ -25,16 +28,25 @@ export default function UserContainer({ user, onLogout }) {
   }
 
   return (
+ 
     <div className="main-container">
-      <nav className="wrapper">
+      <div className="wrapper">
         <Header handleLogout={handleLogout} />
-      </nav>
+        <Link to={`${match.url}/game`}>hi</Link>
+      </div>
       <div className="wrapper">
         <User user={user} />
       </div>
       <div className="wrapper">
-        <PetsContainer pets={pets} />
+        <PetContainer pets={pets} />
       </div>
+      
+      <Route path={`${match.url}/game`}>
+        <GameContainer pets={pets} />
+      </Route>
+      
     </div>
+    
+  
   );
 }

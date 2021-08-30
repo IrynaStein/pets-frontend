@@ -4,8 +4,10 @@ import LoginForm from "./pages/LoginForm";
 import SignupForm from "./pages/SignupForm";
 import { useState, useEffect } from "react";
 import HomePage from "./pages/HomePage";
-import GameContainer from "./pages/GameContainer";
 import CreatePet from "./pages/CreatePet";
+import GameContainer from "./pages/GameContainer";
+import Header from "./components/Header";
+import {Fragment} from 'react'
 
 function App() {
   const [user, setUser] = useState(null);
@@ -21,29 +23,27 @@ function App() {
 
   console.log(user);
 
-  // if (!user) return <Login onLogin={setUser}/>
-
   return (
     <Switch>
-      <Route exact path="/">
+      <Route exact path="/home">
         {user ? (
           <HomePage user={user} onLogout={setUser} />
         ) : (
           <Redirect to="/login" />
         )}
       </Route>
-      <Route path="/signup">
-        {!user ? <SignupForm onLogin={setUser} /> : <Redirect to="/" />}
+      <Route exact path="/signup">
+        {!user ? <SignupForm onLogin={setUser} /> : <Redirect to="/home" />}
       </Route>
       <Route exact path="/login">
-        {!user ? <LoginForm onLogin={setUser} /> : <Redirect to="/" />}
+        {!user ? <LoginForm onLogin={setUser} /> : <Redirect to="/home" />}
       </Route>
-      <Route exact path='/game'>
-        <GameContainer/>
-      </Route>
-      <Route exact path='/create_pet'>
-        <CreatePet/>
-      </Route>
+      <Route exact path="/game/:petName" component={GameContainer}>
+          {/* <GameContainer /> */}
+        </Route>
+        <Route exact path="/create_pet">
+          <CreatePet />
+        </Route>
     </Switch>
   );
 }
