@@ -7,23 +7,23 @@ import Birthday from "../components/Birthday";
 export default function GameContainer() {
   const params = useParams();
   console.log(params.petName);
-  const pets = useSelector(state => state.petList).filter(pet => pet.name === params.petName)
+  const pets = useSelector(state => state.petList)
   console.log(pets)
 
-//   const currentPet = pets
-//   .filter(pet => pet.name === params.petName)
-  console.log(pets)
-  const {name, breed, activity, birthday, food, sleepy, bored, healthy, hungry} = pets
-console.log(birthday)
+  const currentPet = pets
+  .filter(pet => pet.name === params.petName)[0]
+
+  console.log(currentPet)
+const {name, breed, activity, birthday, food, healthy, hungry, sleepy} = currentPet
+
   return (
     <div className="game-container">
       <p>Game Container</p>
-      <p>{name}</p>
+     <p>This is {name} the {breed.name.toUpperCase()}. His favorite food is {food.name} - if he behaves well treat him to one. His favorite activity is {activity.name}ing, so make sure to do that often.</p>
       <div className="pet-display">
-      <Birthday pet={pets}/>
+    {/* <Birthday pet={currentPet}/> */}
       </div>
-      <p>{breed}</p>
-      <p>{activity}</p>
+      
     </div>
   );
 }

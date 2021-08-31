@@ -9,11 +9,11 @@ export default function PetsContainer() {
   const pets = useSelector(state => state.petList)
   console.log(pets)
   // console.log(pets.length);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchPets());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchPets());
+  // }, [dispatch]);
 
   const renderPets = pets.map((pet) => <Pet key={pet.id} pet={pet} />);
 
