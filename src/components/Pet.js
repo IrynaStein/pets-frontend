@@ -5,7 +5,7 @@ import "./Pet.css";
 export default function Pet({ pet }) {
   const [infoCard, setInfoCard] = useState(false);
 
-  const { name, avatar, birthday } = pet;
+  const { name, birthday } = pet;
   const today = new Date().getDate();
   // const date = [(today.getMonth() + 1), today.getDate()]
   const age = birthday.split("-").slice(1);
@@ -19,23 +19,21 @@ export default function Pet({ pet }) {
   function image() {
     switch (currentAge) {
       case 0:
-        return pet.breed.age_stages[0].image_url;
+        return pet.breed.age[0].image;
       case 1:
-        return pet.breed.age_stages[1].image_url;
+        return pet.breed.age[1].image;
       case 2:
-        return pet.breed.age_stages[2].image_url;
+        return pet.breed.age[2].image;
       case 3:
-        return pet.breed.age_stages[3].image_url;
+        return pet.breed.age[3].image;
       default:
-        return avatar;
+        return pet.breed.age[3].image;
     }
   }
 
   return (
     <div>
-      <Link to="/create_pet">
-        <button>Create new pet</button>
-      </Link>
+      
       <button className="button">x</button>
       <Link to={`/game/${pet.name}`}>
         <img className="pet-window" src={image()} alt ="pet"/>
