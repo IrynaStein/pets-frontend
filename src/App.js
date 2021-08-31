@@ -6,11 +6,10 @@ import { useState, useEffect } from "react";
 import HomePage from "./pages/HomePage";
 import CreatePet from "./pages/CreatePet";
 import GameContainer from "./pages/GameContainer";
-import Header from "./components/Header";
-import {Fragment} from 'react'
 
 function App() {
   const [user, setUser] = useState(null);
+
 
   useEffect(() => {
     // auto-login
@@ -38,12 +37,12 @@ function App() {
       <Route exact path="/login">
         {!user ? <LoginForm onLogin={setUser} /> : <Redirect to="/home" />}
       </Route>
-      <Route exact path="/game/:petName" component={GameContainer}>
-          {/* <GameContainer /> */}
-        </Route>
-        <Route exact path="/create_pet">
-          <CreatePet />
-        </Route>
+      <Route exact path="/game/:petName" >
+        <GameContainer/>
+      </Route>
+      <Route exact path="/create_pet">
+        <CreatePet />
+      </Route>
     </Switch>
   );
 }
