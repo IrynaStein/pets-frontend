@@ -10,4 +10,15 @@
     border: 3px solid #50AB6E;
     font: 15px Indie Flower;
     font-weight: bold;
+    text-align: center;
 }
+
+.pet-display{
+    display: flex;
+    height: 300px;
+    width: 300px;
+    padding: 5px;
+    border-radius: 300px;
+    cursor: pointer
+}
+

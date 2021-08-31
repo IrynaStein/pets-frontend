@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Pet.css";
+import Birthday from "./Birthday";
 
 export default function Pet({ pet }) {
   const [infoCard, setInfoCard] = useState(false);
@@ -36,7 +37,9 @@ export default function Pet({ pet }) {
       
       <button className="button">x</button>
       <Link to={`/game/${pet.name}`}>
-        <img className="pet-window" src={image()} alt ="pet"/>
+        <div className="pet-window" >
+        <Birthday pet={pet}/>
+        </div>
       </Link>
 
       <p
