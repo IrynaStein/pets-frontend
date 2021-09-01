@@ -5,7 +5,7 @@ const initialState = {
   status: "idle",
 };
 
-const petsSlice = createSlice({
+const petSlice = createSlice({
   name: "pets",
   initialState,
   reducers: {
@@ -14,6 +14,11 @@ const petsSlice = createSlice({
     },
     petUpdated(state,action){
       const pet = state.petList.find((cat) => cat.id === action.payload.id)
+      pet.hungry = action.payload.hungry
     }
   }
 })
+
+export const catActions = petSlice.actions
+
+export default petSlice.reducer
