@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {Link, useHistory} from 'react-router-dom'
+import Header from "../components/Header";
 
 import "./CreatePet.css";
 
@@ -56,19 +57,21 @@ export default function CreatePet() {
 
   return (
     <div>
-     <Link to='/home'><button className="button">&#8592;Home</button></Link>
-    <p>{errors}</p>
+      <Header/>
+      <p>{errors}</p>
       <form className="createform-container" onSubmit={handleSubmit}>
+        
         <label>Choose your pet's breed</label>
+        <div>
         <input
           onClick={handleClick}
           type="radio"
           id="tibbar"
           name="breed"
           value="tibbar"
-        ></input>
+        ></input> 
         <label for="tibbar">Tibbar</label>
-
+        
         <input
           onClick={handleClick}
           type="radio"
@@ -77,8 +80,10 @@ export default function CreatePet() {
           value="drazzil"
         ></input>
         <label for="drazzil">Drazzil</label>
-        <br />
+        </div>
+       
         <label for="name">Name your pet</label>
+        <div>
         <input
           onChange={handleClick}
           className="input-field"
@@ -87,9 +92,12 @@ export default function CreatePet() {
           placeholder="pet name..."
           value={formData.name}
         ></input>
-        <br />
-
+       </div>
+       <label>Choose your pet's favorite snack</label>
+<div>
+  
         <input
+        
           onClick={handleClick}
           type="radio"
           id="avocado"
@@ -97,7 +105,7 @@ export default function CreatePet() {
           value="avocado"
         ></input>
         <label for="avocado">
-          <img src={avocado} style={{ height: "25px" }} alt="avocado"/>
+          <img src={avocado} style={{ height: "25px"}} alt="avocado"/>
           avocado
         </label>
 
@@ -136,8 +144,9 @@ export default function CreatePet() {
           <img src={strawberry} style={{ height: "25px" }} alt="strawberry"/>
           strawberry
         </label>
-
-        <br />
+        </div>
+        <label>Choose your pet's favorite activity</label>
+        <div>
         <input
           onClick={handleClick}
           type="radio"
@@ -155,7 +164,7 @@ export default function CreatePet() {
 
         <input onClick={handleClick} type="radio" id="ball" name="activity" value="ball"></input>
         <label for="ball">ball</label>
-        <br />
+        </div>
         <button className="button-inv" type="submit">
           Create
         </button>
