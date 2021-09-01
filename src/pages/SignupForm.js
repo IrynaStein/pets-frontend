@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 function SignupForm({ onLogin }) {
@@ -38,6 +38,9 @@ function SignupForm({ onLogin }) {
       }
     });
   }
+
+
+
   return (
     <div className="App">
       <Link to="login">
@@ -81,7 +84,9 @@ function SignupForm({ onLogin }) {
         <button className="button" type="submit">
           Signup
         </button>
-        <p>{errors}</p>
+        <p>
+       {errors.map((error) => <>{error}</>)}
+       </p>
       </form>
     </div>
   );
