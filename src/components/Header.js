@@ -13,9 +13,10 @@ export default function Header({ handleLogout }) {
           <NavLink activeClassName={classes.active} to="/signup">
             Visit Cemetery
           </NavLink>
+          <NavLink exact to='/home' activeclassName={classes.active} >Home</NavLink>
           <NavLink
             activeClassName={classes.active}
-            to="#"
+            exact to="#"
             onClick={handleLogout}
           >
             Logout

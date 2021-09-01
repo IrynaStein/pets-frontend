@@ -6,10 +6,17 @@ import { useState, useEffect } from "react";
 import HomePage from "./pages/HomePage";
 import CreatePet from "./pages/CreatePet";
 import GameContainer from "./pages/GameContainer";
+import {useSelector, useDispatch} from 'react-redux'
+import { fetchPets } from "./store/petSlice";
 
 function App() {
   const [user, setUser] = useState(null);
+  const pets = useSelector(state => state.petList)
+  console.log(pets)
+  // console.log(pets.length);
+  const dispatch = useDispatch();
 
+  
 
   useEffect(() => {
     // auto-login
@@ -19,6 +26,10 @@ function App() {
       }
     });
   }, []);
+  
+  useEffect(() => {
+    dispatch(fetchPets());
+  }, [dispatch]);
 
   console.log(user);
 
