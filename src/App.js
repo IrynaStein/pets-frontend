@@ -26,10 +26,11 @@ function App() {
       }
     });
   }, []);
-  
+
   useEffect(() => {
     dispatch(fetchPets());
   }, [dispatch]);
+  
 
   console.log(user);
 

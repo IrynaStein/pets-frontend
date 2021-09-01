@@ -5,7 +5,7 @@ import GamePet from "../components/GamePet";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 
-export default function GameContainer() {
+export default function GameContainer({handleLogout}) {
   const params = useParams();
   console.log(params.petName);
   const pets = useSelector((state) => state.petList);
@@ -16,7 +16,7 @@ export default function GameContainer() {
 
   return (
     <div className="game-container">
-      <Header/>
+      <Header handleLogout={handleLogout}/>
       
       {renderPet}
     </div>

@@ -1,34 +1,19 @@
+import {createSlice} from "@reduxjs/toolkit"
+
 const initialState = {
   petList: [],
   status: "idle",
 };
 
-export default function petsReducer(state = initialState, action) {
-  switch (action.type) {
-    case "pets/petsLoading":
-      return {
-        ...state,
-        status: "loading",
-      }
-      case "pets/petsLoaded":
-          return {
-              ...state,
-              petList: action.payload,
-              status: 'idle'
-          }
-          default:
-          return state
-  }
-}
-
-
-export function fetchPets(){
-    return function(dispatch){
-        dispatch({type: "pets/petsLoading"})
-        fetch('/pets')
-        .then((resp) => resp.json())
-        .then((data) => {
-            dispatch({type: "pets/petsLoaded", payload: data})
-        })
+const petsSlice = createSlice({
+  name: "pets",
+  initialState,
+  reducers: {
+    petCreated(state, action){
+      state.petList.push(action.payload)
+    },
+    petUpdated(state,action){
+      const pet = state.petList.find((cat) => cat.id === action.payload.id)
     }
-}
+  }
+})
