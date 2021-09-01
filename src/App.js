@@ -16,9 +16,7 @@ function App() {
   // console.log(pets.length);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchPets());
-  }, [dispatch]);
+  
 
   useEffect(() => {
     // auto-login
@@ -28,6 +26,10 @@ function App() {
       }
     });
   }, []);
+  
+  useEffect(() => {
+    dispatch(fetchPets());
+  }, [dispatch]);
 
   console.log(user);
 

@@ -15,11 +15,12 @@ export default function Header({ handleLogout }) {
           </NavLink>
           <NavLink
             activeClassName={classes.active}
-            to="#"
+            exact to="/#"
             onClick={handleLogout}
           >
             Logout
           </NavLink>
+          <NavLink exact to='/home' activeclassName={classes.active} >Home</NavLink>
         </div>
       </div>
     </div>

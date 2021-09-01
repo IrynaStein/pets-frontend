@@ -54,3 +54,47 @@ button:hover {
   color: black;
   cursor: pointer;
 }
+
+.inline{
+  display:inline;
+  width: 100px;
+  height: 100px;
+  padding: 5px;
+  border: 1px solid blue;  
+  background-color: white; 
+}
+.chart {
+  display: inline-block;
+  height: 50px;
+  width: 500px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+}
+
+section {
+  float: left;
+  margin: 5px;
+  width: 115px;
+}
+
+.button-n {
+  border: none;
+  background: rgba(255, 255, 255, 0.7);
+  font: 12px Indie Flower;
+  margin-left: 5px;
+  margin-right: 5px;
+  position: relative;
+  color: black;
+  box-shadow: 1px 2px 3px 3px #50AB6E;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: white;
+  padding: 2px
+}
+.button-n:hover {
+  color: #50AB6E;
+  cursor: pointer;
+}
+

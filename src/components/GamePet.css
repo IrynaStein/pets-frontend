@@ -1,0 +1,10 @@
+
+.pet-display{
+  display: flex;
+  height: 300px;
+  width: 300px;
+  padding: 5px;
+  border-radius: 300px;
+  cursor: pointer
+}
+

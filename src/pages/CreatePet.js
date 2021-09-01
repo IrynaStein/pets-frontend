@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {useHistory} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 
 import "./CreatePet.css";
 
@@ -45,7 +45,7 @@ export default function CreatePet() {
             resp.json().then((err) => setErrors(err.errors))
         }
     })
-    history.push('/game/:petName')
+    // history.push('/game/:petName')
   }
   
   //   const dataInputHandler = (e) => {
@@ -56,7 +56,7 @@ export default function CreatePet() {
 
   return (
     <div>
-      <h1>create new pet</h1>
+     <Link to='/home'><button className="button">&#8592;Home</button></Link>
     <p>{errors}</p>
       <form className="createform-container" onSubmit={handleSubmit}>
         <label>Choose your pet's breed</label>
