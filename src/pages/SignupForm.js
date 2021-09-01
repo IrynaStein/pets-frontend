@@ -9,7 +9,6 @@ function SignupForm({ onLogin }) {
     email: "",
   };
   const [formData, setFormdData] = useState(defaultForm);
-  const history = useHistory();
   const [errors, setErrors] = useState([])
   function handleChange(e) {
     console.log(e.target.value);

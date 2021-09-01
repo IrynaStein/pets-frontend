@@ -2,10 +2,13 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Pet.css";
 import Birthday from "./Birthday";
+import { useDispatch } from "react-redux";
+import { petActions } from "../store/petSlice";
 
 export default function Pet({ pet }) {
   const [infoCard, setInfoCard] = useState(false);
 console.log(pet.name)
+const dispatch = useDispatch()
   const { name, birthday } = pet;
   const today = new Date().getDate();
   // const date = [(today.getMonth() + 1), today.getDate()]
@@ -32,10 +35,16 @@ console.log(pet.name)
     }
   }
 
+  const deleteHandler = () => {
+    console.log(pet.id)
+    dispatch(petActions.petDelete(pet.id))
+
+  }
+
   return (
     <div>
       
-      <button className="button">x</button>
+      <button className="button" onClick={deleteHandler}>x</button>
       <Link to={`/game/${pet.name}`}>
         <div className="pet-window" >
         <Birthday pet={pet}/>
