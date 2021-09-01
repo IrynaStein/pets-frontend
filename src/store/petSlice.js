@@ -15,10 +15,10 @@ const petSlice = createSlice({
   name: "pets",
   initialState,
   reducers: {
-    petCreated(state, action){
+    petCreate(state, action){
       state.petList.push(action.payload)
     },
-    petUpdated(state,action){
+    petUpdate(state,action){
       const pet = state.petList.find((cat) => cat.id === action.payload.id)
       pet.hungry = action.payload.hungry
     }
