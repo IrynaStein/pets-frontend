@@ -5,7 +5,7 @@ import Birthday from "./Birthday";
 
 export default function Pet({ pet }) {
   const [infoCard, setInfoCard] = useState(false);
-
+console.log(pet.name)
   const { name, birthday } = pet;
   const today = new Date().getDate();
   // const date = [(today.getMonth() + 1), today.getDate()]
