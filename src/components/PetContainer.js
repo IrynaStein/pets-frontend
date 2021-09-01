@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 export default function PetsContainer() {
-  const pets = useSelector((state) => state.petList);
+  const pets = useSelector((state) => state.pets.petList);
   console.log(pets);
  
   const renderPets = () => {

@@ -8,10 +8,21 @@ import PetContainer from "../components/PetContainer";
 // import CreatePet from "./CreatePet";
 // import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
 // import { Fragment } from "react";
+import { useEffect } from "react";
+import {useSelector, useDispatch} from 'react-redux'
+import { fetchPets } from "../store/petSlice";
 
 export default function UserContainer({ user, onLogout }) {
   // let match = useRouteMatch();
+  const pets = useSelector(state => state.pets.petList)
  
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchPets());
+  }, [dispatch]); 
+
+  console.log(pets)
 
   function handleLogout() {
     fetch("/logout", { method: "DELETE" }).then((resp) => {
