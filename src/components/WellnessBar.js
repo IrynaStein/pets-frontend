@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { petActions } from "../store/petSlice";
 export default function WellnessBar({ pet }) {
     console.log(pet)
 
-  const [dirty, setDirty] = useState(Math.floor(Math.random() * 4) + 1);
+const dirty = useSelector(state => state.pets.dirty)
+// const sleepy = useSelector(state => state.pets.pet.sleepy)
+// const hungry = useSelector(state => state.pets.pet.hungry)
+// const bored = useSelector(state => state.pets.pet.bored)
   const {
-      id,
+    id,
     name,
     breed,
     activity,
@@ -15,11 +18,45 @@ export default function WellnessBar({ pet }) {
     sleepy,
     bored,
     healthy,
+    alive,
     hungry,
   } = pet;
   console.log(sleepy);
-  //   const dirty = () =>
+console.log(hungry)
+
+
 const dispatch = useDispatch()
+useEffect(() => {
+    let clockInterval = setInterval(() => {
+        if (alive){
+            if (sleepy < 0 && hungry < 0 ){
+                dispatch(petActions.petDead(id))
+                alert("Your pet died")
+            }
+            else if(sleepy < -1 || hungry < -1){
+                dispatch(petActions.petDead(id))
+                alert("Your pet died")
+            }
+            else if(bored < 0 && hungry <0 || bored < 0 && sleepy < 0){
+                dispatch(petActions.petDead(id))
+                alert("Your pet died")
+            }
+            else {
+                dispatch(petActions.getSleepy(id))
+                dispatch(petActions.getHungry(id))
+            }
+        }
+        else {
+            alert(`We are preparing ${name}'s the funeral!`)
+            clearInterval(clockInterval)
+        }
+    }, 15000);    
+    return () => {
+        clearInterval(clockInterval)
+    }
+}, [dispatch, sleepy, hungry, bored, dirty, alive])
+
+
   const barConverter = (arg) => {
     switch (arg) {
       case 1:
@@ -50,7 +87,7 @@ const dispatch = useDispatch()
           </div>
         );
       default:
-        return <div>&#9904;</div>;
+        return <div style={{fontSize: "30px"}}>&#9760;</div>;
     }
   };
 
@@ -64,43 +101,55 @@ const dispatch = useDispatch()
     dispatch(petActions.petPlay(id))
 }
 
+const cleanHandler = () => {
+    dispatch(petActions.petClean(id))
+}
+
+const sleepHandler = () => {
+    dispatch(petActions.petSleep(id))
+    dispatch(petActions.getBored(id))
+}
+
   return (
-    <div
-      style={{
-        display: "block",
-        position: "relative",
-        bottom: "30px",
-        backgroundColor: "white",
-      }}
-    >
-      <section>
-        sleepy: {barConverter(sleepy)}
-        <button className="button-n" style={{ width: "60px" }}>
-          put to bed
-        </button>
-      </section>{" "}
-      <section>
-        hungry: {barConverter(hungry)}
-        <button onClick={feedHandler} className="button-n" style={{ width: "60px" }}>
-          feed
-        </button>
-      </section>
-      <section>
-        bored: {barConverter(bored)}
-        <button onClick={playHandler}style={{ width: "60px" }} className="button-n">
-          play
-        </button>
-      </section>
-      <section>
-        dirty: {barConverter(dirty)}
-        <button
-          style={{ width: "60px" }}
-          className="button-n"
-          onClick={() => setDirty(4)}
-        >
-          shower
-        </button>
-      </section>
+      <div>{alive?  <div
+        style={{
+          display: "block",
+          position: "relative",
+          bottom: "30px",
+          backgroundColor: "white",
+        }}
+      >
+        <section>
+          sleepy: {barConverter(sleepy)}
+          <button  onClick={sleepHandler} className="button-n" style={{ width: "60px" }}>
+            put to bed
+          </button>
+        </section>{" "}
+        <section>
+          hungry: {barConverter(hungry)}
+          <button onClick={feedHandler} className="button-n" style={{ width: "60px" }}>
+            feed
+          </button>
+        </section>
+        <section>
+          bored: {barConverter(bored)}
+          <button onClick={playHandler}style={{ width: "60px" }} className="button-n">
+            play
+          </button>
+        </section>
+        <section>
+          dirty: {barConverter(dirty)}
+          <button
+            style={{ width: "60px" }}
+            className="button-n"
+          onClick={cleanHandler}
+          >
+            shower
+          </button>
+        </section>
+      </div>
+      :
+      null }
     </div>
   );
 }

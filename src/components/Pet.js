@@ -37,8 +37,10 @@ const dispatch = useDispatch()
 
   const deleteHandler = () => {
     console.log(pet.id)
+    fetch(`pets/${pet.id}`, {
+      method: "DELETE"
+    })
     dispatch(petActions.petDelete(pet.id))
-
   }
 
   return (
