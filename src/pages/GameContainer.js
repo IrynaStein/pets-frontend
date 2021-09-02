@@ -10,6 +10,7 @@ export default function GameContainer({handleLogout}) {
   const params = useParams();
   console.log(params.petName);
   const pets = useSelector((state) => state.pets.petList);
+  
   console.log(pets);
 const dispatch = useDispatch()
 

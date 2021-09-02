@@ -1,6 +1,8 @@
 import { useState } from "react";
 import {Link, useHistory} from 'react-router-dom'
 import Header from "../components/Header";
+import { useDispatch } from "react-redux";
+import petCreate from '../store/petSlice'
 
 import "./CreatePet.css";
 
@@ -21,7 +23,7 @@ export default function CreatePet() {
     activity: ""
   });
   const [errors, setErrors] = useState([])
-
+const dispatch = useDispatch()
   const history = useHistory()
 
   const handleClick = (e) => {
@@ -46,18 +48,13 @@ export default function CreatePet() {
             resp.json().then((err) => setErrors(err.errors))
         }
     })
-    // history.push('/game/:petName')
+    history.push('/home')
   }
-  
-  //   const dataInputHandler = (e) => {
-  //     e.preventDefault();
-  //     console.log(formData);
-  //     dispatch(petActions.createPet(formData))
-  //   };
+
 
   return (
     <div>
-      <Header/>
+      {/* <Header/> */}
       <p>{errors}</p>
       <form className="createform-container" onSubmit={handleSubmit}>
         
