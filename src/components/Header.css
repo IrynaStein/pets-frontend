@@ -1,8 +1,5 @@
 .header-container {
-  display: inline-flexbox;
   text-align: right;
-  height: 30px;
-  padding: 5px;
 }
 .dropdown {
   position: relative;
@@ -43,6 +40,8 @@
 .menu {
   color: gray;
   font-size: 20px;
+  margin-right: 10px;
+  margin-top: 5px;
 }
 
 .menu:hover {

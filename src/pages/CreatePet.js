@@ -1,8 +1,7 @@
 import { useState } from "react";
-import {Link, useHistory} from 'react-router-dom'
-import Header from "../components/Header";
+import {useHistory} from 'react-router-dom'
+import { petActions } from "../store/petSlice";
 import { useDispatch } from "react-redux";
-import petCreate from '../store/petSlice'
 
 import "./CreatePet.css";
 
@@ -23,41 +22,42 @@ export default function CreatePet() {
     activity: ""
   });
   const [errors, setErrors] = useState([])
-const dispatch = useDispatch()
   const history = useHistory()
-
+const dispatch = useDispatch()
   const handleClick = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     console.log(e.target.value);
   };
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log(formData);
-    const configObj = {
-        method: "POST",
-        headers: {'Content-type': 'application/json'},
-        body: JSON.stringify(formData)
-    }
-    fetch('/pets', configObj)
-    .then(resp => {
-        if (resp.ok){
-            resp.json()
-        }
-        else{
-            resp.json().then((err) => setErrors(err.errors))
-        }
-    })
-    history.push('/home')
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+  //   console.log(formData);
+  //   const configObj = {
+  //       method: "POST",
+  //       headers: {'Content-type': 'application/json'},
+  //       body: JSON.stringify(formData)
+  //   }
+  //   fetch('/pets', configObj)
+  //   .then(resp => {
+  //       if (resp.ok){
+  //           resp.json().then((data) => dispatch(petActions.petCreate(data)))
+  //       }
+  //       else{
+  //           resp.json().then((err) => setErrors(err.errors))
+  //       }
+  //   })
+  //   history.push('/home')
+  // }
+
+  function handleSubmit(e){
+    e.preventDefault()
+    dispatch()
   }
 
 
   return (
     <div>
-      {/* <Header/> */}
-      <p>{errors}</p>
       <form className="createform-container" onSubmit={handleSubmit}>
-        
         <label>Choose your pet's breed</label>
         <div>
         <input
@@ -166,6 +166,7 @@ const dispatch = useDispatch()
           Create
         </button>
       </form>
+      <p>{errors}</p>
     </div>
   );
 }

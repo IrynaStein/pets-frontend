@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { petActions } from "../store/petSlice";
 export default function WellnessBar({ pet }) {
@@ -11,13 +11,8 @@ const dirty = useSelector(state => state.pets.dirty)
   const {
     id,
     name,
-    breed,
-    activity,
-    birthday,
-    food,
     sleepy,
     bored,
-    healthy,
     alive,
     hungry,
   } = pet;
@@ -37,7 +32,7 @@ useEffect(() => {
                 dispatch(petActions.petDead(id))
                 alert("Your pet died")
             }
-            else if(bored < 0 && hungry <0 || bored < 0 && sleepy < 0){
+            else if((bored < 0 && hungry <0) || (bored < 0 && sleepy < 0)){
                 dispatch(petActions.petDead(id))
                 alert("Your pet died")
             }
@@ -54,7 +49,7 @@ useEffect(() => {
     return () => {
         clearInterval(clockInterval)
     }
-}, [dispatch, sleepy, hungry, bored, dirty, alive])
+}, [dispatch, sleepy, hungry, bored, dirty, alive,id, name])
 
 
   const barConverter = (arg) => {

@@ -15,7 +15,12 @@ const userSlice = createSlice({
         userLogout(state){
             state.user = null
         },
-
+        userDelete(state){
+            state.user = null
+        },
+        userEdit(state, action){
+            state.user = action.payload
+        }
     }
 })
 

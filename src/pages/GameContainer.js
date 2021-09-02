@@ -1,12 +1,11 @@
 import { useEffect } from "react";
 import "./GameContainer.css";
 import GamePet from "../components/GamePet";
-import Header from "../components/Header";
 import { useParams } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
 import { fetchPets } from "../store/petSlice";
 
-export default function GameContainer({handleLogout}) {
+export default function GameContainer() {
   const params = useParams();
   console.log(params.petName);
   const pets = useSelector((state) => state.pets.petList);
@@ -23,8 +22,6 @@ const dispatch = useDispatch()
 
   return (
     <div className="game-container">
-      <Header handleLogout={handleLogout}/>
-      
       {renderPet}
     </div>
   );

@@ -8,12 +8,7 @@ export default function GamePet({ pet }) {
     name,
     breed,
     activity,
-    birthday,
     food,
-    sleepy,
-    bored,
-    healthy,
-    hungry,
     alive
   } = pet;
 
