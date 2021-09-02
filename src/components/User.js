@@ -1,7 +1,9 @@
 import './User.css'
+import { useSelector } from 'react-redux'
 
 
-export default function User({user}){
+export default function User(){
+    const user = useSelector(state => state.user.user)
     console.log(user)
     const {user_name, email, avatar} = user
     return (

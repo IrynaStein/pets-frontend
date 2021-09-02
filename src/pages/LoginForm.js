@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import {useDispatch } from 'react-redux'
+import { userActions } from "../store/userSlice";
 
-function LoginForm({onLogin}) {
+function LoginForm() {
   const [errors, setErrors] = useState([]);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
-
+const dispatch = useDispatch()
   function handleChange(e) {
     console.log(e.target.value);
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -29,7 +31,7 @@ function LoginForm({onLogin}) {
     fetch("/login", configObj)
       .then((resp) => {
         if (resp.ok) {
-          resp.json().then((user) => onLogin(user))
+          resp.json().then((user) => dispatch(userActions.userLogin(user)));
         } else {
           resp.json().then((error) => setErrors(error.errors));
         }
@@ -59,7 +61,7 @@ function LoginForm({onLogin}) {
         <br />
         <button className="button">Login</button>
         <Link to="/signup">
-          <button onClick={()=>console.log("signing up...")} className="button" type="submit">Signup</button>
+          <button className="button" type="submit">Signup</button>
         </Link>
         {errors.map((err) => <p>{err}</p>)}
       </form>

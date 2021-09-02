@@ -1,7 +1,24 @@
 import classes from "./Header.css";
 import { NavLink } from "react-router-dom";
+import { userActions } from "../store/userSlice";
+import {useSelector, useDispatch} from 'react-redux'
 
-export default function Header({ handleLogout }) {
+export default function Header() {
+const user = useSelector(state => state.user.user)
+  const dispatch = useDispatch()
+
+  
+  const logoutHandler =()=>{
+    fetch("/logout", {
+      method: "DELETE"
+    })
+    .then((resp) => {
+      if (resp.ok){
+        dispatch(userActions.userLogout())
+      }
+    })
+    
+  }
   return (
     <div className="header-container">
       <div className="dropdown" style={{ float: "right" }}>
@@ -17,7 +34,7 @@ export default function Header({ handleLogout }) {
           <NavLink
             activeClassName={classes.active}
             exact to="#"
-            onClick={handleLogout}
+            onClick={logoutHandler}
           >
             Logout
           </NavLink>

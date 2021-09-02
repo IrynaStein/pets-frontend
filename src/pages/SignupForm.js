@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import {useDispatch} from 'react-redux'
+import { userActions } from "../store/userSlice";
 
-function SignupForm({ onLogin }) {
+function SignupForm() {
   const defaultForm = {
     username: "",
     password: "",
@@ -10,6 +12,7 @@ function SignupForm({ onLogin }) {
   };
   const [formData, setFormdData] = useState(defaultForm);
   const [errors, setErrors] = useState([])
+  const dispatch = useDispatch()
   function handleChange(e) {
     console.log(e.target.value);
     setFormdData({ ...formData, [e.target.name]: e.target.value });
@@ -31,7 +34,7 @@ function SignupForm({ onLogin }) {
     };
     fetch("/signup", configObg).then((resp) => {
       if (resp.ok) {
-        resp.json().then((user) => onLogin(user));
+        resp.json().then((user) => dispatch(userActions.userLogin(user)));
       } else {
         resp.json().then((err) => setErrors(err.errors));
       }

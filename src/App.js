@@ -2,24 +2,26 @@ import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
 import LoginForm from "./pages/LoginForm";
 import SignupForm from "./pages/SignupForm";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import HomePage from "./pages/HomePage";
 import CreatePet from "./pages/CreatePet";
 import GameContainer from "./pages/GameContainer";
+import {useSelector, useDispatch } from 'react-redux'
+import { userActions } from "./store/userSlice";
 
 
 function App() {
-  const [user, setUser] = useState(null);
 
-
+const user = useSelector(state => state.user.user)
+const dispatch = useDispatch()
   useEffect(() => {
     // auto-login
     fetch("/me").then((r) => {
       if (r.ok) {
-        r.json().then((user) => setUser(user));
+        r.json().then((user) => dispatch(userActions.userLogin(user)));
       }
     });
-  }, []);
+  }, [dispatch]);
 
 
   console.log(user);
@@ -28,16 +30,16 @@ function App() {
     <Switch>
       <Route exact path="/home">
         {user ? (
-          <HomePage user={user} onLogout={setUser} />
+          <HomePage/>
         ) : (
           <Redirect to="/login" />
         )}
       </Route>
       <Route exact path="/signup">
-        {!user ? <SignupForm onLogin={setUser} /> : <Redirect to="/home" />}
+        {!user ? <SignupForm  /> : <Redirect to="/home" />}
       </Route>
       <Route exact path="/login">
-        {!user ? <LoginForm onLogin={setUser} /> : <Redirect to="/home" />}
+        {!user ? <LoginForm /> : <Redirect to="/home" />}
       </Route>
       <Route exact path="/game/:petName" >
         <GameContainer/>
