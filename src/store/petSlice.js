@@ -1,16 +1,10 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit"
 
-export const fetchPets = createAsyncThunk("pets/fetchPets",() => {
-  return fetch('/pets')
-  .then((response) => response.json())
-  .then(data => data)
+export const fetchPets = createAsyncThunk("pets/fetchPets", async () => {
+  const response = await fetch('/pets')
+  const data = await response.json()
+  return data
 })
-
-// export const deletePet = createAsyncThunk("pets/deletePet", (id) => {
-// return fetch(`pets/${id}`, {
-//   method: "DELETE"
-// })
-// })
 
 export const deletePet = createAsyncThunk('/pets/deletePet', async(id) => {
   const response = await fetch(`pets/${id}`, {method: "DELETE"})
@@ -18,8 +12,19 @@ export const deletePet = createAsyncThunk('/pets/deletePet', async(id) => {
   return data
 })
 
+// export const createPet = createAsyncThunk('pets/createPet', async (pet) => {
+//   const response = await fetch ('/pets', {
+//     method: "POST", 
+//     headers: {"Content-Type" : "application/json", "Accept": "application/json"}, 
+//     body: JSON.stringify(pet)})
+//     const data = await response.json()
+//     console.log(data)
+//     return data
+// })
+
 export const createPet = createAsyncThunk('pets/createPet', async (pet) => {
-  const response = await fetch ('pets/', {
+  console.log(pet)
+  const response = await fetch ('/pets', {
     method: "POST", 
     headers: {"Content-Type" : "application/json", "Accept": "application/json"}, 
     body: JSON.stringify(pet)})
@@ -42,9 +47,6 @@ const petSlice = createSlice({
     petCreate(state, action){
       state.petList.push(action.payload)
     },
-    // petDelete(state, action){
-    //   state.petList = state.petList.filter((pet) => pet.id !== action.payload)
-    // },
     petFeed(state,action){
         state.pet = state.petList.find((pet) => pet.id === action.payload)
         if ( state.pet.hungry < 4){
@@ -115,7 +117,16 @@ const petSlice = createSlice({
       state.petList = state.petList.filter((pet) => pet.id !== action.payload.id)
       console.log(action.payload)
       state.status = "deleted"
-    }
+    },
+    [createPet.pending](state){
+      state.status = "loading"
+    },
+    [createPet.fulfilled](state, action){
+      // debugger;
+      state.petList.push(action.payload)
+      // state.petList = [...state.petList, action.payload]
+      state.status = "created"
+    },
   }
 })
 
