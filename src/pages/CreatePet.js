@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { petActions } from "../store/petSlice";
-import { useDispatch } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import {createPet} from '../store/petSlice'
+
 
 import "./CreatePet.css";
 
@@ -22,46 +22,27 @@ export default function CreatePet() {
     food: "",
     activity: "",
   });
-  const [errors, setErrors] = useState([]);
   const history = useHistory();
   const dispatch = useDispatch();
+  const errors = useSelector(state => state.pets.errors)
   const handleClick = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     console.log(e.target.value);
   };
 
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-  //   console.log(formData);
-  //   const configObj = {
-  //       method: "POST",
-  //       headers: {'Content-type': 'application/json'},
-  //       body: JSON.stringify(formData)
-  //   }
-  //   fetch('/pets', configObj)
-  //   .then(resp => {
-  //       if (resp.ok){
-  //           resp.json().then((data) => dispatch(petActions.petCreate(data)))
-  //       }
-  //       else{
-  //           resp.json().then((err) => setErrors(err.errors))
-  //       }
-  //   })
-  //   history.push('/home')
-  // }
-
   function handleSubmit(e) {
     console.log(formData)
     e.preventDefault();
     dispatch(createPet(formData));
-    history.push('/home')
+    // history.push('/home')
   }
 
   return (
     <div>
+       <>{errors === "Your pet was successfully created!" ? <Link to="/home">{errors}</Link> : errors}</>
       <form className="createform-container" onSubmit={handleSubmit}>
         <label>Choose your pet's breed</label>
-        <div>
+        <div className="feature-container">
           <input
             onClick={handleClick}
             type="radio"
@@ -93,7 +74,10 @@ export default function CreatePet() {
           ></input>
         </div>
         <label>Choose your pet's favorite snack</label>
-        <div>
+        <div className="feature-container">
+          <div className="feature-item">
+          <img src={avocado} style={{ height: "25px" }} alt="avocado" />
+          <div className="feature-item-button">
           <input
             onClick={handleClick}
             type="radio"
@@ -102,10 +86,10 @@ export default function CreatePet() {
             value="avocado"
           ></input>
           <label for="avocado">
-            <img src={avocado} style={{ height: "25px" }} alt="avocado" />
             avocado
           </label>
-
+          </div>
+          </div>
           <input
             onClick={handleClick}
             type="radio"
@@ -184,7 +168,7 @@ export default function CreatePet() {
           Create
         </button>
       </form>
-      <p>{errors}</p>
+     
     </div>
   );
 }

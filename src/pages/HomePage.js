@@ -8,11 +8,10 @@ import { fetchPets } from "../store/petSlice";
 
 export default function HomePage () {
   const dispatch = useDispatch();
-  // const pets  
 
   useEffect(() => {
     dispatch(fetchPets());
-  }, []); 
+  }, [dispatch]); 
 
   return (
   <div className="main-container">

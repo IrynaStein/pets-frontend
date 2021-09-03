@@ -1,9 +1,13 @@
 .header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
   text-align: right;
 }
 .dropdown {
-  position: relative;
-  display: inline-block;
+  position: fixed;
+  display: block;
+  margin: 5px
 }
 
 .dropdown-content {

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "./Pet.css";
 import Birthday from "./Birthday";
 import { useDispatch } from "react-redux";
-import { petActions } from "../store/petSlice";
 import { deletePet } from "../store/petSlice";
 
 export default function Pet({ pet }) {
@@ -21,13 +20,6 @@ const dispatch = useDispatch()
   console.log(today);
   console.log(currentAge);
 
-  // const deleteHandler = () => {
-  //   console.log(pet.id)
-  //   fetch(`pets/${pet.id}`, {
-  //     method: "DELETE"
-  //   })
-  //   dispatch(petActions.petDelete(pet.id))
-  // }
   const deleteHandler = () => {
     dispatch(deletePet(pet.id))
   }
