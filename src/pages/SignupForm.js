@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import {useDispatch} from 'react-redux'
 import { userActions } from "../store/userSlice";
@@ -17,7 +17,7 @@ function SignupForm() {
     console.log(e.target.value);
     setFormdData({ ...formData, [e.target.name]: e.target.value });
   }
-
+const history= useHistory()
   function handleSubmit(e) {
     e.preventDefault();
     const configObg = {
@@ -34,14 +34,12 @@ function SignupForm() {
     };
     fetch("/signup", configObg).then((resp) => {
       if (resp.ok) {
-        resp.json().then((user) => dispatch(userActions.userLogin(user)));
+        resp.json().then((user) => dispatch(userActions.userLogin(user))).then(history.push('/home'))
       } else {
         resp.json().then((err) => setErrors(err.errors));
       }
     });
   }
-
-
 
   return (
     <div className="App">

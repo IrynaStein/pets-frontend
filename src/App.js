@@ -8,6 +8,7 @@ import CreatePet from "./pages/CreatePet";
 import GameContainer from "./pages/GameContainer";
 import {useSelector, useDispatch } from 'react-redux'
 import { userActions } from "./store/userSlice";
+import Header from "./components/Header";
 
 
 function App() {
@@ -27,6 +28,8 @@ const dispatch = useDispatch()
   console.log(user);
 
   return (
+    <>
+    {user? <Header/>: null}
     <Switch>
       <Route exact path="/home">
         {user ? (
@@ -36,18 +39,19 @@ const dispatch = useDispatch()
         )}
       </Route>
       <Route exact path="/signup">
-        {!user ? <SignupForm  /> : <Redirect to="/home" />}
+        <SignupForm />
       </Route>
       <Route exact path="/login">
         {!user ? <LoginForm /> : <Redirect to="/home" />}
       </Route>
       <Route exact path="/game/:petName" >
-        <GameContainer/>
+        { user? <GameContainer/> : <Redirect to="/home"/>}
       </Route>
       <Route exact path="/create_pet">
-        <CreatePet />
+        { user? <CreatePet/> : <Redirect to="/home"/>}
       </Route>
     </Switch>
+    </>
   );
 }
 

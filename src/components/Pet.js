@@ -4,6 +4,7 @@ import "./Pet.css";
 import Birthday from "./Birthday";
 import { useDispatch } from "react-redux";
 import { petActions } from "../store/petSlice";
+import { deletePet } from "../store/petSlice";
 
 export default function Pet({ pet }) {
   const [infoCard, setInfoCard] = useState(false);
@@ -20,27 +21,15 @@ const dispatch = useDispatch()
   console.log(today);
   console.log(currentAge);
 
-  function image() {
-    switch (currentAge) {
-      case 0:
-        return pet.breed.age[0].image;
-      case 1:
-        return pet.breed.age[1].image;
-      case 2:
-        return pet.breed.age[2].image;
-      case 3:
-        return pet.breed.age[3].image;
-      default:
-        return pet.breed.age[3].image;
-    }
-  }
-
+  // const deleteHandler = () => {
+  //   console.log(pet.id)
+  //   fetch(`pets/${pet.id}`, {
+  //     method: "DELETE"
+  //   })
+  //   dispatch(petActions.petDelete(pet.id))
+  // }
   const deleteHandler = () => {
-    console.log(pet.id)
-    fetch(`pets/${pet.id}`, {
-      method: "DELETE"
-    })
-    dispatch(petActions.petDelete(pet.id))
+    dispatch(deletePet(pet.id))
   }
 
   return (
