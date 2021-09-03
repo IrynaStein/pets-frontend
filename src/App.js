@@ -45,12 +45,12 @@ const dispatch = useDispatch()
         {!user ? <LoginForm /> : <Redirect to="/home" />}
       </Route>
       <Route exact path="/game/:petName" >
-        {/* { user? <GameContainer/> : <Redirect to="/home"/>} */}
-        <GameContainer />
+        { user? <GameContainer/> : <Redirect to="/home"/>}
+        {/* <GameContainer /> */}
       </Route>
       <Route exact path="/create_pet">
-        {/* { user? <CreatePet/> : <Redirect to="/home"/>} */}
-        <CreatePet/>
+        { user? <CreatePet/> : <Redirect to="/home"/>}
+        {/* <CreatePet/> */}
       </Route>
     </Switch>
     </>
