@@ -23,12 +23,12 @@ export const deletePet = createAsyncThunk('/pets/deletePet', async(id) => {
 // })
 
 export const createPet = createAsyncThunk('pets/createPet', async (pet) => {
-  console.log(pet)
   const response = await fetch ('/pets', {
     method: "POST", 
     headers: {"Content-Type" : "application/json", "Accept": "application/json"}, 
     body: JSON.stringify(pet)})
     const data = await response.json()
+    // debugger;
     return data
 })
 
@@ -44,9 +44,9 @@ const petSlice = createSlice({
   name: "pets",
   initialState,
   reducers: {
-    petCreate(state, action){
-      state.petList.push(action.payload)
-    },
+    // petCreate(state, action){
+    //   state.petList.push(action.payload)
+    // },
     petFeed(state,action){
         state.pet = state.petList.find((pet) => pet.id === action.payload)
         if ( state.pet.hungry < 4){
@@ -124,7 +124,6 @@ const petSlice = createSlice({
     [createPet.fulfilled](state, action){
       // debugger;
       state.petList.push(action.payload)
-      // state.petList = [...state.petList, action.payload]
       state.status = "created"
     },
   }

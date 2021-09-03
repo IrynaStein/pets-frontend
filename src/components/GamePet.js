@@ -17,7 +17,7 @@ export default function GamePet({ pet }) {
   
   return (
     <>
-    {alive? <div>
+    {alive? <>
       {notification !== "" ? <p>{notification}</p> : <p>
         This is {name.toUpperCase()} the {breed.name.toUpperCase()}. His
         favorite food is {food.name} - if he behaves well treat him to one. His
@@ -27,7 +27,7 @@ export default function GamePet({ pet }) {
         <Birthday pet={pet} />
       </div>
         <WellnessBar pet={pet}/>
-    </div>
+    </>
     :
     <div style={{fontSize: "300px"}}>&#9760;</div>
   } 

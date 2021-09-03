@@ -61,7 +61,7 @@ export default function CreatePet() {
     <div>
       <form className="createform-container" onSubmit={handleSubmit}>
         <label>Choose your pet's breed</label>
-        <div>
+        <div className="feature-container">
           <input
             onClick={handleClick}
             type="radio"
@@ -93,7 +93,10 @@ export default function CreatePet() {
           ></input>
         </div>
         <label>Choose your pet's favorite snack</label>
-        <div>
+        <div className="feature-container">
+          <div className="feature-item">
+          <img src={avocado} style={{ height: "25px" }} alt="avocado" />
+          <div className="feature-item-button">
           <input
             onClick={handleClick}
             type="radio"
@@ -102,10 +105,10 @@ export default function CreatePet() {
             value="avocado"
           ></input>
           <label for="avocado">
-            <img src={avocado} style={{ height: "25px" }} alt="avocado" />
             avocado
           </label>
-
+          </div>
+          </div>
           <input
             onClick={handleClick}
             type="radio"

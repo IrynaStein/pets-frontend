@@ -21,35 +21,35 @@ console.log(hungry)
 
 
 const dispatch = useDispatch()
-useEffect(() => {
-    let clockInterval = setInterval(() => {
-        if (alive){
-            if (sleepy < 0 && hungry < 0 ){
-                dispatch(petActions.petDead(id))
-                alert("Your pet died")
-            }
-            else if(sleepy < -1 || hungry < -1){
-                dispatch(petActions.petDead(id))
-                alert("Your pet died")
-            }
-            else if((bored < 0 && hungry <0) || (bored < 0 && sleepy < 0)){
-                dispatch(petActions.petDead(id))
-                alert("Your pet died")
-            }
-            else {
-                dispatch(petActions.getSleepy(id))
-                dispatch(petActions.getHungry(id))
-            }
-        }
-        else {
-            alert(`We are preparing ${name}'s the funeral!`)
-            clearInterval(clockInterval)
-        }
-    }, 15000);    
-    return () => {
-        clearInterval(clockInterval)
-    }
-}, [dispatch, sleepy, hungry, bored, dirty, alive,id, name])
+// useEffect(() => {
+//     let clockInterval = setInterval(() => {
+//         if (alive){
+//             if (sleepy < 0 && hungry < 0 ){
+//                 dispatch(petActions.petDead(id))
+//                 alert("Your pet died")
+//             }
+//             else if(sleepy < -1 || hungry < -1){
+//                 dispatch(petActions.petDead(id))
+//                 alert("Your pet died")
+//             }
+//             else if((bored < 0 && hungry <0) || (bored < 0 && sleepy < 0)){
+//                 dispatch(petActions.petDead(id))
+//                 alert("Your pet died")
+//             }
+//             else {
+//                 dispatch(petActions.getSleepy(id))
+//                 dispatch(petActions.getHungry(id))
+//             }
+//         }
+//         else {
+//             alert(`We are preparing ${name}'s the funeral!`)
+//             clearInterval(clockInterval)
+//         }
+//     }, 15000);    
+//     return () => {
+//         clearInterval(clockInterval)
+//     }
+// }, [dispatch, sleepy, hungry, bored, dirty, alive,id, name])
 
 
   const barConverter = (arg) => {

@@ -9,7 +9,7 @@ export default function PetsContainer() {
 
   return (
     <div className="pet-container">
-      {pets.length <= 2 ? <Link className="button-n" role="button" to="/create_pet">Create new pet</Link> : null}
+      {pets.length <= 2 ? <Link to="/create_pet"><button className="button-n">Create new pet</button></Link> : null}
       {renderPets()}
     </div>
   );
