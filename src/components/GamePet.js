@@ -18,9 +18,10 @@ export default function GamePet({ pet }) {
   return (
     <>
     {notification !== "" ? <div className="info-container"><p>{notification}</p></div> : <div className="info-container"><p>
-        This is {name.toUpperCase()} the {breed.name.toUpperCase()}. His
-        favorite food is {food.name} - if he behaves well treat him to one. His
-        favorite activity is {activity.name}, so make sure to do that often.
+        Hi! <br/>
+        I am {name.toUpperCase()} the {breed.name.toUpperCase()}. <br/> My
+        favorite food is {food.name} - if I behave well give me some! My
+        favorite activity is {activity.name}, so lets play.
         </p></div>}
     {alive? <>
       <div className="pet-display">
