@@ -17,7 +17,7 @@ export default function GamePet({ pet }) {
   
   return (
     <>
-    {notification !== "" ? <div className="info-container">{notification}</div> : <div className="info-container"><p>
+    {notification !== "" ? <div className="info-container"><p>{notification}</p></div> : <div className="info-container"><p>
         This is {name.toUpperCase()} the {breed.name.toUpperCase()}. His
         favorite food is {food.name} - if he behaves well treat him to one. His
         favorite activity is {activity.name}, so make sure to do that often.
@@ -29,7 +29,7 @@ export default function GamePet({ pet }) {
         <WellnessBar pet={pet}/>
     </>
     :
-    <div style={{fontSize: "300px"}}>&#9760;</div>
+    <div className="pet-display"><img src="https://live.staticflickr.com/65535/51425421314_73dab74c11_o.png"/></div>
   } 
     </>
   );

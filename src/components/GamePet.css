@@ -3,7 +3,7 @@
   flex-direction: row;
   justify-content: center;
   position: fixed;
-  top: 100px;
+  top: 110px;
   width: 300px;
   height: 300px;
   padding: 5px;
@@ -19,7 +19,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  background-image: url("https://live.staticflickr.com/65535/51424501416_033f7db7ee_o.png");
+  background-image: url("https://live.staticflickr.com/65535/51423857442_fb0a6a3cb0_o.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;
@@ -28,7 +28,7 @@
   left: 160px;
   width: 250px;
   height: 200px;
-  /* border: solid 1px; */
+  border: solid 1px;
   padding: 5px;
 }
 .info-container > p {
@@ -37,7 +37,7 @@
   top: 41px;
   left: 180px;
   width: 200px;
-  /* border: solid 1px; */
+  border: solid 1px;
   text-align: center;
 }
 

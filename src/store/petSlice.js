@@ -99,10 +99,10 @@ const petSlice = createSlice({
       state.pet.alive = Math.random() < 0.1
       if (state.pet.alive){
         state.pet.healthy = true
-        state.notification = "Vet said your pet can go home now. He is healthy and happy again. Take care!!!"
+        state.notification = `Doctor says: "Your pet can go home now. He is healthy and happy again. Take care!!!"`
       }
       else {
-        state.notification = "Vet has tried everything, but unfortunately was able to cure your pet. We are so sorry for your loss!"
+        state.notification = `Nurse says: "Vet tried everything, but unfortunately was not able to cure your pet. We are so sorry for your loss!"`
       }
     }
   },
