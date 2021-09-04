@@ -1,93 +1,75 @@
 import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import {useDispatch} from 'react-redux'
-import { userActions } from "../store/userSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { createUser } from "../store/userSlice";
+import { useForm } from "react-hook-form";
+import {userActions} from '../store/userSlice'
 
 function SignupForm() {
-  const defaultForm = {
-    username: "",
-    password: "",
-    pass_conf: "",
-    email: "",
-  };
-  const [formData, setFormdData] = useState(defaultForm);
-  const [errors, setErrors] = useState([])
-  const dispatch = useDispatch()
-  function handleChange(e) {
-    console.log(e.target.value);
-    setFormdData({ ...formData, [e.target.name]: e.target.value });
-  }
-const history= useHistory()
-  function handleSubmit(e) {
-    e.preventDefault();
-    const configObg = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        user_name: formData.username,
-        password: formData.password,
-        password_confirmation: formData.pass_conf,
-        email: formData.email,
-      }),
-    };
-    fetch("/signup", configObg).then((resp) => {
-      if (resp.ok) {
-        resp.json().then((user) => dispatch(userActions.userLogin(user))).then(history.push('/home'))
-      } else {
-        resp.json().then((err) => setErrors(err.errors));
-      }
-    });
+  const dispatch = useDispatch();
+
+  const history = useHistory();
+  const errors = useSelector((state) => state.user.errors);
+  console.log(errors);
+  const { register, handleSubmit, reset } = useForm();
+
+  const onFileChange = (e) => {
+    console.log(e.target.files[0])
   }
 
+  const onSubmit = (data, e) => {
+    console.log(data.avatar[0]);
+    e.preventDefault();
+    dispatch(createUser(data));
+    if (errors === "") {
+     history.push("/home");
+    } else {
+      reset();
+    }
+  };
   return (
     <div className="App">
       <Link to="login">
         <button className="button">&#8592;Back to Login</button>
       </Link>
-      <form className="centered-form" onSubmit={handleSubmit}>
+      
+      <form className="centered-form" onSubmit={handleSubmit(onSubmit)}>
         <input
           className="input-field"
-          name="username"
-          value={formData.user_name}
-          onChange={(e) => handleChange(e)}
+          name="user-name"
           placeholder="user name..."
+          {...register("user_name")}
         ></input>
         <br />
         <input
           className="input-field"
           name="password"
           type="password"
-          value={formData.password}
-          onChange={(e) => handleChange(e)}
           placeholder="password..."
+          {...register("password")}
         ></input>
         <br />
         <input
           className="input-field"
-          name="pass_conf"
+          name="password_confirmation"
           type="password"
-          value={formData.pass_conf}
-          onChange={(e) => handleChange(e)}
           placeholder="confirm password..."
+          {...register("password_confirmation")}
         ></input>
         <br />
         <input
           className="input-field"
           name="email"
-          value={formData.email}
-          onChange={(e) => handleChange(e)}
           placeholder="email..."
+          {...register("email")}
         ></input>
         <br />
-        <button className="button" type="submit">
-          Signup
-        </button>
-        <p>
-       {errors.map((error) => <>{error}</>)}
-       </p>
+        <input type="file" name="avatar" {...register("avatar")} ></input>
+        <button className="button" type="submit" >
+          Signup</button>
+        {errors}
       </form>
+      
     </div>
   );
 }

@@ -79,6 +79,7 @@ const petSlice = createSlice({
     petClean(state, action){
       state.pet = state.petList.find((pet) => pet.id === action.payload)
       state.dirty = 4
+      state.pet.bored +=1
       state.pet.sleepy -=1
     },
     getDirty(state, action){
@@ -88,6 +89,21 @@ const petSlice = createSlice({
     petDead(state, action){
       state.pet = state.petList.find((pet) => pet.id === action.payload)
       state.pet.alive = false
+    },
+    getSick(state, action){
+      state.pet = state.petList.find((pet) => pet.id === action.payload)
+      state.pet.healthy = Math.random() < 0.1
+    },
+    gotoVet(state, action){
+      state.pet = state.petList.find((pet) => pet.id === action.payload)
+      state.pet.alive = Math.random() < 0.1
+      if (state.pet.alive){
+        state.pet.healthy = true
+        state.notification = "Vet said your pet can go home now. He is healthy and happy again. Take care!!!"
+      }
+      else {
+        state.notification = "Vet has tried everything, but unfortunately was able to cure your pet. We are so sorry for your loss!"
+      }
     }
   },
   extraReducers: {
@@ -111,6 +127,8 @@ const petSlice = createSlice({
       state.status = "loading"
     },
     [createPet.fulfilled](state, action){
+      state.status = "completed"
+      state.petList.push(action.payload)
       if(action.payload.error){
         state.errors = "Sorry, we couldn't process your request. Please make sure all fields are filled in and try again. Thank you!"
       }
@@ -119,7 +137,7 @@ const petSlice = createSlice({
       }
       else {
         state.errors = "Your pet was successfully created!"
-        state.petList.push(action.payload)
+        // state.petList.push(action.payload)
       }
     }
   }

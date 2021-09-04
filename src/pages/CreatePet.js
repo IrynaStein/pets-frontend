@@ -25,21 +25,21 @@ export default function CreatePet() {
   const history = useHistory();
   const dispatch = useDispatch();
   const errors = useSelector(state => state.pets.errors)
+  const status = useSelector(state=> state.pets.status)
   const handleClick = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     console.log(e.target.value);
   };
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     console.log(formData)
     e.preventDefault();
-    dispatch(createPet(formData));
-    // history.push('/home')
+    dispatch(createPet(formData)).then(() => history.push('/home')); 
   }
 
   return (
     <div>
-       <>{errors === "Your pet was successfully created!" ? <Link to="/home">{errors}</Link> : errors}</>
+       <>{errors}</>
       <form className="createform-container" onSubmit={handleSubmit}>
         <label>Choose your pet's breed</label>
         <div className="feature-container">
