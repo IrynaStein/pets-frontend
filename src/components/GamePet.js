@@ -17,20 +17,22 @@ export default function GamePet({ pet }) {
   
   return (
     <>
+    {notification !== "" ? <div className="info-container"><p>{notification}</p></div> : <div className="info-container"><p>
+        Hi! <br/>
+        I am {name.toUpperCase()} the {breed.name.toUpperCase()}. <br/> My
+        favorite food is {food.name} - if I behave well give me some! My
+        favorite activity is {activity.name}, so lets play.
+        </p></div>}
     {alive? <>
-      {notification !== "" ? <p>{notification}</p> : <p>
-        This is {name.toUpperCase()} the {breed.name.toUpperCase()}. His
-        favorite food is {food.name} - if he behaves well treat him to one. His
-        favorite activity is {activity.name}, so make sure to do that often.
-      </p>}
       <div className="pet-display">
         <Birthday pet={pet} />
       </div>
         <WellnessBar pet={pet}/>
     </>
     :
-    <div style={{fontSize: "300px"}}>&#9760;</div>
+    <div className="pet-display"><img src="https://live.staticflickr.com/65535/51425421314_73dab74c11_o.png"/></div>
   } 
     </>
   );
 }
+

@@ -1,12 +1,33 @@
-.game-container{
-    background-image: url("https://live.staticflickr.com/65535/51407109978_5a63923b81_o.jpg");
-    background-size: 500px;
-    height: 494px;
-    border: 3px solid #50AB6E;
-    text-align: center;
-    align-items: center;
-    flex-direction: column;
-    display: flex;
+.game-container {
+  background-image: url("https://live.staticflickr.com/65535/51407109978_5a63923b81_o.jpg");
+  background-size: 500px;
+  height: 494px;
+  border: 3px solid #50ab6e;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+  display: flex;
 }
 
+.health_container {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 300px;
+  right: 200px;
+  width: 50px;
+  /* border: solid 1px; */
+  padding: 5px;
+}
+
+.health-container > img {
+  width: 100%;
+}
+
+.wellness-bar {
+  position: fixed;
+  bottom: 200px;
+  width: 500px;
+  left: 175px;
+}
 

@@ -12,13 +12,14 @@ const dirty = useSelector(state => state.pets.dirty)
     id,
     name,
     sleepy,
+    healthy,
     bored,
     alive,
     hungry,
   } = pet;
   console.log(sleepy);
 console.log(hungry)
-
+console.log(healthy)
 
 const dispatch = useDispatch()
 // useEffect(() => {
@@ -39,6 +40,9 @@ const dispatch = useDispatch()
 //             else {
 //                 dispatch(petActions.getSleepy(id))
 //                 dispatch(petActions.getHungry(id))
+//                 dispatch(petActions.getDirty(id))
+//                 dispatch(petActions.getSick(id))
+//                 dispatch(petActions.getBored(id))
 //             }
 //         }
 //         else {
@@ -56,28 +60,28 @@ const dispatch = useDispatch()
     switch (arg) {
       case 1:
         return (
-          <div style={{ color: "red", fontSize: "20px" }}>
+          <div style={{ color: "#D04848", fontSize: "20px" }}>
             &#10074;
             <span style={{ color: "gray" }}>&#10074;&#10074;&#10151;</span>
           </div>
         );
       case 2:
         return (
-          <div style={{ color: "orange", fontSize: "20px" }}>
+          <div style={{ color: "#FFE35C", fontSize: "20px" }}>
             &#10074;&#10074;
             <span style={{ color: "gray" }}>&#10074;&#10151;</span>
           </div>
         );
       case 3:
         return (
-          <div style={{ color: "yellow", fontSize: "20px" }}>
+          <div style={{ color: "#FFA34D", fontSize: "20px" }}>
             &#10074;&#10074;&#10074;
             <span style={{ color: "gray" }}>&#10151;</span>
           </div>
         );
       case 4:
         return (
-          <div style={{ color: "blue", fontSize: "20px" }}>
+          <div style={{ color: "#486799", fontSize: "20px" }}>
             &#10074;&#10074;&#10074;&#10151;
           </div>
         );
@@ -105,15 +109,20 @@ const sleepHandler = () => {
     dispatch(petActions.getBored(id))
 }
 
+const vetHandler = () => {
+   dispatch(petActions.gotoVet(id))
+}
+
+
   return (
-      <div>{alive?  <div
-        style={{
-          display: "block",
-          position: "relative",
-          bottom: "30px",
-          backgroundColor: "white",
-        }}
-      >
+      <div>{alive?  <div className="wellness-bar"
+        // style={{
+        //     display: "block",
+        //     position: "relative",
+        //     bottom: "30px",
+        //     backgroundColor: "white",
+        //   }}
+      > {!healthy? <div className="health_container"><img src="https://live.staticflickr.com/65535/51425384610_2a4c6065b3_o.png"></img></div> :<div className="health_container"><img src="https://i.imgur.com/arrUsjs.gif" onClick={vetHandler}/></div>}
         <section>
           sleepy: {barConverter(sleepy)}
           <button  onClick={sleepHandler} className="button-n" style={{ width: "60px" }}>

@@ -1,20 +1,24 @@
 import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {createPet} from '../store/petSlice'
-
+import { createPet } from "../store/petSlice";
 
 import "./CreatePet.css";
 
 export default function CreatePet() {
   const avocado =
-    "https://live.staticflickr.com/65535/51406867835_66995b93fb_o.png";
+    "https://live.staticflickr.com/65535/51424737451_68d984499f_o.png";
   const icecream =
-    "https://live.staticflickr.com/65535/51405887526_9e7cbea55b_o.png";
+    "https://live.staticflickr.com/65535/51424737566_8c2d4c6092_o.png";
   const charcoal =
-    "https://live.staticflickr.com/65535/51406867940_6320a6a8a2_o.png";
+    "https://live.staticflickr.com/65535/51424737761_a8cb15f2f1_o.png";
   const strawberry =
-    "https://live.staticflickr.com/65535/51405887496_2fb7bc4733_o.png";
+    "https://live.staticflickr.com/65535/51423990027_059f38b3d6_o.png";
+
+  const tibbar =
+    "https://live.staticflickr.com/65535/51425499894_6cfaa9a365_o.png";
+  const drazzil =
+    "https://live.staticflickr.com/65535/51423990307_69aff94700_o.png";
 
   const [formData, setFormData] = useState({
     breed: "",
@@ -24,42 +28,52 @@ export default function CreatePet() {
   });
   const history = useHistory();
   const dispatch = useDispatch();
-  const errors = useSelector(state => state.pets.errors)
+  const errors = useSelector((state) => state.pets.errors);
+  const status = useSelector((state) => state.pets.status);
   const handleClick = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     console.log(e.target.value);
   };
 
-  function handleSubmit(e) {
-    console.log(formData)
+  const handleSubmit = (e) => {
+    console.log(formData);
     e.preventDefault();
-    dispatch(createPet(formData));
-    // history.push('/home')
-  }
+    dispatch(createPet(formData)).then(() => history.push("/home"));
+  };
 
   return (
     <div>
-       <>{errors === "Your pet was successfully created!" ? <Link to="/home">{errors}</Link> : errors}</>
+      <>{errors}</>
       <form className="createform-container" onSubmit={handleSubmit}>
         <label>Choose your pet's breed</label>
         <div className="feature-container">
-          <input
-            onClick={handleClick}
-            type="radio"
-            id="tibbar"
-            name="breed"
-            value="tibbar"
-          ></input>
-          <label for="tibbar">Tibbar</label>
+          <div className="feature-item">
+          <img src={tibbar} style={{ height: "40px" }} alt="tibbar" />
+          <div className="feature-item-button">
+            <input
+              onClick={handleClick}
+              type="radio"
+              id="tibbar"
+              name="breed"
+              value="tibbar"
+            ></input>
+            <label for="tibbar">Tibbar</label>
+            </div>
+          </div>
 
-          <input
-            onClick={handleClick}
-            type="radio"
-            id="drazzil"
-            name="breed"
-            value="drazzil"
-          ></input>
-          <label for="drazzil">Drazzil</label>
+          <div className="feature-item">
+          <img src={drazzil} style={{ height: "40px" }} alt="drazzil" />
+          <div className="feature-item-button">
+            <input
+              onClick={handleClick}
+              type="radio"
+              id="drazzil"
+              name="breed"
+              value="drazzil"
+            ></input>
+            <label for="drazzil">Drazzil</label>
+          </div>
+          </div>
         </div>
 
         <label for="name">Name your pet</label>
@@ -74,101 +88,109 @@ export default function CreatePet() {
           ></input>
         </div>
         <label>Choose your pet's favorite snack</label>
+
         <div className="feature-container">
           <div className="feature-item">
-          <img src={avocado} style={{ height: "25px" }} alt="avocado" />
-          <div className="feature-item-button">
-          <input
-            onClick={handleClick}
-            type="radio"
-            id="avocado"
-            name="food"
-            value="avocado"
-          ></input>
-          <label for="avocado">
-            avocado
-          </label>
+            <img src={avocado} style={{ height: "40px" }} alt="avocado" />
+            <div className="feature-item-button">
+              <input
+                onClick={handleClick}
+                type="radio"
+                id="avocado"
+                name="food"
+                value="avocado"
+              ></input>
+              <label for="avocado">avocado</label>
+            </div>
           </div>
+
+          <div className="feature-item">
+            <img src={icecream} style={{ height: "40px" }} alt="icecream" />
+            <div className="feature-item-button">
+              <input
+                onClick={handleClick}
+                type="radio"
+                id="icecream"
+                name="food"
+                value="icecream"
+              ></input>
+              <label for="icecream">icecream</label>
+            </div>
           </div>
-          <input
-            onClick={handleClick}
-            type="radio"
-            id="icecream"
-            name="food"
-            value="icecream"
-          ></input>
-          <label for="icecream">
-            <img src={icecream} style={{ height: "25px" }} alt="icecream" />
-            icecream
-          </label>
 
-          <input
-            onClick={handleClick}
-            type="radio"
-            id="charcoal"
-            name="food"
-            value="charcoal"
-          ></input>
-          <label for="charcoal">
-            <img src={charcoal} style={{ height: "25px" }} alt="charcoal" />
-            charcoal
-          </label>
+          <div className="feature-item">
+            <img src={charcoal} style={{ height: "40px" }} alt="charcoal" />
+            <div className="feature-item-button">
+              <input
+                onClick={handleClick}
+                type="radio"
+                id="charcoal"
+                name="food"
+                value="charcoal"
+              ></input>
+              <label for="charcoal">charcoal</label>
+            </div>
+          </div>
 
-          <input
-            onClick={handleClick}
-            type="radio"
-            id="strawberry"
-            name="food"
-            value="strawberry"
-          ></input>
-          <label for="strawberry">
-            <img src={strawberry} style={{ height: "25px" }} alt="strawberry" />
-            strawberry
-          </label>
+          <div className="feature-item">
+            <img src={strawberry} style={{ height: "40px" }} alt="strawberry" />
+            <div className="feature-item-button">
+              <input
+                onClick={handleClick}
+                type="radio"
+                id="strawberry"
+                name="food"
+                value="strawberry"
+              ></input>
+              <label for="strawberry">strawberry</label>
+            </div>
+          </div>
         </div>
+
         <label>Choose your pet's favorite activity</label>
-        <div>
-          <input
-            onClick={handleClick}
-            type="radio"
-            id="swimming"
-            name="activity"
-            value="swimming"
-          ></input>
-          <label for="swimming">swimming</label>
+        <div className="feature-container">
+          <div>
+            <input
+              onClick={handleClick}
+              type="radio"
+              id="swimming"
+              name="activity"
+              value="swimming"
+            ></input>
+            <label for="swimming">swimming</label>
 
-          <input
-            onClick={handleClick}
-            type="radio"
-            id="coding"
-            name="activity"
-            value="coding"
-          ></input>
-          <label for="coding">coding</label>
+            <input
+              onClick={handleClick}
+              type="radio"
+              id="coding"
+              name="activity"
+              value="coding"
+            ></input>
+            <label for="coding">coding</label>
 
-          <input
-            onClick={handleClick}
-            type="radio"
-            id="hiking"
-            name="activity"
-            value="hiking"
-          ></input>
-          <label for="hiking">hiking</label>
+            <input
+              onClick={handleClick}
+              type="radio"
+              id="hiking"
+              name="activity"
+              value="hiking"
+            ></input>
+            <label for="hiking">hiking</label>
 
-          <input
-            onClick={handleClick}
-            type="radio"
-            id="balling"
-            name="activity"
-            value="balling"
-          ></input>
-          <label for="balling">ball</label>
+            <input
+              onClick={handleClick}
+              type="radio"
+              id="balling"
+              name="activity"
+              value="balling"
+            ></input>
+            <label for="balling">ball</label>
+          </div>
         </div>
         <button className="button-inv" type="submit">
           Create
         </button>
       </form>
-     
     </div>
   );
 }
