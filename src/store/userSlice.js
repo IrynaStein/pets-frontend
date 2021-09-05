@@ -72,7 +72,8 @@ const userSlice = createSlice({
         [deleteUser.pending](state){
             state.status = 'pending'
         },
-        [deleteUser.fulfilled](state){
+        [deleteUser.fulfilled](state, {payload}){
+            console.log(payload)
             state.status = "completed"
             state.user = null
         },
