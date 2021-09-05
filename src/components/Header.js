@@ -27,7 +27,7 @@ export default function Header() {
           <NavLink activeclassname={classes.active} to="/home/game/:petName">
             Game rules
           </NavLink>
-          <NavLink activeclassname={classes.active} to="/signup">
+          <NavLink activeclassname={classes.active} to="/cemetery">
             Visit Cemetery
           </NavLink>
           <NavLink exact to='/home' activeclassname={classes.active} >Home</NavLink>

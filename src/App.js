@@ -9,6 +9,7 @@ import GameContainer from "./pages/GameContainer";
 import {useSelector, useDispatch } from 'react-redux'
 import { userActions } from "./store/userSlice";
 import Header from "./components/Header";
+import Cemetery from "./components/Cemetery";
 
 
 function App() {
@@ -46,11 +47,12 @@ const dispatch = useDispatch()
       </Route>
       <Route exact path="/game/:petName" >
         { user? <GameContainer/> : <Redirect to="/home"/>}
-        {/* <GameContainer /> */}
       </Route>
       <Route exact path="/create_pet">
         { user? <CreatePet/> : <Redirect to="/home"/>}
-        {/* <CreatePet/> */}
+      </Route>
+      <Route exact path="/cemetery">
+        <Cemetery/>
       </Route>
     </Switch>
     </>
