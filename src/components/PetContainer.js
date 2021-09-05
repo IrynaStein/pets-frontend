@@ -5,11 +5,24 @@ import { useSelector } from "react-redux";
 
 export default function PetsContainer() {
   const pets = useSelector((state) => state.pets.petList);
-  const renderPets = () => pets.map((pet) => <Pet key={pet.id} pet={pet} />);
+  console.log(pets);
+
+  const renderPets = () =>
+    pets.map((pet) => {
+      if (pet.alive) {
+        return <Pet key={pet.id} pet={pet} />;
+      } else {
+        return <div />;
+      }
+    });
 
   return (
     <div className="pet-container">
-      {pets.length <= 2 ? <Link to="/create_pet"><button className="button-n">Create new pet</button></Link> : null}
+      {pets.length <= 2 ? (
+        <Link to="/create_pet">
+          <button className="button-n">Create new pet</button>
+        </Link>
+      ) : null}
       {renderPets()}
     </div>
   );
