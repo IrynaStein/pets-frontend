@@ -16,6 +16,14 @@ export const createUser = createAsyncThunk ('user/createUser', async(user) => {
        return data
 } ) 
 
+export const deleteUser = createAsyncThunk ('user/deleteUser', async(id)=> {
+    const response = fetch(`/users/${id}`, {
+        method: "DELETE"
+    })
+    const data = await response.json()
+    return data
+})
+
 
 const initialState = {
     user: null,
@@ -61,6 +69,16 @@ const userSlice = createSlice({
         // [createUser.rejected](state, action){
         //     state.errors = action.payload.errors[0].map((err, ind) => `${ind+1}. ${err}, `)
         // }
+        [deleteUser.pending](state){
+            state.status = 'pending'
+        },
+        [deleteUser.fulfilled](state){
+            state.status = "completed"
+            state.user = null
+        },
+        [deleteUser.rejected](state, {payload}){
+            state.status = "rejected"
+        }
     }
 })
 
