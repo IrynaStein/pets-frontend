@@ -16,10 +16,8 @@ export const createUser = createAsyncThunk ('user/createUser', async(user) => {
        return data
 } ) 
 
-export const deleteUser = createAsyncThunk ('user/deleteUser', async(id)=> {
-    const response = fetch(`/users/${id}`, {
-        method: "DELETE"
-    })
+export const deleteUser = createAsyncThunk ('/user/deleteUser', async(id)=> {
+    const response = await fetch(`/users/${id}`, {method: "DELETE"})
     const data = await response.json()
     return data
 })
@@ -70,15 +68,19 @@ const userSlice = createSlice({
         //     state.errors = action.payload.errors[0].map((err, ind) => `${ind+1}. ${err}, `)
         // }
         [deleteUser.pending](state){
-            state.status = 'pending'
+            state.status = 'loading'
         },
-        [deleteUser.fulfilled](state, {payload}){
-            console.log(payload)
+        [deleteUser.fulfilled](state){
             state.status = "completed"
             state.user = null
         },
-        [deleteUser.rejected](state, {payload}){
+        [deleteUser.rejected](state, action){
             state.status = "rejected"
+            if (action.payload) {
+                state.error = action.payload.errorMessage
+              } else {
+                state.error = action.error.message
+              }
         }
     }
 })
