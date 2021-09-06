@@ -29,43 +29,44 @@ function SignupForm() {
   };
   return (
     <div className="App">
-      <Link to="login">
-        <button className="button">&#8592;Back to Login</button>
+      <Link className="button-regular" to="login">
+        &#8592;Back to Login
       </Link>
       
-      <form className="centered-form" onSubmit={handleSubmit(onSubmit)}>
+      <form className="centered-form-signup" onSubmit={handleSubmit(onSubmit)}>
         <input
-          className="input-field"
+          className="input-field-orange"
           name="user-name"
           placeholder="user name..."
-          {...register("user_name")}
+          {...register("user_name", {required: true})}
         ></input>
         <br />
         <input
-          className="input-field"
+          className="input-field-orange"
           name="password"
           type="password"
           placeholder="password..."
-          {...register("password")}
+          {...register("password", {required: true})}
         ></input>
         <br />
         <input
-          className="input-field"
+          className="input-field-orange"
           name="password_confirmation"
           type="password"
           placeholder="confirm password..."
-          {...register("password_confirmation")}
+          {...register("password_confirmation", {required: true})}
         ></input>
         <br />
         <input
-          className="input-field"
+          className="input-field-orange"
           name="email"
           placeholder="email..."
-          {...register("email")}
+          {...register("email", {required: true})}
         ></input>
         <br />
-        <input type="file" name="avatar" {...register("avatar")} ></input>
-        <button className="button" type="submit" >
+        <input className="input-field-orange" type="file" name="avatar" {...register("avatar")} ></input>
+        <br />
+        <button className="button-regular" type="submit" >
           Signup</button>
         {errors}
       </form>

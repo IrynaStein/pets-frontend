@@ -38,14 +38,14 @@ export default function User(){
      
         <form onSubmit={handleSubmit(onSubmit)}>
         <input
-          className="input-field"
+          className="input-field-gray"
           name="user-name"
           placeholder="user name..."
           {...register("user_name")}
         ></input>
         <br />
         <input
-          className="input-field"
+          className="input-field-gray"
           name="password"
           type="password"
           placeholder="re-enter password..."
@@ -54,24 +54,26 @@ export default function User(){
         {/* {errors.password && <p>Password</p>} */}
         <br />
         <input
-          className="input-field"
+          className="input-field-gray"
           name="password_confirmation"
           type="password"
           placeholder="confirm password..."
-          {...register("password_confirmation", { required: "Please enter your first name." })}
+          {...register("password_confirmation", { required: true })}
         ></input>
         <br />
         <input
-          className="input-field"
+          className="input-field-gray"
           name="email"
           placeholder="email..."
           {...register("email")}
         ></input>
         <br/>
+        <div className="centered-buttons">
         <button className="button-gray" type="submit" >
           Update my profile</button>
           <br/>
-          <button onClick={()=> setShowForm(false)}>Cancel</button>
+          <button className="button-gray" onClick={()=> setShowForm(false)}>Cancel</button>
+          </div>
       </form>
       
         : 

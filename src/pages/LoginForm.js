@@ -40,9 +40,9 @@ const dispatch = useDispatch()
 
   return (
     <div className="App">
-      <form className="centered-form" onSubmit={handleSubmit}>
+      <form className="centered-form-login" onSubmit={handleSubmit}>
         <input
-          className="input-field"
+          className="input-field-orange"
           onChange={(e) => handleChange(e)}
           value={formData.username}
           type="text"
@@ -51,7 +51,7 @@ const dispatch = useDispatch()
         ></input>
         <br />
         <input
-          className="input-field"
+          className="input-field-orange"
           onChange={(e) => handleChange(e)}
           value={formData.password}
           type="password"
@@ -59,9 +59,9 @@ const dispatch = useDispatch()
           placeholder="password..."
         ></input>
         <br />
-        <button className="button">Login</button>
+        <button className="button-regular">Login</button>
         <Link to="/signup">
-          <button className="button" type="submit">Signup</button>
+          <button className="button-regular" type="submit">Signup</button>
         </Link>
         {errors.map((err) => <p>{err}</p>)}
       </form>

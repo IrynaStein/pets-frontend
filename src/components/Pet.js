@@ -25,13 +25,12 @@ const dispatch = useDispatch()
   }
 
   return (
-    <>
+    <div className="pet-element">
       
-      <button className="button-regular" onClick={deleteHandler}>x</button>
-      <Link className="pet-window" to={`/game/${pet.name}`}>
+      <button className="button-regular-inv" onClick={deleteHandler}>x</button>
+      <Link className="pet-card" to={`/game/${pet.name}`}>
         <Birthday pet={pet}/>
       </Link>
-
       <p
         style={{ cursor: "pointer" }}
         onClick={() => setInfoCard((mUV) => !mUV)}
@@ -49,6 +48,7 @@ const dispatch = useDispatch()
           <p>Favorite activity: {pet.activity.name}</p>
         </div>
       ) : null}
-    </>
+  
+    </div>
   );
 }

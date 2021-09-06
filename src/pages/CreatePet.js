@@ -80,7 +80,7 @@ export default function CreatePet() {
         <div>
           <input
             onChange={handleClick}
-            className="input-field"
+            className="input-field-orange"
             id="name"
             name="name"
             placeholder="pet name..."

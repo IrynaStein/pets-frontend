@@ -54,7 +54,7 @@ export default function WellnessBar() {
       return () => {
           clearInterval(clockInterval)
       }
-  }, [dispatch, sleepy, hungry, bored, dirty, alive,id, name])
+  }, [dispatch, sleepy, hungry, bored, dirty, alive,id, name, pet])
 
   const feedHandler = () => {
     console.log(id);
@@ -151,7 +151,7 @@ export default function WellnessBar() {
             </button>
           </section>
         </div>
-      ) : null}
+      ) : <div className="pop-up">Your pet passed away</div>}
     </>
   );
 }

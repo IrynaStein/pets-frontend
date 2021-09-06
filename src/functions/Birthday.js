@@ -24,6 +24,8 @@ export default function Birthday({pet}){
       }
     }
     return (
+      // <div className="pet-card">
         <img src={image()} alt ="pet"/>
+        // </div>
     )
 }

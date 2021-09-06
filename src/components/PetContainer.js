@@ -24,9 +24,9 @@ export default function PetsContainer() {
         </Link>
       ) : null}
       </div>
-     
+     <div className="pets-window">
       {renderPets()}
-    
+      </div>
     </div>
   );
 }
