@@ -2,13 +2,11 @@ import { useEffect } from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { petActions } from "../store/petSlice";
 import {updatePet} from '../store/petSlice'
-export default function WellnessBar({ pet }) {
-    console.log(pet)
 
+export default function WellnessBar() {
+const pet = useSelector(state => state.pets.pet)
 const dirty = useSelector(state => state.pets.dirty)
-// const sleepy = useSelector(state => state.pets.pet.sleepy)
-// const hungry = useSelector(state => state.pets.pet.hungry)
-// const bored = useSelector(state => state.pets.pet.bored)
+
   const {
     id,
     name,
@@ -18,6 +16,7 @@ const dirty = useSelector(state => state.pets.dirty)
     alive,
     hungry,
   } = pet;
+  
   console.log(sleepy);
 console.log(hungry)
 console.log(healthy)

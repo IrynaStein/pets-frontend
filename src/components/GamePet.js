@@ -3,7 +3,10 @@ import Birthday from "./Birthday";
 import WellnessBar from "./WellnessBar";
 import { useSelector } from "react-redux";
 
-export default function GamePet({ pet }) {
+export default function GamePet() {
+  
+const pet =  useSelector(state => state.pets.pet)
+  const notification = useSelector(state => state.pets.notification)
   const {
     name,
     breed,
@@ -11,9 +14,6 @@ export default function GamePet({ pet }) {
     food,
     alive
   } = pet;
-
-  const notification = useSelector(state => state.pets.notification)
-
   
   return (
     <>
@@ -27,7 +27,7 @@ export default function GamePet({ pet }) {
       <div className="pet-display">
         <Birthday pet={pet} />
       </div>
-        <WellnessBar pet={pet}/>
+        <WellnessBar/>
     </>
     :
     <div className="pet-display"><img src="https://live.staticflickr.com/65535/51425421314_73dab74c11_o.png"/></div>

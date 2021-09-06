@@ -52,6 +52,9 @@ const petSlice = createSlice({
   name: "pets",
   initialState,
   reducers: {
+    gamePet(state, action){
+      state.pet = action.payload
+    },
     petFeed(state, action) {
       state.pet = state.petList.find((pet) => pet.id === action.payload);
       if (state.pet.hungry < 4) {
