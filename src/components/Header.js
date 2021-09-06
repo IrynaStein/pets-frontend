@@ -1,6 +1,7 @@
 import classes from "./Header.css";
 import { Link, NavLink } from "react-router-dom";
 import { userActions } from "../store/userSlice";
+import { petActions } from "../store/petSlice";
 import {useSelector, useDispatch} from 'react-redux'
 
 export default function Header() {
@@ -15,6 +16,7 @@ const user = useSelector(state => state.user.user)
     .then((resp) => {
       if (resp.ok){
         dispatch(userActions.userLogout())
+        dispatch(petActions.resetState())
       }
     })
     

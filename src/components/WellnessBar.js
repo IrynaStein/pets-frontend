@@ -28,6 +28,7 @@ useEffect(() => {
         if (alive){
             if (sleepy < 0 && hungry < 0 ){
                 dispatch(petActions.petDead(id))
+                console.log(pet)
                 dispatch(updatePet(pet))
                 clearInterval(clockInterval)
                 // alert("Your pet died")
