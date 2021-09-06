@@ -23,6 +23,22 @@ export const createPet = createAsyncThunk('pets/createPet', async (pet) => {
     return data   
 })
 
+export const updatePet = createAsyncThunk('pets/updatePet', async (pet) => {
+  const response = await fetch (`/pets/${pet.id}`, {
+    method: "PATCH",
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      sleepy: pet.sleepy,
+      alive: pet.alive,
+      bored: pet.bored,
+      healthy: pet.healthy,
+      hungry: pet.hungry
+    })
+  })
+  const data = await response.json()
+  return data
+})
+
 const initialState = {
   petList: [],
   status: "idle",
@@ -92,11 +108,11 @@ const petSlice = createSlice({
     },
     getSick(state, action){
       state.pet = state.petList.find((pet) => pet.id === action.payload)
-      state.pet.healthy = Math.random() < 0.1
+      state.pet.healthy = Math.random() < 0.3
     },
     gotoVet(state, action){
       state.pet = state.petList.find((pet) => pet.id === action.payload)
-      state.pet.alive = Math.random() < 0.1
+      state.pet.alive = Math.random() < 0.8
       if (state.pet.alive){
         state.pet.healthy = true
         state.notification = `Doctor says: "Your pet can go home now. He is healthy and happy again. Take care!!!"`
@@ -139,6 +155,23 @@ const petSlice = createSlice({
         state.errors = "Your pet was successfully created!"
         // state.petList.push(action.payload)
       }
+    },
+    [updatePet.pending](state){
+      state.status = "pending"
+    },
+    [updatePet.fulfilled](state, action){
+      state.status = "completed"
+      // debugger;
+      // state.petList.push(state.petList.map((pet) => {
+      //   if (pet.id === action.payload.id){
+      //     return action.payload
+      //   }
+      // else {
+      //   return pet
+      // }
+      // }))
+      state.pet = action.payload
+
     }
   }
 })

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { petActions } from "../store/petSlice";
+import {updatePet} from '../store/petSlice'
 export default function WellnessBar({ pet }) {
     console.log(pet)
 
@@ -22,38 +23,45 @@ console.log(hungry)
 console.log(healthy)
 
 const dispatch = useDispatch()
-// useEffect(() => {
-//     let clockInterval = setInterval(() => {
-//         if (alive){
-//             if (sleepy < 0 && hungry < 0 ){
-//                 dispatch(petActions.petDead(id))
-//                 alert("Your pet died")
-//             }
-//             else if(sleepy < -1 || hungry < -1){
-//                 dispatch(petActions.petDead(id))
-//                 alert("Your pet died")
-//             }
-//             else if((bored < 0 && hungry <0) || (bored < 0 && sleepy < 0)){
-//                 dispatch(petActions.petDead(id))
-//                 alert("Your pet died")
-//             }
-//             else {
-//                 dispatch(petActions.getSleepy(id))
-//                 dispatch(petActions.getHungry(id))
-//                 dispatch(petActions.getDirty(id))
-//                 dispatch(petActions.getSick(id))
-//                 dispatch(petActions.getBored(id))
-//             }
-//         }
-//         else {
-//             alert(`We are preparing ${name}'s the funeral!`)
-//             clearInterval(clockInterval)
-//         }
-//     }, 15000);    
-//     return () => {
-//         clearInterval(clockInterval)
-//     }
-// }, [dispatch, sleepy, hungry, bored, dirty, alive,id, name])
+useEffect(() => {
+    let clockInterval = setInterval(() => {
+        if (alive){
+            if (sleepy < 0 && hungry < 0 ){
+                dispatch(petActions.petDead(id))
+                dispatch(updatePet(pet))
+                clearInterval(clockInterval)
+                // alert("Your pet died")
+            }
+            else if(sleepy < -1 || hungry < -1){
+                dispatch(petActions.petDead(id))
+                dispatch(updatePet(pet))
+                clearInterval(clockInterval)
+                // alert("Your pet died")
+            }
+            else if((bored < 0 && hungry <0) || (bored < 0 && sleepy < 0)){
+                dispatch(petActions.petDead(id))
+                dispatch(updatePet(pet))
+                clearInterval(clockInterval)
+                // alert("Your pet died")
+            }
+            else {
+                dispatch(petActions.getSleepy(id))
+                dispatch(petActions.getHungry(id))
+                dispatch(petActions.getDirty(id))
+                dispatch(petActions.getSick(id))
+                dispatch(petActions.getBored(id))
+            }
+        }
+        else {
+            alert(`We are preparing ${name}'s the funeral!`)
+            dispatch(updatePet(pet))
+            clearInterval(clockInterval)
+        }
+    }, 15000);    
+    return () => {
+        clearInterval(clockInterval)
+    }
+}, [dispatch, sleepy, hungry, bored, dirty, alive,id, name])
 
 
   const barConverter = (arg) => {
@@ -113,16 +121,17 @@ const vetHandler = () => {
    dispatch(petActions.gotoVet(id))
 }
 
+const saveGameHandler = () => {
+    dispatch(updatePet(pet))
+}
 
   return (
       <div>{alive?  <div className="wellness-bar"
-        // style={{
-        //     display: "block",
-        //     position: "relative",
-        //     bottom: "30px",
-        //     backgroundColor: "white",
-        //   }}
-      > {!healthy? <div className="health_container"><img src="https://live.staticflickr.com/65535/51425384610_2a4c6065b3_o.png"></img></div> :<div className="health_container"><img src="https://i.imgur.com/arrUsjs.gif" onClick={vetHandler}/></div>}
+      > {!healthy? 
+        <div className="health_container"><img src="https://i.imgur.com/arrUsjs.gif" onClick={vetHandler} alt="medical"/> <button onClick={saveGameHandler}>Save Game</button></div>
+      :<div className="health_container"><img src="https://live.staticflickr.com/65535/51425384610_2a4c6065b3_o.png" alt="medical"></img>
+      <button onClick={saveGameHandler}>Save Game</button></div> 
+      }
         <section>
           sleepy: {barConverter(sleepy)}
           <button  onClick={sleepHandler} className="button-n" style={{ width: "60px" }}>

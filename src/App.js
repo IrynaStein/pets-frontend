@@ -9,7 +9,8 @@ import GameContainer from "./pages/GameContainer";
 import {useSelector, useDispatch } from 'react-redux'
 import { userActions } from "./store/userSlice";
 import Header from "./components/Header";
-import Cemetery from "./components/Cemetery";
+import Cemetery from "./pages/Cemetery";
+import GameRules from "./pages/GameRules";
 
 
 function App() {
@@ -30,7 +31,7 @@ const dispatch = useDispatch()
 
   return (
     <>
-    {user? <Header/>: null}
+    <Header/>
     <Switch>
       <Route exact path="/home">
         {user ? (
@@ -53,6 +54,9 @@ const dispatch = useDispatch()
       </Route>
       <Route exact path="/cemetery">
         <Cemetery/>
+      </Route>
+      <Route exact path="/how-to-play">
+        <GameRules/>
       </Route>
     </Switch>
     </>
