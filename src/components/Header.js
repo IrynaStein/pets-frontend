@@ -1,5 +1,5 @@
 import classes from "./Header.css";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { userActions } from "../store/userSlice";
 import {useSelector, useDispatch} from 'react-redux'
 
@@ -24,20 +24,20 @@ const user = useSelector(state => state.user.user)
       <div className="dropdown" style={{ float: "right" }}>
         <div className="menu">&#9776;</div>
         <div className="dropdown-content">
-          <NavLink activeclassname={classes.active} to="/home/game/:petName">
+          <NavLink activeclassname={classes.active} to="/how-to-play">
             Game rules
           </NavLink>
           <NavLink activeclassname={classes.active} to="/cemetery">
             Visit Cemetery
            </NavLink>
-           {user? <><NavLink exact to='/home' activeclassname={classes.active} >Home</NavLink>
-         <NavLink
+            <NavLink exact to='/home' activeclassname={classes.active} >Home</NavLink>
+            {user?<Link
             activeclassname={classes.active}
-            exact to="#"
+            exact to="/login"
             onClick={logoutHandler}
           >
             Logout
-          </NavLink></>
+          </Link>
           : null}
         </div>
       </div>
