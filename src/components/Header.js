@@ -1,12 +1,12 @@
 import classes from "./Header.css";
 import { NavLink } from "react-router-dom";
 import { userActions } from "../store/userSlice";
-import {useDispatch} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
 
 export default function Header() {
 // const user = useSelector(state => state.user.user)
   const dispatch = useDispatch()
-
+const user = useSelector(state => state.user.user)
   
   const logoutHandler =()=>{
     fetch("/logout", {
@@ -29,15 +29,16 @@ export default function Header() {
           </NavLink>
           <NavLink activeclassname={classes.active} to="/cemetery">
             Visit Cemetery
-          </NavLink>
-          <NavLink exact to='/home' activeclassname={classes.active} >Home</NavLink>
-          <NavLink
+           </NavLink>
+           {user? <><NavLink exact to='/home' activeclassname={classes.active} >Home</NavLink>
+         <NavLink
             activeclassname={classes.active}
             exact to="#"
             onClick={logoutHandler}
           >
             Logout
-          </NavLink>
+          </NavLink></>
+          : null}
         </div>
       </div>
     </div>

@@ -30,7 +30,7 @@ const dispatch = useDispatch()
 
   return (
     <>
-    {user? <Header/>: null}
+    <Header/>
     <Switch>
       <Route exact path="/home">
         {user ? (
