@@ -187,7 +187,7 @@ export default function CreatePet() {
             <label for="balling">ball</label>
           </div>
         </div>
-        <button className="button-inv" type="submit">
+        <button className="button-orange" type="submit">
           Create
         </button>
       </form>

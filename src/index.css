@@ -42,7 +42,7 @@ textarea {
   /* background-color: bisque; */
 }
 
-.button {
+.button-regular {
   border: none;
   background: none;
   font: 20px Indie Flower;
@@ -50,7 +50,7 @@ textarea {
   margin-right: 5px;
   color: white;
 }
-button:hover {
+button-regular:hover {
   color: black;
   cursor: pointer;
 }
@@ -69,7 +69,7 @@ section {
   width: 115px;
 }
 
-.button-n {
+.button-green {
   border: none;
   background: rgba(255, 255, 255, 0.7);
   font: 12px Indie Flower;
@@ -85,8 +85,30 @@ section {
   padding: 2px;
   text-decoration: none
 }
-.button-n:hover {
+.button-green:hover {
   color: #50AB6E;
   cursor: pointer;
 }
+
+.button-gray {
+  border: none;
+  background: rgba(255, 255, 255, 0.7);
+  font: 12px Indie Flower;
+  margin-left: 5px;
+  margin-right: 5px;
+  position: relative;
+  color: black;
+  box-shadow: 1px 2px 3px 3px #93B3D2;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: white;
+  padding: 2px;
+  text-decoration: none
+}
+.button-gray:hover {
+  color: #93B3D2;
+  cursor: pointer;
+}
+
 

@@ -25,13 +25,11 @@ const dispatch = useDispatch()
   }
 
   return (
-    <div>
+    <>
       
-      <button className="button" onClick={deleteHandler}>x</button>
-      <Link to={`/game/${pet.name}`}>
-        <div className="pet-window" >
+      <button className="button-regular" onClick={deleteHandler}>x</button>
+      <Link className="pet-window" to={`/game/${pet.name}`}>
         <Birthday pet={pet}/>
-        </div>
       </Link>
 
       <p
@@ -51,6 +49,6 @@ const dispatch = useDispatch()
           <p>Favorite activity: {pet.activity.name}</p>
         </div>
       ) : null}
-    </div>
+    </>
   );
 }

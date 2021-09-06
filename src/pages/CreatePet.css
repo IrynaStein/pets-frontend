@@ -12,7 +12,7 @@
   text-align: center;
 }
 
-.button-inv {
+.button-orange {
   border: none;
   background: rgba(255, 255, 255, 0.7);
   font: 20px Indie Flower;
@@ -28,7 +28,7 @@
   border-color: white;
   padding: 5px;
 }
-.button-inv:hover {
+.button-orange:hover {
   color: #dcb56d;
   cursor: pointer;
 }

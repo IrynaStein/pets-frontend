@@ -14,7 +14,9 @@ export default function Cemetery(){
     return (
         <div className="cemetery-container">
         <h1>Cemetery</h1>
-        {passedPets.map((pet) => <div className="tombstone" key={pet.id}><img src="https://live.staticflickr.com/65535/51426137870_96aedb2582_o.png" alt="tombsotone"/>{pet.name}</div>)}
+        <div className="tombstone-container">
+        {passedPets.map((pet) => <div className="tombstone" key={pet.id}><img src="https://live.staticflickr.com/65535/51426137870_96aedb2582_o.png" alt="tombsotone"/><div className="engraving">{pet.name}</div></div>)}
+        </div>
         </div>
     )
 }

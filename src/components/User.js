@@ -68,7 +68,7 @@ export default function User(){
           {...register("email")}
         ></input>
         <br/>
-        <button type="submit" >
+        <button className="button-gray" type="submit" >
           Update my profile</button>
           <br/>
           <button onClick={()=> setShowForm(false)}>Cancel</button>
@@ -76,11 +76,12 @@ export default function User(){
       
         : 
         <div className="user-container">
-        <button onClick={()=> setShowForm(true)}>Edit profile</button>
-        <button onClick={deleteUserHandler}> Delete profile</button>
+        <div className="centered-buttons">
+        <button className="button-gray" onClick={()=> setShowForm(true)}>Edit profile</button>
+        <button className="button-gray" onClick={deleteUserHandler}> Delete profile</button>
+        </div>
         <img className="user-avatar" src={avatar} alt="user"/>
         <p>Hello {user_name}!</p>
-        
         <p>You can create or edit your profile here. Below is the list of pets you own. You can also create up to 3 pets if you dont have any yet. Good luck!!! </p>
     </div>}
        </>

@@ -18,12 +18,15 @@ export default function PetsContainer() {
 
   return (
     <div className="pet-container">
-      {pets.length <= 2 ? (
-        <Link to="/create_pet">
-          <button className="button-n">Create new pet</button>
+      <div className="centered-buttons">{pets.length <= 2 ? (
+        <Link  className="button-gray" to="/create_pet">
+          Create new pet
         </Link>
       ) : null}
+      </div>
+     
       {renderPets()}
+    
     </div>
   );
 }
