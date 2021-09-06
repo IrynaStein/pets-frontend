@@ -18,14 +18,10 @@ const dispatch = useDispatch()
    dispatch(fetchPets())
   }, [dispatch])
 
-  // const currentPet = pets.filter((pet) => pet.name === params.petName);
-  // dispatch(petActions.gamePet(currentPet))
   dispatch(petActions.gamePet(pets.find((pet) => pet.name === params.petName)))
-  // const renderPet = currentPet.map(p  => <GamePet key={p.id} pet={p}/>)
 
   return (
     <div className="game-container">
-      {/* {renderPet} */}
       <GamePet/>
     </div>
   );

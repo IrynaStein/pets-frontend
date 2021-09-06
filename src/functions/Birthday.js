@@ -1,6 +1,4 @@
-import {useSelector} from 'react-redux'
 export default function Birthday({pet}){
-    // const pet = useSelector(state => state.pets.pet)
     const today = new Date().getDate();
     // const date = [(today.getMonth() + 1), today.getDate()]
     const age = pet.birthday.split("-").slice(1);

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Pet.css";
-import Birthday from "./Birthday";
+import Birthday from "../functions/Birthday";
 import { useDispatch } from "react-redux";
 import { deletePet } from "../store/petSlice";
 

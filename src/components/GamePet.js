@@ -1,12 +1,12 @@
 import "./GamePet.css";
-import Birthday from "./Birthday";
+import Birthday from "../functions/Birthday";
 import WellnessBar from "./WellnessBar";
 import { useSelector } from "react-redux";
 
 export default function GamePet() {
   
 const pet =  useSelector(state => state.pets.pet)
-  const notification = useSelector(state => state.pets.notification)
+const notification = useSelector(state => state.pets.notification)
   const {
     name,
     breed,
