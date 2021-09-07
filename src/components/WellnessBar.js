@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { petActions } from "../store/petSlice";
+import { gameActions } from "../store/gameSlice";
 import { updatePet } from "../store/petSlice";
 import WellnessRender from "../functions/WellnessRender";
 
@@ -8,41 +9,37 @@ export default function WellnessBar() {
   const pet = useSelector((state) => state.pets.pet);
   const dirty = useSelector((state) => state.pets.dirty);
   const gamePaused = useSelector((state) => state.game.gamePaused);
-  const { id, sleepy, healthy, bored, alive, hungry, name } = pet;
 
   const dispatch = useDispatch();
-  useEffect(() => {
+
+  useEffect(() => { 
     let clockInterval;
     if (gamePaused) {
       clearInterval(clockInterval);
     }
     else {
-      if (alive && healthy) {
+      if (pet.alive && pet.healthy) {
         clockInterval = setInterval(() => {
-          if (sleepy < 0 && hungry < 0) {
-            dispatch(petActions.petDead(id));
+          if (pet.sleepy < 0 && pet.hungry < 0) {
+            dispatch(petActions.petDead(pet.id));
             clearInterval(clockInterval);
        
-          } else if (sleepy < -1 || hungry < -1) {
-            dispatch(petActions.petDead(id));
+          } else if (pet.sleepy < -1 || pet.hungry < -1) {
+            dispatch(petActions.petDead(pet.id));
             clearInterval(clockInterval);
-          } else if ((bored < 0 && hungry < 0) || (bored < 0 && sleepy < 0)) {
-            dispatch(petActions.petDead(id));
+          } else if ((pet.bored < 0 && pet.hungry < 0) || (pet.bored < 0 && pet.sleepy < 0)) {
+            dispatch(petActions.petDead(pet.id));
             clearInterval(clockInterval);
           } else {
-            dispatch(petActions.getSleepy(id));
-            dispatch(petActions.getHungry(id));
-            dispatch(petActions.getDirty(id));
-            dispatch(petActions.getBored(id));
-            dispatch(petActions.getSick(id));
+            dispatch(petActions.getSleepy(pet.id));
+            dispatch(petActions.getHungry(pet.id));
+            dispatch(petActions.getDirty(pet.id));
+            dispatch(petActions.getBored(pet.id));
+            dispatch(petActions.getSick(pet.id));
           }
         }, 15000);
-      } else if (alive && !healthy){
-        clearInterval(clockInterval);
-        dispatch(petActions.getSleepy(id));
-        dispatch(petActions.getHungry(id));
-        dispatch(petActions.getDirty(id));
-        dispatch(petActions.getBored(id))
+      } else if (pet.alive && !pet.healthy){
+        dispatch(gameActions.pauseGame())
       }
       else {
         clearInterval(clockInterval);
@@ -54,36 +51,38 @@ export default function WellnessBar() {
     return () => {
       clearInterval(clockInterval);
     };
-  }, [dispatch, sleepy, hungry, bored, dirty, alive, id, name, pet, gamePaused]);
+  }, [dispatch, pet.sleepy, pet.hungry, pet.bored, dirty, pet.alive, pet.id, pet.name, pet, gamePaused]);
 
+
+//   const { pet.id, sleepy, healthy, bored, alive, hungry, name } = pet;
   const feedHandler = () => {
-    dispatch(petActions.petFeed(id));
+    dispatch(petActions.petFeed(pet.id));
   };
 
   const playHandler = () => {
-    dispatch(petActions.petPlay(id));
+    dispatch(petActions.petPlay(pet.id));
   };
 
   const cleanHandler = () => {
-    dispatch(petActions.petClean(id));
+    dispatch(petActions.petClean(pet.id));
   };
 
   const sleepHandler = () => {
       console.log(`pet:`, pet)
-    dispatch(petActions.petSleep(id));
-    dispatch(petActions.getBored(id));
+    dispatch(petActions.petSleep(pet.id));
+    dispatch(petActions.getBored(pet.id));
   };
 
   const vetHandler = () => {
-    dispatch(petActions.gotoVet(id));
+    dispatch(petActions.gotoVet(pet.id));
   };
 
   return (
     <>
-      {alive ? (
+      {pet.alive ? (
         <div className="wellness-bar">
           {" "}
-          {!healthy ? (
+          {!pet.healthy ? (
             <div className="health_container">
               <img
                 src="https://i.imgur.com/arrUsjs.gif"
@@ -100,7 +99,7 @@ export default function WellnessBar() {
             </div>
           )}
           <section>
-            sleepy: <WellnessRender arg={sleepy} />
+            sleepy: <WellnessRender arg={pet.sleepy} />
             <button
               onClick={sleepHandler}
               className="button-green"
@@ -110,7 +109,7 @@ export default function WellnessBar() {
             </button>
           </section>{" "}
           <section>
-            hungry: <WellnessRender arg={hungry} />
+            hungry: <WellnessRender arg={pet.hungry} />
             <button
               onClick={feedHandler}
               className="button-green"
@@ -120,7 +119,7 @@ export default function WellnessBar() {
             </button>
           </section>
           <section>
-            bored: <WellnessRender arg={bored} />
+            bored: <WellnessRender arg={pet.bored} />
             <button
               onClick={playHandler}
               style={{ width: "60px" }}

@@ -23,7 +23,7 @@ export default function GameContainer() {
   useEffect(() => {
     dispatch(fetchPets());
   }, [dispatch]);
-
+ 
   dispatch(petActions.gamePet(pets.find((pet) => pet.name === params.petName)));
 
   const saveGameHandler = () => {
@@ -34,6 +34,8 @@ export default function GameContainer() {
   };
 
   return (
+ 
+   
     <div className="game-container">
       <div className="centered-buttons">
         <Timer />
@@ -44,8 +46,10 @@ export default function GameContainer() {
           Save Game
         </button>
       </div>
+      {pets.length > 0 ? <>
       <GamePet />
-      <WellnessBar />
-    </div>
+      <WellnessBar /></> : "Loading"}
+    </div> 
+ 
   );
 }

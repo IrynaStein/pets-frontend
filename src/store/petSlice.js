@@ -109,6 +109,14 @@ const petSlice = createSlice({
     getSick(state, action) {
       state.pet = state.petList.find((pet) => pet.id === action.payload);
       state.pet.healthy = Math.random() < 0.3;
+      if (!state.pet.healthy){
+        state.pet.bored = 0
+        state.dirty = 0
+        state.pet.hungry = 0
+        state.pet.sleepy = 0
+      } else {
+        return state.pet.healthy
+      }
     },
     gotoVet(state, action) {
       state.pet = state.petList.find((pet) => pet.id === action.payload);
