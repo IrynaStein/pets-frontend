@@ -3,24 +3,30 @@ import { Link, NavLink } from "react-router-dom";
 import { userActions } from "../store/userSlice";
 import { petActions } from "../store/petSlice";
 import {useSelector, useDispatch} from 'react-redux'
+import {onLogout} from '../store/userSlice'
 
 export default function Header() {
 // const user = useSelector(state => state.user.user)
   const dispatch = useDispatch()
 const user = useSelector(state => state.user.user)
   
-  const logoutHandler =()=>{
-    fetch("/logout", {
-      method: "DELETE"
-    })
-    .then((resp) => {
-      if (resp.ok){
-        dispatch(userActions.userLogout())
-        dispatch(petActions.resetState())
-      }
-    })
-    
+  // const logoutHandler =()=>{
+  //   fetch("/logout", {
+  //     method: "DELETE",
+  //     credentials: "include"
+  //   })
+  //   .then((resp) => {
+  //     if (resp.ok){
+  //       dispatch(userActions.userLogout())
+  //       dispatch(petActions.resetState())
+  //     }
+  //   })
+  // }
+  const logoutHandler = () => {
+    dispatch(onLogout())
   }
+
+
   return (
     <div className="header-container">
       <div className="dropdown" style={{ float: "right" }}>

@@ -7,7 +7,7 @@ import {userActions} from '../store/userSlice'
 
 function SignupForm() {
   const dispatch = useDispatch();
-
+const errors = useSelector(state => state.user.errors)
   // const history = useHistory();
   // const errors = useSelector((state) => state.user.errors);
   // console.log(errors);
@@ -114,7 +114,10 @@ function SignupForm() {
   }
     return (
         <div className="App">
+          {errors}
           <Link to='login'><button className="button">&#8592;Back to Login</button></Link>
+          {/* {errors.map(
+          (err, ind) => `${ind + 1}. ${err}, `)} */}
       <form className="centered-form" onSubmit={handleSubmit}>
       <input className="input-field" name="username" value={formData.user_name} onChange={(e)=>handleChange(e)} placeholder="user name..."></input>
       <br/>

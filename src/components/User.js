@@ -35,7 +35,7 @@ export default function User(){
         <>
         
         {showForm ?  
-     
+      <div className='user-container-centered'>
         <form onSubmit={handleSubmit(onSubmit)}>
         <input
           className="input-field-gray"
@@ -75,7 +75,7 @@ export default function User(){
           <button className="button-gray" onClick={()=> setShowForm(false)}>Cancel</button>
           </div>
       </form>
-      
+      </div>
         : 
         <div className="user-container">
         <div className="centered-buttons">

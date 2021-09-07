@@ -40,11 +40,11 @@ export const updatePet = createAsyncThunk("pets/updatePet", async (pet) => {
 
 const initialState = {
   petList: [],
-  status: "idle",
   pet: [],
-  notification: "",
   dirty: Math.floor(Math.random() * 4) + 1,
-  errors: "",
+  notification: "",
+  status: "idle",
+  errors: [],
 };
 
 const petSlice = createSlice({
@@ -108,14 +108,16 @@ const petSlice = createSlice({
     },
     getSick(state, action) {
       state.pet = state.petList.find((pet) => pet.id === action.payload);
-      state.pet.healthy = Math.random() < 0.3;
+      state.pet.healthy = Math.random() < 0.6;
+      // debugger;
       if (!state.pet.healthy){
         state.pet.bored = 0
         state.dirty = 0
         state.pet.hungry = 0
         state.pet.sleepy = 0
+        state.notification = "I am not feeling well. Please take me to the vet!"
       } else {
-        return state.pet.healthy
+        return 
       }
     },
     gotoVet(state, action) {
@@ -125,7 +127,7 @@ const petSlice = createSlice({
         state.pet.healthy = true;
         state.pet.sleepy = 4
         state.pet.hungry = 4
-        state.notification = `Doctor says: "Your pet can go home now. He is healthy and happy again. Take care!!!"`;
+        state.notification = `Vet says: "Your pet can go home now. It is healthy and happy again. Take care!!!"`;
         state.pet.bored = 4
         state.dirty = 4
       } else {
@@ -133,7 +135,7 @@ const petSlice = createSlice({
       }
     },
     resetState: (state, action) => {
-      return initialState;
+      state.petList = []
     },
   },
   extraReducers: {
@@ -141,26 +143,34 @@ const petSlice = createSlice({
       state.status = "loading";
     },
     [fetchPets.fulfilled](state, action) {
-      state.petList = action.payload;
       state.status = "idle";
+      if (action.payload.errors) {
+        state.errors = action.payload.errorMessage;
+      } else {
+        state.errors = []
+        state.petList = action.payload;
+      }
     },
     [fetchPets.rejected](state, action) {
       state.status = "rejected";
       if (action.payload) {
-        state.error = action.payload.errorMessage;
+        state.errors = action.payload.errorMessage;
       } else {
-        state.error = action.error.message;
+        state.errors = action.error.message;
       }
     },
     [deletePet.pending](state) {
       state.status = "loading";
     },
     [deletePet.fulfilled](state, action) {
-      state.petList = state.petList.filter(
-        (pet) => pet.id !== action.payload.id
-      );
-      console.log(action.payload);
       state.status = "deleted";
+      if (action.payload.errors){
+        state.errors = action.payload.errors
+      }
+      else {
+        state.petList = state.petList.filter(
+          (pet) => pet.id !== action.payload.id)
+      }
     },
     [createPet.pending](state) {
       state.status = "loading";
@@ -168,7 +178,7 @@ const petSlice = createSlice({
     [createPet.fulfilled](state, action) {
       state.status = "completed";
       state.petList.push(action.payload);
-      if (action.payload.error) {
+      if (action.payload.errors) {
         state.errors =
           "Sorry, we couldn't process your request. Please make sure all fields are filled in and try again. Thank you!";
       } else if (action.payload.errors) {
