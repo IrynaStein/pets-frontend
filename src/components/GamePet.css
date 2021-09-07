@@ -17,30 +17,33 @@
 
 .info-container {
   display: flex;
-  flex-direction: column;
-  /* justify-content: center; */
+  /* flex-direction: column; */
+  align-items: center;
   background-image: url("https://live.staticflickr.com/65535/51423857442_fb0a6a3cb0_o.png");
-  /* background-repeat: no-repeat; */
-  /* background-position: center; */
   background-size: 100% 100%;
   position: relative;
-  /* top: 15px;
-  right: 0px; */
+  top: 15px;
+  right: 150px;
   width: 250px;
   height: 200px;
   border: solid 1px;
-  /* padding: 5px; */
-  flex-wrap: nowrap;
-    align-content: space-around;
-    align-items: center;
+
 }
-.info-container > p {
-  position: relative;
+.notification-container{
+  display: flex;
   font-size: 12.6px;
-  /* top: 41px; */
-  /* left: 180px; */
   width: 200px;
   border: solid 1px;
   text-align: center;
 }
-
+/* .notification-container{
+  display: flex;
+  flex-direction: row;
+  width: 110px;
+  height: 110px;
+  position: relative;
+  top: 200px;
+  font-size: 12px;
+  flex-direction: column;
+  justify-content: center;
+} */

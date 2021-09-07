@@ -47,7 +47,6 @@ const dispatch = useDispatch()
         {!user ? <LoginForm /> : <Redirect to="/home" />}
       </Route>
       <Route exact path="/game/:petName" >
-        {/* <GameContainer/> */}
         { user ? <GameContainer/> : <Redirect to="/home"/>}
       </Route>
       <Route exact path="/create_pet">

@@ -63,7 +63,7 @@ const dispatch = useDispatch()
         <Link to="/signup">
           <button className="button-regular" type="submit">Signup</button>
         </Link>
-        {errors.map((err) => <p>{err}</p>)}
+        {errors.map((err) => <p key={err}>{err}</p>)}
       </form>
     </div>
   );

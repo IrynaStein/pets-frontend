@@ -7,62 +7,60 @@ import WellnessRender from "../functions/WellnessRender";
 export default function WellnessBar() {
   const pet = useSelector((state) => state.pets.pet);
   const dirty = useSelector((state) => state.pets.dirty);
-
+  const gamePaused = useSelector((state) => state.game.gamePaused);
   const { id, sleepy, healthy, bored, alive, hungry, name } = pet;
-
-  console.log(sleepy);
-  console.log(hungry);
-  console.log(healthy);
 
   const dispatch = useDispatch();
   useEffect(() => {
-      let clockInterval = setInterval(() => {
-          if (alive){
-              if (sleepy < 0 && hungry < 0 ){
-                  dispatch(petActions.petDead(id))
-                  console.log(pet)
-                  dispatch(updatePet(pet))
-                  clearInterval(clockInterval)
-                  // alert("Your pet died")
-              }
-              else if(sleepy < -1 || hungry < -1){
-                  dispatch(petActions.petDead(id))
-                  dispatch(updatePet(pet))
-                  clearInterval(clockInterval)
-                  // alert("Your pet died")
-              }
-              else if((bored < 0 && hungry <0) || (bored < 0 && sleepy < 0)){
-                  dispatch(petActions.petDead(id))
-                  dispatch(updatePet(pet))
-                  clearInterval(clockInterval)
-                  // alert("Your pet died")
-              }
-              else {
-                  dispatch(petActions.getSleepy(id))
-                  dispatch(petActions.getHungry(id))
-                  dispatch(petActions.getDirty(id))
-                  dispatch(petActions.getSick(id))
-                  dispatch(petActions.getBored(id))
-              }
+    let clockInterval;
+    if (gamePaused) {
+      clearInterval(clockInterval);
+    }
+    else {
+      if (alive && healthy) {
+        clockInterval = setInterval(() => {
+          if (sleepy < 0 && hungry < 0) {
+            dispatch(petActions.petDead(id));
+            clearInterval(clockInterval);
+       
+          } else if (sleepy < -1 || hungry < -1) {
+            dispatch(petActions.petDead(id));
+            clearInterval(clockInterval);
+          } else if ((bored < 0 && hungry < 0) || (bored < 0 && sleepy < 0)) {
+            dispatch(petActions.petDead(id));
+            clearInterval(clockInterval);
+          } else {
+            dispatch(petActions.getSleepy(id));
+            dispatch(petActions.getHungry(id));
+            dispatch(petActions.getDirty(id));
+            dispatch(petActions.getBored(id));
+            dispatch(petActions.getSick(id));
           }
-          else {
-              alert(`We are preparing ${name}'s the funeral!`)
-              dispatch(updatePet(pet))
-              clearInterval(clockInterval)
-          }
-      }, 15000);
-      return () => {
-          clearInterval(clockInterval)
+        }, 15000);
+      } else if (alive && !healthy){
+        clearInterval(clockInterval);
+        dispatch(petActions.getSleepy(id));
+        dispatch(petActions.getHungry(id));
+        dispatch(petActions.getDirty(id));
+        dispatch(petActions.getBored(id))
       }
-  }, [dispatch, sleepy, hungry, bored, dirty, alive,id, name, pet])
+      else {
+        clearInterval(clockInterval);
+        //   alert(`We are preparing ${name}'s the funeral!`) 
+        // debugger;
+        dispatch(updatePet(pet));
+      }
+    }
+    return () => {
+      clearInterval(clockInterval);
+    };
+  }, [dispatch, sleepy, hungry, bored, dirty, alive, id, name, pet, gamePaused]);
 
   const feedHandler = () => {
-    console.log(id);
     dispatch(petActions.petFeed(id));
   };
 
   const playHandler = () => {
-    console.log(id);
     dispatch(petActions.petPlay(id));
   };
 
@@ -71,16 +69,13 @@ export default function WellnessBar() {
   };
 
   const sleepHandler = () => {
+      console.log(`pet:`, pet)
     dispatch(petActions.petSleep(id));
     dispatch(petActions.getBored(id));
   };
 
   const vetHandler = () => {
     dispatch(petActions.gotoVet(id));
-  };
-
-  const saveGameHandler = () => {
-    dispatch(updatePet(pet));
   };
 
   return (
@@ -95,9 +90,6 @@ export default function WellnessBar() {
                 onClick={vetHandler}
                 alt="medical"
               />{" "}
-              <button onClick={saveGameHandler} className="button-green">
-                Save Game
-              </button>
             </div>
           ) : (
             <div className="health_container">
@@ -105,9 +97,6 @@ export default function WellnessBar() {
                 src="https://live.staticflickr.com/65535/51425384610_2a4c6065b3_o.png"
                 alt="medical"
               ></img>
-              <button onClick={saveGameHandler} className="button-green">
-                Save Game
-              </button>
             </div>
           )}
           <section>
@@ -151,7 +140,9 @@ export default function WellnessBar() {
             </button>
           </section>
         </div>
-      ) : <div className="pop-up">Your pet passed away</div>}
+      ) : (
+        <div className="pop-up">Your pet passed away</div>
+      )}
     </>
   );
 }

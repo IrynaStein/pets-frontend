@@ -9,14 +9,17 @@ export const fetchCemetery = createAsyncThunk("cemetery/fetchCemetery", async() 
 const initialState = {
     status: "",
     cemetery: [],
-    notifications: ""
+    notifications: "",
+    gamePaused: false
 }
 
 const gameSlice = createSlice({
     name: "game",
     initialState,
     reducers: {
-
+        pauseGame(state){
+            state.gamePaused = !state.gamePaused
+        }
     },
     extraReducers: {
         [fetchCemetery.pending](state){

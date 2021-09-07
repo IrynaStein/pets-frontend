@@ -1,5 +1,5 @@
-import "./PetContainer.css";
-import Pet from "../components/Pet";
+import "./PetsContainer.css";
+import Pet from "./Pet";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -12,7 +12,7 @@ export default function PetsContainer() {
       if (pet.alive) {
         return <Pet key={pet.id} pet={pet} />;
       } else {
-        return <div />;
+        return <div key={pet.id}/>;
       }
     });
 
