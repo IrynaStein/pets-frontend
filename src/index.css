@@ -13,12 +13,17 @@ body {
   font-weight: bold;
 }
 
-.centered-form {
+.centered-form-signup {
+  position: relative;
+  top: 165px;
+}
+
+.centered-form-login {
   position: relative;
   top: 210px;
 }
 
-.input-field {
+.input-field-orange {
   border-radius: 20px;
   color: #b78e44;
   border-style: solid;
@@ -32,26 +37,67 @@ body {
   font-weight: bold;
 }
 
-.input-field:focus,
+.input-field-orange:focus,
 textarea {
   outline: none !important;
 }
 
-.input-field:focus {
+.input-field-orange:focus {
   color: #b78e44;
-  /* background-color: bisque; */
 }
 
-.button {
+.input-field-gray {
+  border-radius: 20px;
+  color: #93B3D2;
+  border-style: solid;
+  border-width: 1px;
+  border-color: white;
+  padding: 5px;
+  text-align: center;
+  margin: 5px;
+  box-shadow: 1px 2px 3px 3px #86A1B3;
+  font: 15px Indie Flower;
+  font-weight: bold;
+}
+
+.input-field-gray:focus,
+textarea {
+  outline: none !important;
+}
+
+.input-field-gray:focus {
+  color: #93B3D2;
+}
+
+.button-regular {
   border: none;
   background: none;
   font: 20px Indie Flower;
   margin-left: 5px;
   margin-right: 5px;
   color: white;
+  cursor: pointer;
+  text-decoration: none;
+ 
 }
-button:hover {
+button-regular:hover {
   color: black;
+  cursor: pointer;
+}
+
+.button-regular-inv {
+  border: none;
+  background: none;
+  font: 20px Indie Flower;
+  margin-left: 5px;
+  margin-right: 5px;
+  color: black;
+  cursor: pointer;
+  text-decoration: none;
+ 
+}
+button-regular-inv:hover {
+  color: white;
   cursor: pointer;
 }
 
@@ -69,7 +115,7 @@ section {
   width: 115px;
 }
 
-.button-n {
+.button-green {
   border: none;
   background: rgba(255, 255, 255, 0.7);
   font: 12px Indie Flower;
@@ -85,8 +131,32 @@ section {
   padding: 2px;
   text-decoration: none
 }
-.button-n:hover {
+.button-green:hover {
   color: #50AB6E;
   cursor: pointer;
 }
+
+.button-gray {
+  border: none;
+  background: rgba(255, 255, 255, 0.7);
+  font: 12px Indie Flower;
+  margin-left: 5px;
+  margin-right: 5px;
+  position: relative;
+  color: black;
+  box-shadow: 1px 2px 3px 3px #93B3D2;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: white;
+  padding: 2px;
+  text-decoration: none
+}
+.button-gray:hover {
+  color: #93B3D2;
+  cursor: pointer;
+}
+
+
+
 

@@ -1,13 +1,17 @@
-
-
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const createUser = createAsyncThunk("user/createUser", async (user) => {
   const response = await fetch("/signup", {
     method: "POST",
     headers: { "Content-Type": "application/json", Accept: "application/json" },
-    body: JSON.stringify(user),
+    body: JSON.stringify({
+        user_name: user.user_name,
+        password: user.password,
+        password_confirmation: user.password_confirmation,
+        avatar: user.avatar[0]
+    }),
   });
+  console.log(user)
   const data = await response.json();
   return data;
 });
@@ -36,6 +40,7 @@ const initialState = {
   user: null,
   status: "",
   errors: "",
+  isLoading: true
 };
 
 const userSlice = createSlice({
@@ -57,6 +62,9 @@ const userSlice = createSlice({
     resetErrors(state) {
       state.errors = "";
     },
+    toogleLoading(state, action){
+        state.isLoading = action.payload
+    }
   },
   extraReducers: {
     [createUser.pending](state) {

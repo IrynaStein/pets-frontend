@@ -38,14 +38,14 @@ export default function User(){
      
         <form onSubmit={handleSubmit(onSubmit)}>
         <input
-          className="input-field"
+          className="input-field-gray"
           name="user-name"
           placeholder="user name..."
           {...register("user_name")}
         ></input>
         <br />
         <input
-          className="input-field"
+          className="input-field-gray"
           name="password"
           type="password"
           placeholder="re-enter password..."
@@ -54,33 +54,36 @@ export default function User(){
         {/* {errors.password && <p>Password</p>} */}
         <br />
         <input
-          className="input-field"
+          className="input-field-gray"
           name="password_confirmation"
           type="password"
           placeholder="confirm password..."
-          {...register("password_confirmation", { required: "Please enter your first name." })}
+          {...register("password_confirmation", { required: true })}
         ></input>
         <br />
         <input
-          className="input-field"
+          className="input-field-gray"
           name="email"
           placeholder="email..."
           {...register("email")}
         ></input>
         <br/>
-        <button type="submit" >
+        <div className="centered-buttons">
+        <button className="button-gray" type="submit" >
           Update my profile</button>
           <br/>
-          <button onClick={()=> setShowForm(false)}>Cancel</button>
+          <button className="button-gray" onClick={()=> setShowForm(false)}>Cancel</button>
+          </div>
       </form>
       
         : 
         <div className="user-container">
-        <button onClick={()=> setShowForm(true)}>Edit profile</button>
-        <button onClick={deleteUserHandler}> Delete profile</button>
+        <div className="centered-buttons">
+        <button className="button-gray" onClick={()=> setShowForm(true)}>Edit profile</button>
+        <button className="button-gray" onClick={deleteUserHandler}> Delete profile</button>
+        </div>
         <img className="user-avatar" src={avatar} alt="user"/>
         <p>Hello {user_name}!</p>
-        
         <p>You can create or edit your profile here. Below is the list of pets you own. You can also create up to 3 pets if you dont have any yet. Good luck!!! </p>
     </div>}
        </>

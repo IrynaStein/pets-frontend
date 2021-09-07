@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { createPet } from "../store/petSlice";
 
@@ -80,7 +80,7 @@ export default function CreatePet() {
         <div>
           <input
             onChange={handleClick}
-            className="input-field"
+            className="input-field-orange"
             id="name"
             name="name"
             placeholder="pet name..."
@@ -187,7 +187,7 @@ export default function CreatePet() {
             <label for="balling">ball</label>
           </div>
         </div>
-        <button className="button-inv" type="submit">
+        <button className="button-orange" type="submit">
           Create
         </button>
       </form>

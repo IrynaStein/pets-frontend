@@ -11,17 +11,24 @@ import { userActions } from "./store/userSlice";
 import Header from "./components/Header";
 import Cemetery from "./pages/Cemetery";
 import GameRules from "./pages/GameRules";
-
+import { useState } from "react";
 
 function App() {
-
+// const [isLoading, setIsLoading] = useState(true)
 const user = useSelector(state => state.user.user)
+const isLoading = useSelector(state => state.user.isLoading)
 const dispatch = useDispatch()
   useEffect(() => {
     // auto-login
     fetch("/me").then((r) => {
       if (r.ok) {
-        r.json().then((user) => dispatch(userActions.userLogin(user)));
+        r.json().then((user) => {
+          dispatch(userActions.userLogin(user))
+          dispatch(userActions.toogleLoading(false))
+        }
+        );
+      } else {
+        dispatch(userActions.toogleLoading(false))
       }
     });
   }, [dispatch]);
@@ -32,6 +39,7 @@ const dispatch = useDispatch()
   return (
     <>
     <Header/>
+    {isLoading ? " Loading .." :
     <Switch>
       <Route exact path="/home">
         {user ? (
@@ -47,7 +55,7 @@ const dispatch = useDispatch()
         {!user ? <LoginForm /> : <Redirect to="/home" />}
       </Route>
       <Route exact path="/game/:petName" >
-        { user? <GameContainer/> : <Redirect to="/home"/>}
+        { user ? <GameContainer/> : <Redirect to="/home"/>}
       </Route>
       <Route exact path="/create_pet">
         { user? <CreatePet/> : <Redirect to="/home"/>}
@@ -58,7 +66,7 @@ const dispatch = useDispatch()
       <Route exact path="/how-to-play">
         <GameRules/>
       </Route>
-    </Switch>
+    </Switch>}
     </>
   );
 }

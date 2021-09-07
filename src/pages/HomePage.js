@@ -1,6 +1,6 @@
 import "./HomePage.css";
 import User from "../components/User"
-import PetContainer from "../components/PetContainer";
+import PetsContainer from "../components/PetsContainer";
 import { useEffect } from "react";
 import {useDispatch} from 'react-redux'
 import { fetchPets } from "../store/petSlice";
@@ -19,7 +19,7 @@ export default function HomePage () {
        <User/> 
       </div>
       <div className="wrapper">
-     <PetContainer/> 
+     <PetsContainer/> 
       </div>
     </div>
   );

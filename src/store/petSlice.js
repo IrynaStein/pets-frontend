@@ -19,7 +19,6 @@ export const createPet = createAsyncThunk("pets/createPet", async (pet) => {
     body: JSON.stringify(pet),
   });
   const data = await response.json();
-  console.log(data);
   return data;
 });
 
@@ -52,6 +51,9 @@ const petSlice = createSlice({
   name: "pets",
   initialState,
   reducers: {
+    gamePet(state, action) {
+      state.pet = action.payload;
+    },
     petFeed(state, action) {
       state.pet = state.petList.find((pet) => pet.id === action.payload);
       if (state.pet.hungry < 4) {
@@ -66,7 +68,7 @@ const petSlice = createSlice({
       state.pet = state.petList.find((pet) => pet.id === action.payload);
       state.pet.hungry -= 1;
     },
-    petPlay(state, action) {
+    petPlay: (state, action) => {
       state.pet = state.petList.find((pet) => pet.id === action.payload);
       if (state.pet.bored < 4) {
         state.pet.bored += 1;
@@ -86,15 +88,15 @@ const petSlice = createSlice({
       state.pet = state.petList.find((pet) => pet.id === action.payload);
       state.pet.sleepy = 4;
     },
-    getSleepy(state, action) {
-      state.pet = state.petList.find((pet) => pet.id === action.payload);
-      state.pet.sleepy -= 1;
+    getSleepy(state) {
+      state.pet.sleepy = state.pet.sleepy - 1;
     },
     petClean(state, action) {
       state.pet = state.petList.find((pet) => pet.id === action.payload);
       state.dirty = 4;
       state.pet.bored += 1;
       state.pet.sleepy -= 1;
+  
     },
     getDirty(state, action) {
       state.pet = state.petList.find((pet) => pet.id === action.payload);
@@ -107,19 +109,31 @@ const petSlice = createSlice({
     getSick(state, action) {
       state.pet = state.petList.find((pet) => pet.id === action.payload);
       state.pet.healthy = Math.random() < 0.3;
+      if (!state.pet.healthy){
+        state.pet.bored = 0
+        state.dirty = 0
+        state.pet.hungry = 0
+        state.pet.sleepy = 0
+      } else {
+        return state.pet.healthy
+      }
     },
     gotoVet(state, action) {
       state.pet = state.petList.find((pet) => pet.id === action.payload);
       state.pet.alive = Math.random() < 0.8;
       if (state.pet.alive) {
         state.pet.healthy = true;
+        state.pet.sleepy = 4
+        state.pet.hungry = 4
         state.notification = `Doctor says: "Your pet can go home now. He is healthy and happy again. Take care!!!"`;
+        state.pet.bored = 4
+        state.dirty = 4
       } else {
         state.notification = `Nurse says: "Vet tried everything, but unfortunately was not able to cure your pet. We are so sorry for your loss!"`;
       }
     },
     resetState: (state, action) => {
-      return initialState
+      return initialState;
     },
   },
   extraReducers: {
@@ -130,7 +144,14 @@ const petSlice = createSlice({
       state.petList = action.payload;
       state.status = "idle";
     },
-    //rejected
+    [fetchPets.rejected](state, action) {
+      state.status = "rejected";
+      if (action.payload) {
+        state.error = action.payload.errorMessage;
+      } else {
+        state.error = action.error.message;
+      }
+    },
     [deletePet.pending](state) {
       state.status = "loading";
     },
@@ -154,7 +175,6 @@ const petSlice = createSlice({
         state.errors = action.payload.errors.map((err) => err);
       } else {
         state.errors = "Your pet was successfully created!";
-        // state.petList.push(action.payload)
       }
     },
     [updatePet.pending](state) {

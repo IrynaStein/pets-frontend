@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Pet.css";
-import Birthday from "./Birthday";
+import Birthday from "../functions/Birthday";
 import { useDispatch } from "react-redux";
 import { deletePet } from "../store/petSlice";
 
@@ -25,15 +25,12 @@ const dispatch = useDispatch()
   }
 
   return (
-    <div>
+    <div className="pet-element">
       
-      <button className="button" onClick={deleteHandler}>x</button>
-      <Link to={`/game/${pet.name}`}>
-        <div className="pet-window" >
+      <button className="button-regular-inv" onClick={deleteHandler}>x</button>
+      <Link className="pet-card" to={`/game/${pet.name}`}>
         <Birthday pet={pet}/>
-        </div>
       </Link>
-
       <p
         style={{ cursor: "pointer" }}
         onClick={() => setInfoCard((mUV) => !mUV)}
@@ -51,6 +48,7 @@ const dispatch = useDispatch()
           <p>Favorite activity: {pet.activity.name}</p>
         </div>
       ) : null}
+  
     </div>
   );
 }
