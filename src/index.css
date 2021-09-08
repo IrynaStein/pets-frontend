@@ -135,6 +135,13 @@ section {
   color: #50AB6E;
   cursor: pointer;
 }
+.button-green:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor: auto
+}
 
 .button-gray {
   border: none;

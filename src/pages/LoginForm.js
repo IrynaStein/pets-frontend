@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import {useDispatch } from 'react-redux'
-import { userActions } from "../store/userSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { onLogin } from "../store/userSlice";
 
 function LoginForm() {
-  const [errors, setErrors] = useState([]);
   const [formData, setFormData] = useState({
-    username: "",
+    user_name: "",
     password: "",
   });
-const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const errors = useSelector((state) => state.user.errors);
   function handleChange(e) {
     console.log(e.target.value);
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -18,24 +18,7 @@ const dispatch = useDispatch()
   function handleSubmit(e) {
     e.preventDefault();
     console.log(formData);
-    const configObj = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        user_name: formData.username,
-        password: formData.password,
-      }),
-    };
-    fetch("/login", configObj)
-      .then((resp) => {
-        if (resp.ok) {
-          resp.json().then((user) => dispatch(userActions.userLogin(user)));
-        } else {
-          resp.json().then((error) => setErrors(error.errors));
-        }
-      })
+    dispatch(onLogin(formData));
   }
 
   return (
@@ -44,9 +27,9 @@ const dispatch = useDispatch()
         <input
           className="input-field-orange"
           onChange={(e) => handleChange(e)}
-          value={formData.username}
+          value={formData.user_name}
           type="text"
-          name="username"
+          name="user_name"
           placeholder="user name..."
         ></input>
         <br />
@@ -61,9 +44,13 @@ const dispatch = useDispatch()
         <br />
         <button className="button-regular">Login</button>
         <Link to="/signup">
-          <button className="button-regular" type="submit">Signup</button>
+          <button className="button-regular" type="submit">
+            Signup
+          </button>
+          <br/>
         </Link>
-        {errors.map((err) => <p key={err}>{err}</p>)}
+        {errors.length > 0 ? errors.map(
+          (err, ind) => `${ind + 1}. ${err} \n`) : null}
       </form>
     </div>
   );

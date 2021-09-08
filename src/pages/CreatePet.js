@@ -45,10 +45,10 @@ export default function CreatePet() {
     <div>
       <>{errors}</>
       <form className="createform-container" onSubmit={handleSubmit}>
-        <label>Choose your pet's breed</label>
+        <label style={{fontSize: "20px"}}>Choose your pet's breed</label>
         <div className="feature-container">
           <div className="feature-item">
-          <img src={tibbar} style={{ height: "40px" }} alt="tibbar" />
+          <img src={tibbar} style={{ height: "80px" }} alt="tibbar" />
           <div className="feature-item-button">
             <input
               onClick={handleClick}
@@ -62,7 +62,7 @@ export default function CreatePet() {
           </div>
 
           <div className="feature-item">
-          <img src={drazzil} style={{ height: "40px" }} alt="drazzil" />
+          <img src={drazzil} style={{ height: "80px" }} alt="drazzil" />
           <div className="feature-item-button">
             <input
               onClick={handleClick}
@@ -76,7 +76,7 @@ export default function CreatePet() {
           </div>
         </div>
 
-        <label for="name">Name your pet</label>
+        <label for="name" style={{fontSize: "20px"}}>Name your pet</label>
         <div>
           <input
             onChange={handleClick}
@@ -87,7 +87,7 @@ export default function CreatePet() {
             value={formData.name}
           ></input>
         </div>
-        <label>Choose your pet's favorite snack</label>
+        <label style={{fontSize: "20px"}}>Choose your pet's favorite snack</label>
 
         <div className="feature-container">
           <div className="feature-item">
@@ -147,7 +147,7 @@ export default function CreatePet() {
           </div>
         </div>
 
-        <label>Choose your pet's favorite activity</label>
+        <label style={{fontSize: "20px"}}>Choose your pet's favorite activity</label>
         <div className="feature-container">
           <div>
             <input

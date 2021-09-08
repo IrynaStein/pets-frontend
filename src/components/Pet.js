@@ -36,8 +36,8 @@ const dispatch = useDispatch()
         onClick={() => setInfoCard((mUV) => !mUV)}
       >
         {infoCard
-          ? `show less info about ${name}`
-          : `show more info about ${name}`}
+          ? <div className="button-gray">show less info about {name}</div>
+          : <div className="button-gray">show more info about {name}</div>}
       </p>
       {infoCard ? (
         <div className="info-card">

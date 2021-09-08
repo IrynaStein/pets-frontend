@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { petActions } from "../store/petSlice";
 import { gameActions } from "../store/gameSlice";
@@ -61,6 +62,7 @@ export default function WellnessBar() {
 
   const playHandler = () => {
     dispatch(petActions.petPlay(pet.id));
+    dispatch(petActions.getSick(pet.id))
   };
 
   const cleanHandler = () => {
@@ -68,13 +70,14 @@ export default function WellnessBar() {
   };
 
   const sleepHandler = () => {
-      console.log(`pet:`, pet)
     dispatch(petActions.petSleep(pet.id));
     dispatch(petActions.getBored(pet.id));
+    dispatch(petActions.getSick(pet.id));
   };
 
   const vetHandler = () => {
-    dispatch(petActions.gotoVet(pet.id));
+    dispatch(petActions.gotoVet(pet.id))
+    dispatch(gameActions.pauseGame(false));
   };
 
   return (
@@ -87,20 +90,21 @@ export default function WellnessBar() {
               <img
                 src="https://i.imgur.com/arrUsjs.gif"
                 onClick={vetHandler}
-                alt="medical"
+                alt="medical" style={{cursor: "pointer"}}
               />{" "}
             </div>
           ) : (
             <div className="health_container">
               <img
                 src="https://live.staticflickr.com/65535/51425384610_2a4c6065b3_o.png"
-                alt="medical"
+                alt="medical" 
               ></img>
             </div>
           )}
           <section>
             sleepy: <WellnessRender arg={pet.sleepy} />
             <button
+            disabled={gamePaused}
               onClick={sleepHandler}
               className="button-green"
               style={{ width: "60px" }}
@@ -111,6 +115,7 @@ export default function WellnessBar() {
           <section>
             hungry: <WellnessRender arg={pet.hungry} />
             <button
+            disabled={gamePaused}
               onClick={feedHandler}
               className="button-green"
               style={{ width: "60px" }}
@@ -121,6 +126,7 @@ export default function WellnessBar() {
           <section>
             bored: <WellnessRender arg={pet.bored} />
             <button
+            disabled={gamePaused}
               onClick={playHandler}
               style={{ width: "60px" }}
               className="button-green"
@@ -131,6 +137,7 @@ export default function WellnessBar() {
           <section>
             dirty: <WellnessRender arg={dirty} />
             <button
+            disabled={gamePaused}
               style={{ width: "60px" }}
               className="button-green"
               onClick={cleanHandler}
@@ -140,7 +147,7 @@ export default function WellnessBar() {
           </section>
         </div>
       ) : (
-        <div className="pop-up">Your pet passed away</div>
+        <Link to='/cemetery' className="pop-up">Your pet passed away. <br/> Lets visit cemetery</Link>
       )}
     </>
   );

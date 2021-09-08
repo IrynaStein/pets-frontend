@@ -11,16 +11,20 @@ import { userActions } from "./store/userSlice";
 import Header from "./components/Header";
 import Cemetery from "./pages/Cemetery";
 import GameRules from "./pages/GameRules";
-import { useState } from "react";
+import {onLogin} from './store/userSlice'
 
 function App() {
-// const [isLoading, setIsLoading] = useState(true)
 const user = useSelector(state => state.user.user)
 const isLoading = useSelector(state => state.user.isLoading)
 const dispatch = useDispatch()
+
   useEffect(() => {
     // auto-login
-    fetch("/me").then((r) => {
+    fetch("/me", {
+      method: "GET",
+      headers: {"Content-Type": "application/json", "Accept":"application/json" },
+      credentials: "include",
+    }).then((r) => {
       if (r.ok) {
         r.json().then((user) => {
           dispatch(userActions.userLogin(user))

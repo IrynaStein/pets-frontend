@@ -1,14 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+
 export const createUser = createAsyncThunk("user/createUser", async (user) => {
   const response = await fetch("/signup", {
     method: "POST",
-    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    headers: { "Content-Type": "application/json", "Accept": "application/json" },
+    credentials: "include",
     body: JSON.stringify({
         user_name: user.user_name,
         password: user.password,
         password_confirmation: user.password_confirmation,
-        avatar: user.avatar[0]
+        email: user.email,
+        avatar: user.avatar
     }),
   });
   console.log(user)
@@ -17,10 +20,34 @@ export const createUser = createAsyncThunk("user/createUser", async (user) => {
 });
 
 export const deleteUser = createAsyncThunk("/user/deleteUser", async (id) => {
-  const response = await fetch(`/users/${id}`, { method: "DELETE" });
+  const response = await fetch(`/users/${id}`, { 
+      method: "DELETE",
+      credentials: "include"
+ });
   const data = await response.json();
   return data;
 });
+
+export const onLogin = createAsyncThunk("user/onLogin", async (user) => {
+    const response = await fetch("/login", {
+        method: "POST", 
+        headers: {"Content-Type": "application/json"},
+        credentials: "include",
+        body: JSON.stringify(user)
+    })
+    const data = await response.json()
+    return data
+})
+
+export const onLogout = createAsyncThunk("user/onLogout", async() => {
+    const response = await fetch("/logout", {
+        method: "DELETE",
+        credentials: "include"
+    })
+    const data = await response.json()
+    console.log(data)
+    return data
+})
 
 export const updateUser = createAsyncThunk(
   "/user/updateUser",
@@ -28,10 +55,10 @@ export const updateUser = createAsyncThunk(
     const response = await fetch(`/users/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
+      credentials: "include",
       body: JSON.stringify(updatedUser, id),
     });
     const data = await response.json();
-    // debugger;
     return data;
   }
 );
@@ -39,8 +66,8 @@ export const updateUser = createAsyncThunk(
 const initialState = {
   user: null,
   status: "",
-  errors: "",
-  isLoading: true
+  isLoading: true,
+  errors: []
 };
 
 const userSlice = createSlice({
@@ -49,18 +76,6 @@ const userSlice = createSlice({
   reducers: {
     userLogin(state, action) {
       state.user = action.payload;
-    },
-    userLogout(state) {
-      state.user = null;
-    },
-    userDelete(state) {
-      state.user = null;
-    },
-    userEdit(state, action) {
-      state.user = action.payload;
-    },
-    resetErrors(state) {
-      state.errors = "";
     },
     toogleLoading(state, action){
         state.isLoading = action.payload
@@ -72,31 +87,39 @@ const userSlice = createSlice({
     },
     [createUser.fulfilled](state, action) {
       state.status = "idle";
-      state.user = action.payload;
       if (action.payload.errors) {
-        state.errors = action.payload.errors[0].map(
-          (err, ind) => `${ind + 1}. ${err}, `
-        );
+        state.errors = action.payload.errors
       } else {
-        state.errors = "";
+        state.user = action.payload;
+        state.errors = [];
       }
     },
-    // [createUser.rejected](state, action){
-    //     state.errors = action.payload.errors[0].map((err, ind) => `${ind+1}. ${err}, `)
-    // }
+    [createUser.rejected](state, action){
+        state.status = "rejected"
+        if (action.payload) {
+            state.errors = action.payload.errorMessage;
+          } else {
+            state.errors = action.error.message;
+          }
+    },
     [deleteUser.pending](state) {
       state.status = "loading";
     },
-    [deleteUser.fulfilled](state) {
+    [deleteUser.fulfilled](state, action) {
       state.status = "completed";
-      state.user = null;
+      if (action.payload.errors) {
+        state.errors = action.payload.errors
+      } else {
+        state.user = null;
+        state.errors = [];
+      }
     },
     [deleteUser.rejected](state, action) {
       state.status = "rejected";
       if (action.payload) {
-        state.error = action.payload.errorMessage;
+        state.errors = action.payload.errorMessage;
       } else {
-        state.error = action.error.message;
+        state.errors = action.error.message;
       }
     },
     [updateUser.pending](state){
@@ -104,14 +127,59 @@ const userSlice = createSlice({
     },
     [updateUser.fulfilled](state, action){
         state.status = "updated"
-        state.user = action.payload
+        if (action.payload.errors) {
+            state.errors = action.payload.errors
+          } else {
+            state.user = action.payload
+            state.errors = [];
+          }
     },
     [updateUser.rejected](state, action){
         state.status = "rejected"
         if (action.payload) {
-            state.error = action.payload.errorMessage;
+            state.errors = action.payload.errorMessage;
           } else {
-            state.error = action.error.message;
+            state.errors = action.error.message;
+          }
+    },
+    [onLogin.pending](state){
+        state.status = "pending"
+    },
+    [onLogin.fulfilled](state, action){
+        state.status = "completed"
+        if (action.payload.errors){
+            state.errors = action.payload.errors
+        }
+        else {
+            state.user = action.payload
+            state.errors = []
+        }
+    },
+    [onLogin.rejected](state,action){
+        if (action.payload) {
+            state.errors = action.payload.errorMessage;
+          } else {
+            state.errors = action.error.message;
+          }
+    },
+    [onLogout.pending](state){
+        state.status = "pending"
+    },
+    [onLogout.fulfilled](state, action){
+        state.status = "completed"
+        if (action.payload.errors){
+            state.errors = action.payload.errors
+        }
+        else {
+            state.user = null
+            state.errors =[]
+        }
+    },
+    [onLogout.rejected](state, action){
+        if (action.payload) {
+            state.errors = action.payload.errorMessage;
+          } else {
+            state.errors = action.error.message;
           }
     }
   },

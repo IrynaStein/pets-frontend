@@ -20,10 +20,10 @@ const user = useSelector(state => state.user.user)
     <> 
     {notification !== "" ? <div className="info-container"><div className="notification-container">{notification}</div></div> : <div className="info-container">
       <div className="notification-container">
-        Hi! <br/>
+        Hi!
         I am {pet.name.toUpperCase()} the {pet.breed.name.toUpperCase()}. <br/> My
         favorite food is {pet.food.name} - if I behave well give me some! My
-        favorite activity is {pet.activity.name}, so lets play.
+        favorite activity is {pet.activity.name}. Lets play.
         </div></div>}
     {pet.alive? <>
       <div className="pet-display">
