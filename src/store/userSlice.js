@@ -87,7 +87,6 @@ const userSlice = createSlice({
     },
     [createUser.fulfilled](state, action) {
       state.status = "idle";
-    //   debugger;
       if (action.payload.errors) {
         state.errors = action.payload.errors
       } else {
@@ -98,9 +97,9 @@ const userSlice = createSlice({
     [createUser.rejected](state, action){
         state.status = "rejected"
         if (action.payload) {
-            state.error = action.payload.errorMessage;
+            state.errors = action.payload.errorMessage;
           } else {
-            state.error = action.error.message;
+            state.errors = action.error.message;
           }
     },
     [deleteUser.pending](state) {
@@ -118,9 +117,9 @@ const userSlice = createSlice({
     [deleteUser.rejected](state, action) {
       state.status = "rejected";
       if (action.payload) {
-        state.error = action.payload.errorMessage;
+        state.errors = action.payload.errorMessage;
       } else {
-        state.error = action.error.message;
+        state.errors = action.error.message;
       }
     },
     [updateUser.pending](state){

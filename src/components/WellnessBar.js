@@ -76,7 +76,7 @@ export default function WellnessBar() {
 
   const vetHandler = () => {
     dispatch(petActions.gotoVet(pet.id))
-    dispatch(gameActions.pauseGame());
+    dispatch(gameActions.pauseGame(false));
   };
 
   return (
