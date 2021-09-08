@@ -63,8 +63,7 @@ const petSlice = createSlice({
       state.pet = action.payload;
     },
     petFeed(state, action) {
-      // state.pet = state.petList.find((pet) => pet.id === action.payload);
-      state.pet = action.payload
+      state.pet = state.petList.find((pet) => pet.id === action.payload);
       if (state.pet.hungry < 4) {
         state.pet.hungry += 1;
         state.pet.sleepy -= 1;
@@ -74,11 +73,11 @@ const petSlice = createSlice({
       }
     },
     getHungry(state, action) {
-      // state.pet = state.petList.find((pet) => pet.id === action.payload);
+      state.pet = state.petList.find((pet) => pet.id === action.payload);
       state.pet.hungry -= 1;
     },
     petPlay: (state, action) => {
-      // state.pet = state.petList.find((pet) => pet.id === action.payload);
+      state.pet = state.petList.find((pet) => pet.id === action.payload);
       if (state.pet.bored < 4) {
         state.pet.bored += 1;
         state.dirty -= 1;
@@ -90,40 +89,33 @@ const petSlice = createSlice({
       }
     },
     getBored(state, action) {
-      // state.pet = state.petList.find((pet) => pet.id === action.payload);
-      state.pet = action.payload
+      state.pet = state.petList.find((pet) => pet.id === action.payload);
       state.pet.bored -= 1;
     },
     petSleep(state, action) {
-      // state.pet = state.petList.find((pet) => pet.id === action.payload);
-      state.pet = action.payload
+      state.pet = state.petList.find((pet) => pet.id === action.payload);
       state.pet.sleepy = 4;
     },
-    getSleepy(state, action) {
-      state.pet = action.payload
+    getSleepy(state) {
       state.pet.sleepy = state.pet.sleepy - 1;
     },
     petClean(state, action) {
-      // state.pet = state.petList.find((pet) => pet.id === action.payload);
-      state.pet = action.payload
+      state.pet = state.petList.find((pet) => pet.id === action.payload);
       state.dirty = 4;
       state.pet.bored += 1;
       state.pet.sleepy -= 1;
   
     },
     getDirty(state, action) {
-      // state.pet = state.petList.find((pet) => pet.id === action.payload);
-      state.pet = action.payload
+      state.pet = state.petList.find((pet) => pet.id === action.payload);
       state.pet.dirty -= 1;
     },
     petDead(state, action) {
-      // state.pet = state.petList.find((pet) => pet.id === action.payload);
-      state.pet = action.payload
+      state.pet = state.petList.find((pet) => pet.id === action.payload);
       state.pet.alive = false;
     },
     getSick(state, action) {
-      // state.pet = state.petList.find((pet) => pet.id === action.payload);
-      state.pet = action.payload
+      state.pet = state.petList.find((pet) => pet.id === action.payload);
       state.pet.healthy = Math.random() < 0.6;
       // debugger;
       if (!state.pet.healthy){
@@ -137,8 +129,7 @@ const petSlice = createSlice({
       }
     },
     gotoVet(state, action) {
-      // state.pet = state.petList.find((pet) => pet.id === action.payload);
-      state.pet = action.payload
+      state.pet = state.petList.find((pet) => pet.id === action.payload);
       state.pet.alive = Math.random() < 0.8;
       if (state.pet.alive) {
         state.pet.healthy = true;
