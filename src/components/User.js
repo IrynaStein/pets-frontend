@@ -8,7 +8,7 @@ import { updateUser } from "../store/userSlice";
 export default function User() {
   const [showForm, setShowForm] = useState(false);
   const user = useSelector((state) => state.user.user);
-  const { user_name, email, avatar, id } = user;
+  const { user_name, email, avatar, id, image } = user;
   const errorsBe = useSelector((state) => state.user.errors);
   const preloadedValues = {
     user_name: user_name,
@@ -114,7 +114,7 @@ export default function User() {
               Delete profile
             </button>
           </div>
-          <img className="user-avatar" src={avatar} alt="user" />
+          <img className="user-avatar" src={image.url} alt="user" />
           <p>Hello {user_name}!</p>
           <p>
             You can create or edit your profile here. Below is the list of pets
