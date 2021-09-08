@@ -129,7 +129,7 @@ const petSlice = createSlice({
     },
     getSick(state, action) {
       state.pet = state.petList.find((pet) => pet.id === action.payload);
-      state.pet.healthy = Math.random() < 0.3;
+      state.pet.healthy = Math.random() < 0.8;
       if (!state.pet.healthy){
         state.pet.bored = 0
         state.dirty = 0
