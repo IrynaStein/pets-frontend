@@ -62,6 +62,7 @@ export default function WellnessBar() {
 
   const playHandler = () => {
     dispatch(petActions.petPlay(pet.id));
+    dispatch(petActions.getSick(pet.id))
   };
 
   const cleanHandler = () => {
@@ -69,9 +70,9 @@ export default function WellnessBar() {
   };
 
   const sleepHandler = () => {
-      console.log(`pet:`, pet)
     dispatch(petActions.petSleep(pet.id));
     dispatch(petActions.getBored(pet.id));
+    dispatch(petActions.getSick(pet.id));
   };
 
   const vetHandler = () => {

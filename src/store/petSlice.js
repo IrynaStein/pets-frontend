@@ -75,6 +75,7 @@ const petSlice = createSlice({
     getHungry(state, action) {
       state.pet = state.petList.find((pet) => pet.id === action.payload);
       state.pet.hungry -= 1;
+      state.notification = ""
     },
     petPlay: (state, action) => {
       state.pet = state.petList.find((pet) => pet.id === action.payload);
@@ -95,6 +96,7 @@ const petSlice = createSlice({
     petSleep(state, action) {
       state.pet = state.petList.find((pet) => pet.id === action.payload);
       state.pet.sleepy = 4;
+      state.notification = "Z-z-z-z-z...."
     },
     getSleepy(state) {
       state.pet.sleepy = state.pet.sleepy - 1;
@@ -102,22 +104,32 @@ const petSlice = createSlice({
     petClean(state, action) {
       state.pet = state.petList.find((pet) => pet.id === action.payload);
       state.dirty = 4;
-      state.pet.bored += 1;
+      if (state.pet.bored < 4){
+        state.pet.bored += 1;
+      } else {
+        return 
+      }
       state.pet.sleepy -= 1;
-  
+      state.notification = "Bubbly bath! I love it"
     },
     getDirty(state, action) {
       state.pet = state.petList.find((pet) => pet.id === action.payload);
-      state.pet.dirty -= 1;
+      state.dirty -= 1;
+      if (state.dirty < -1){
+        state.notification = "I am stinky! Please give me a bath"
+      } else {
+        state.notification = ""
+      }
+     
     },
     petDead(state, action) {
       state.pet = state.petList.find((pet) => pet.id === action.payload);
       state.pet.alive = false;
+      state.notification = `We are sorry to inform you that ${state.pet.name} passed away.`
     },
     getSick(state, action) {
       state.pet = state.petList.find((pet) => pet.id === action.payload);
-      state.pet.healthy = Math.random() < 0.6;
-      // debugger;
+      state.pet.healthy = Math.random() < 0.3;
       if (!state.pet.healthy){
         state.pet.bored = 0
         state.dirty = 0
