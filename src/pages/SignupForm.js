@@ -97,7 +97,7 @@ console.log(errors)
     e.preventDefault()
     console.log(formData)
     dispatch(createUser(formData))
-    .then(errors.length < 0 ? history.push("/home") : () => setFormdData(defaultForm))
+    .then(errors.length === 0 ? history.push("/home") : () => setFormdData(defaultForm))
   }
     return (
         <div className="App">

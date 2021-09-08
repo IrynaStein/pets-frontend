@@ -22,21 +22,21 @@ export default function WellnessBar() {
       if (pet.alive && pet.healthy) {
         clockInterval = setInterval(() => {
           if (pet.sleepy < 0 && pet.hungry < 0) {
-            dispatch(petActions.petDead(pet.id));
+            dispatch(petActions.petDead(pet));
             clearInterval(clockInterval);
        
           } else if (pet.sleepy < -1 || pet.hungry < -1) {
-            dispatch(petActions.petDead(pet.id));
+            dispatch(petActions.petDead(pet));
             clearInterval(clockInterval);
           } else if ((pet.bored < 0 && pet.hungry < 0) || (pet.bored < 0 && pet.sleepy < 0)) {
-            dispatch(petActions.petDead(pet.id));
+            dispatch(petActions.petDead(pet));
             clearInterval(clockInterval);
           } else {
-            dispatch(petActions.getSleepy(pet.id));
-            dispatch(petActions.getHungry(pet.id));
-            dispatch(petActions.getDirty(pet.id));
-            dispatch(petActions.getBored(pet.id));
-            dispatch(petActions.getSick(pet.id));
+            dispatch(petActions.getSleepy(pet));
+            dispatch(petActions.getHungry(pet));
+            dispatch(petActions.getDirty(pet));
+            dispatch(petActions.getBored(pet));
+            dispatch(petActions.getSick(pet));
           }
         }, 15000);
       } else if (pet.alive && !pet.healthy){
@@ -57,25 +57,25 @@ export default function WellnessBar() {
 
 //   const { pet.id, sleepy, healthy, bored, alive, hungry, name } = pet;
   const feedHandler = () => {
-    dispatch(petActions.petFeed(pet.id));
+    dispatch(petActions.petFeed(pet));
   };
 
   const playHandler = () => {
-    dispatch(petActions.petPlay(pet.id));
+    dispatch(petActions.petPlay(pet));
   };
 
   const cleanHandler = () => {
-    dispatch(petActions.petClean(pet.id));
+    dispatch(petActions.petClean(pet));
   };
 
   const sleepHandler = () => {
       console.log(`pet:`, pet)
-    dispatch(petActions.petSleep(pet.id));
-    dispatch(petActions.getBored(pet.id));
+    dispatch(petActions.petSleep(pet));
+    dispatch(petActions.getBored(pet));
   };
 
   const vetHandler = () => {
-    dispatch(petActions.gotoVet(pet.id))
+    dispatch(petActions.gotoVet(pet))
     dispatch(gameActions.pauseGame());
   };
 

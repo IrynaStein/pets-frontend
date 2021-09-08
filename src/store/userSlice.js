@@ -5,6 +5,7 @@ export const createUser = createAsyncThunk("user/createUser", async (user) => {
   const response = await fetch("/signup", {
     method: "POST",
     headers: { "Content-Type": "application/json", "Accept": "application/json" },
+    credentials: "include",
     body: JSON.stringify({
         user_name: user.user_name,
         password: user.password,
@@ -19,7 +20,10 @@ export const createUser = createAsyncThunk("user/createUser", async (user) => {
 });
 
 export const deleteUser = createAsyncThunk("/user/deleteUser", async (id) => {
-  const response = await fetch(`/users/${id}`, { method: "DELETE" });
+  const response = await fetch(`/users/${id}`, { 
+      method: "DELETE",
+      credentials: "include"
+ });
   const data = await response.json();
   return data;
 });
@@ -102,9 +106,14 @@ const userSlice = createSlice({
     [deleteUser.pending](state) {
       state.status = "loading";
     },
-    [deleteUser.fulfilled](state) {
+    [deleteUser.fulfilled](state, action) {
       state.status = "completed";
-      state.user = null;
+      if (action.payload.errors) {
+        state.errors = action.payload.errors
+      } else {
+        state.user = null;
+        state.errors = [];
+      }
     },
     [deleteUser.rejected](state, action) {
       state.status = "rejected";
@@ -119,7 +128,12 @@ const userSlice = createSlice({
     },
     [updateUser.fulfilled](state, action){
         state.status = "updated"
-        state.user = action.payload
+        if (action.payload.errors) {
+            state.errors = action.payload.errors
+          } else {
+            state.user = action.payload
+            state.errors = [];
+          }
     },
     [updateUser.rejected](state, action){
         state.status = "rejected"
