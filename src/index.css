@@ -164,7 +164,7 @@ button[disabled]{
   cursor: pointer;
 }
 
-label {
+/* label {
   border-radius: 20px;
   color: gray;
   border-style: solid;
@@ -172,12 +172,13 @@ label {
   border-color: white;
   padding: 5px;
   text-align: center;
-  margin-top: 20px;
+  margin: 5px;
   box-shadow: 1px 2px 3px 3px #dcb56d;
   font: 15px Indie Flower;
   font-weight: bold;
   cursor: pointer;
-}
+  width: 100px;
+} */
 
 
 
