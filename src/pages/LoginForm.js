@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import {useSelector, useDispatch } from 'react-redux'
-import {onLogin} from '../store/userSlice'
+import { useSelector, useDispatch } from "react-redux";
+import { onLogin } from "../store/userSlice";
 
 function LoginForm() {
   const [formData, setFormData] = useState({
     user_name: "",
     password: "",
   });
-const dispatch = useDispatch()
-const errors = useSelector(state => state.user.errors)
+  const dispatch = useDispatch();
+  const errors = useSelector((state) => state.user.errors);
   function handleChange(e) {
     console.log(e.target.value);
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -18,8 +18,7 @@ const errors = useSelector(state => state.user.errors)
   function handleSubmit(e) {
     e.preventDefault();
     console.log(formData);
-    dispatch(onLogin(formData))
-    
+    dispatch(onLogin(formData));
   }
 
   return (
@@ -45,9 +44,13 @@ const errors = useSelector(state => state.user.errors)
         <br />
         <button className="button-regular">Login</button>
         <Link to="/signup">
-          <button className="button-regular" type="submit">Signup</button>
+          <button className="button-regular" type="submit">
+            Signup
+          </button>
+          <br/>
         </Link>
-        {errors.map((err) => <p key={err}>{err}</p>)}
+        {errors.length > 0 ? errors.map(
+          (err, ind) => `${ind + 1}. ${err} \n`) : null}
       </form>
     </div>
   );

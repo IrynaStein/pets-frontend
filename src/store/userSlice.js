@@ -9,7 +9,8 @@ export const createUser = createAsyncThunk("user/createUser", async (user) => {
         user_name: user.user_name,
         password: user.password,
         password_confirmation: user.password_confirmation,
-        avatar: user.avatar[0]
+        email: user.email,
+        avatar: user.avatar
     }),
   });
   console.log(user)
@@ -50,10 +51,10 @@ export const updateUser = createAsyncThunk(
     const response = await fetch(`/users/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
+      credentials: "include",
       body: JSON.stringify(updatedUser, id),
     });
     const data = await response.json();
-    // debugger;
     return data;
   }
 );
@@ -71,18 +72,6 @@ const userSlice = createSlice({
   reducers: {
     userLogin(state, action) {
       state.user = action.payload;
-    },
-    // userLogout(state) {
-    //   state.user = null;
-    // },
-    userDelete(state) {
-      state.user = null;
-    },
-    userEdit(state, action) {
-      state.user = action.payload;
-    },
-    resetErrors(state) {
-      state.errors = "";
     },
     toogleLoading(state, action){
         state.isLoading = action.payload

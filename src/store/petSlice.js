@@ -134,9 +134,9 @@ const petSlice = createSlice({
         state.notification = `Nurse says: "Vet tried everything, but unfortunately was not able to cure your pet. We are so sorry for your loss!"`;
       }
     },
-    resetState: (state, action) => {
-      state.petList = []
-    },
+    // resetState: (state, action) => {
+    //   state.petList = []
+    // },
   },
   extraReducers: {
     [fetchPets.pending](state) {

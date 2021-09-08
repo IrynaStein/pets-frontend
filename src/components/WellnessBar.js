@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { petActions } from "../store/petSlice";
 import { gameActions } from "../store/gameSlice";
@@ -145,7 +146,7 @@ export default function WellnessBar() {
           </section>
         </div>
       ) : (
-        <div className="pop-up">Your pet passed away</div>
+        <Link to='/cemetery' className="pop-up">Your pet passed away. <br/> Lets visit cemetery</Link>
       )}
     </>
   );

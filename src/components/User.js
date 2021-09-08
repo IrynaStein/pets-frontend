@@ -8,15 +8,15 @@ import { updateUser } from '../store/userSlice';
 
 export default function User(){
     const [showForm, setShowForm] = useState(false)
-
     const user = useSelector(state => state.user.user)
     const {user_name, email, avatar, id} = user
+
     const preloadedValues ={
         user_name: user_name,
         email: email
     }
     const dispatch = useDispatch()
-    const {register, handleSubmit, reset, errors} = useForm({
+    const {register, handleSubmit, reset, formState: {errors}} = useForm({
         defaultValues: preloadedValues
     })
     const deleteUserHandler = () => {
@@ -33,7 +33,6 @@ export default function User(){
 
     return (
         <>
-        
         {showForm ?  
       <div className='user-container-centered'>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -51,7 +50,7 @@ export default function User(){
           placeholder="re-enter password..."
           {...register("password", { required: true })}
         ></input>
-        {/* {errors.password && <p>Password</p>} */}
+        {errors.password && <div style={{fontSize: "10px"}}>Password is required.Please re-type or create a new one</div>}
         <br />
         <input
           className="input-field-gray"
@@ -60,6 +59,7 @@ export default function User(){
           placeholder="confirm password..."
           {...register("password_confirmation", { required: true })}
         ></input>
+         {errors.password_confirmation && <div style={{fontSize: "10px"}}>Confirm your password</div>}
         <br />
         <input
           className="input-field-gray"

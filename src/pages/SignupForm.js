@@ -8,7 +8,7 @@ import {userActions} from '../store/userSlice'
 function SignupForm() {
   const dispatch = useDispatch();
 const errors = useSelector(state => state.user.errors)
-  // const history = useHistory();
+  const history = useHistory();
   // const errors = useSelector((state) => state.user.errors);
   // console.log(errors);
   // const { register, handleSubmit, reset } = useForm();
@@ -75,14 +75,15 @@ const errors = useSelector(state => state.user.errors)
   //   </div>
   // );
   const defaultForm = {
-    username: "",
+    user_name: "",
     password: "",
-    pass_conf: "",
+    password_confirmation: "",
     email: "",
     avatar: ""
   }
   const [formData, setFormdData] = useState(defaultForm)
-
+console.log(errors)
+// debugger;
   function handleChange(e){
     console.log(e.target.value)
     setFormdData({...formData, [e.target.name]: e.target.value})
@@ -95,40 +96,27 @@ const errors = useSelector(state => state.user.errors)
   function handleSubmit(e){
     e.preventDefault()
     console.log(formData)
-    const configObg = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        user_name: formData.username,
-        password: formData.password,
-        password_confirmation: formData.pass_conf,
-        email: formData.email,
-        avatar: formData.avatar
-      })
-    }
-    fetch('/signup', configObg)
-    .then(resp=> resp.json())
-    .then(data=> console.log(data))
+    dispatch(createUser(formData))
+    .then(errors.length < 0 ? history.push("/home") : () => setFormdData(defaultForm))
   }
     return (
         <div className="App">
-          {errors}
-          <Link to='login'><button className="button">&#8592;Back to Login</button></Link>
-          {/* {errors.map(
-          (err, ind) => `${ind + 1}. ${err}, `)} */}
-      <form className="centered-form" onSubmit={handleSubmit}>
-      <input className="input-field" name="username" value={formData.user_name} onChange={(e)=>handleChange(e)} placeholder="user name..."></input>
+          <Link to='login'><button className="button-regular">&#8592;Back to Login</button></Link>
+          <br/>
+          {errors.length > 0 ? errors[0].map(
+          (err, ind) => <div style={{fontSize: "12px"}}>{ind + 1}. {err}<br/></div>) : null}
+      <form className="centered-form-signup" onSubmit={handleSubmit}>
+      <input className="input-field-orange" name="user_name" value={formData.user_name} onChange={(e)=>handleChange(e)} placeholder="user name..."></input>
       <br/>
-      <input className="input-field" name="password" value={formData.password} onChange={(e)=>handleChange(e)} placeholder="password..."></input>
+      <input className="input-field-orange" type="password" name="password" value={formData.password} onChange={(e)=>handleChange(e)} placeholder="password..."></input>
       <br/>
-      <input className="input-field" name="pass_conf" value={formData.pass_conf} onChange={(e)=>handleChange(e)} placeholder="confirm password..."></input>
+      <input className="input-field-orange" type="password" name="password_confirmation" value={formData.password_confirmation} onChange={(e)=>handleChange(e)} placeholder="confirm password..."></input>
       <br/>
-      <input className="input-field" name="email" value={formData.email} onChange={(e)=>handleChange(e)} placeholder="email..."></input>
+      <input className="input-field-orange" name="email" value={formData.email} onChange={(e)=>handleChange(e)} placeholder="email..."></input>
       <br/>
-      <input className="input-field" type="file" name="avatar" onChange={(e)=>handleFileUpload(e)} placeholder="email..."></input>
-      <button className="button" type="submit">Signup</button>
+      <input className="input-field-orange" type="file" name="avatar" onChange={(e)=>handleFileUpload(e)} placeholder="email..."></input>
+      <br/>
+      <button className="button-regular-inv" type="submit">Signup</button>
       </form>
       
     </div>
