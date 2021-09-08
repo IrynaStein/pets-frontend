@@ -29,7 +29,6 @@ export default function CreatePet() {
   const history = useHistory();
   const dispatch = useDispatch();
   const errors = useSelector((state) => state.pets.errors);
-  const status = useSelector((state) => state.pets.status);
   const handleClick = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     console.log(e.target.value);

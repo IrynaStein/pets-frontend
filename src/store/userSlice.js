@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 
 export const createUser = createAsyncThunk("user/createUser", async (user) => {
+    debugger;
   const response = await fetch("/signup", {
     method: "POST",
     headers: { "Content-Type": "application/json", "Accept": "application/json" },

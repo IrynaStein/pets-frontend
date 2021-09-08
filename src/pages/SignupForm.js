@@ -96,8 +96,21 @@ console.log(errors)
   function handleSubmit(e){
     e.preventDefault()
     console.log(formData)
-    dispatch(createUser(formData))
-    .then(errors.length === 0 ? history.push("/home") : () => setFormdData(defaultForm))
+    const fD = new FormData()
+    // debugger;
+    fD.append("avatar", formData.avatar)
+fD.append("user_name", formData.user_name)
+fD.append("password", formData.password)
+fD.append("password_confirmation", formData.password_confirmation)
+fD.append("email", formData.email)
+    // dispatch(createUser(formData))
+    // .then(errors.length === 0 ? history.push("/home") : () => setFormdData(defaultForm))
+    fetch ("/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      credentials: "include",
+      body: fD,
+    });
   }
     return (
         <div className="App">
@@ -114,7 +127,8 @@ console.log(errors)
       <br/>
       <input className="input-field-orange" name="email" value={formData.email} onChange={(e)=>handleChange(e)} placeholder="email..."></input>
       <br/>
-      <input className="input-field-orange" type="file" name="avatar" onChange={(e)=>handleFileUpload(e)} placeholder="email..."></input>
+      <input id="fileupload" className="upload-field-orange" type="file" name="avatar" onChange={(e)=>handleFileUpload(e)} placeholder="email... hidden"></input>
+      <label for="fileupload">Add avatar</label>
       <br/>
       <button className="button-regular-inv" type="submit">Signup</button>
       </form>
