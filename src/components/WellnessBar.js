@@ -44,8 +44,6 @@ export default function WellnessBar() {
       }
       else {
         clearInterval(clockInterval);
-        //   alert(`We are preparing ${name}'s the funeral!`) 
-        // debugger;
         dispatch(updatePet(pet));
       }
     }
@@ -55,7 +53,6 @@ export default function WellnessBar() {
   }, [dispatch, pet.sleepy, pet.hungry, pet.bored, dirty, pet.alive, pet.id, pet.name, pet, gamePaused]);
 
 
-//   const { pet.id, sleepy, healthy, bored, alive, hungry, name } = pet;
   const feedHandler = () => {
     dispatch(petActions.petFeed(pet.id));
   };
@@ -72,7 +69,6 @@ export default function WellnessBar() {
   const sleepHandler = () => {
     dispatch(petActions.petSleep(pet.id));
     dispatch(petActions.getBored(pet.id));
-    dispatch(petActions.getSick(pet.id));
   };
 
   const vetHandler = () => {
@@ -84,23 +80,6 @@ export default function WellnessBar() {
     <>
       {pet.alive ? (
         <div className="wellness-bar">
-          {" "}
-          {!pet.healthy ? (
-            <div className="health_container">
-              <img
-                src="https://i.imgur.com/arrUsjs.gif"
-                onClick={vetHandler}
-                alt="medical" style={{cursor: "pointer"}}
-              />{" "}
-            </div>
-          ) : (
-            <div className="health_container">
-              <img
-                src="https://live.staticflickr.com/65535/51425384610_2a4c6065b3_o.png"
-                alt="medical" 
-              ></img>
-            </div>
-          )}
           <section>
             sleepy: <WellnessRender arg={pet.sleepy} />
             <button
@@ -143,6 +122,32 @@ export default function WellnessBar() {
               onClick={cleanHandler}
             >
               shower
+            </button>
+          </section>
+          <section>
+            healthy: {!pet.healthy ? (
+            <div className="health_container">
+              <img
+                src="https://i.imgur.com/arrUsjs.gif"
+                onClick={vetHandler}
+                alt="medical" style={{cursor: "pointer"}}
+              />{" "}
+            </div>
+          ) : (
+            <div className="health_container">
+              <img
+                src="https://live.staticflickr.com/65535/51425384610_2a4c6065b3_o.png"
+                alt="medical" 
+              ></img>
+            </div>
+          )}
+            <button
+            disabled={pet.healthy}
+              style={{ width: "60px" }}
+              className="button-green"
+              onClick={vetHandler}
+            >
+              go to vet
             </button>
           </section>
         </div>

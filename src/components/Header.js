@@ -22,7 +22,7 @@ export default function Header() {
           <NavLink activeclassname={classes.active} to="/cemetery">
             Visit Cemetery
           </NavLink>
-          <NavLink exact to="/home" activeclassname={classes.active}>
+          <NavLink exact to="/" activeclassname={classes.active}>
             Home
           </NavLink>
           {user ? (

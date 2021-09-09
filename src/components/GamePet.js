@@ -6,15 +6,7 @@ export default function GamePet() {
   
 const pet =  useSelector(state => state.pets.pet)
 const notification = useSelector(state => state.pets.notification)
-const isLoading = useSelector(state => state.user.isLoading)
-const user = useSelector(state => state.user.user)
-  // const {
-  //   name,
-  //   breed,
-  //   activity,
-  //   food,
-  //   alive
-  // } = pet;
+
   if (!pet) return "Loading..."
   return (
     <> 
