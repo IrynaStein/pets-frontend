@@ -11,6 +11,7 @@ import { userActions } from "./store/userSlice";
 import Header from "./components/Header";
 import Cemetery from "./pages/Cemetery";
 import GameRules from "./pages/GameRules";
+import Loader from "./functions/Loader";
 
 function App() {
   const user = useSelector((state) => state.user.user);
@@ -42,7 +43,7 @@ function App() {
     <>
       <Header />
       {isLoading ? (
-        " Loading .."
+        <Loader/>
       ) : (
         <Switch>
           <Route exact path="/">

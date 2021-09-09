@@ -1,4 +1,4 @@
-import { Link, useHistory } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { createUser } from "../store/userSlice";
 import { useForm } from "react-hook-form";
@@ -6,12 +6,10 @@ import { useForm } from "react-hook-form";
 function SignupForm() {
   const dispatch = useDispatch();
   const errorsBE = useSelector((state) => state.user.errors);
-  const history = useHistory();
-
+  const user = useSelector((state) => state.user.user);
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data, e) => {
-    console.log(data.image[0]);
     e.preventDefault();
     const formData = new FormData();
     if (data.image[0]) {
@@ -26,12 +24,10 @@ function SignupForm() {
       formData.append("password_confirmation", data.password_confirmation);
       formData.append("email", data.email);
     }
-    dispatch(createUser(formData)).then(() => {
-      if (errorsBE.length === 0) {
-        history.push("/");
-      }
-    });
-  };
+    dispatch(createUser(formData))
+  }
+
+  if (user) return (<Redirect to='/'></Redirect>)
 
   return (
     <div className="App">

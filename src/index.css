@@ -215,3 +215,11 @@ button[disabled] {
   margin: 15px;
   border-radius: 20px;
 }
+
+.loader{
+  left: 200px;
+  position: relative;
+  top: 200px;
+  height: 100px;
+  width: 100px;
+}
