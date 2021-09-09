@@ -1,27 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-
-// export const createUser = createAsyncThunk("user/createUser", async (user) => {
-//     debugger;
-//   const response = await fetch("/signup", {
-//     method: "POST",
-//     headers: { "Content-Type": "application/json", "Accept": "application/json" },
-//     credentials: "include",
-//     body: JSON.stringify({
-//         user_name: user.user_name,
-//         password: user.password,
-//         password_confirmation: user.password_confirmation,
-//         email: user.email,
-//         avatar: user.avatar
-//     }),
-//   });
-//   console.log(user)
-//   const data = await response.json();
-//   return data;
-// });
-
 export const createUser = createAsyncThunk("user/createUser", async (formData) => {
-    // debugger;
   const response = await fetch("/signup", {
     method: "POST",
     credentials: "include",

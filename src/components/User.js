@@ -9,12 +9,11 @@ export default function User() {
   const [showForm, setShowForm] = useState(false);
   const user = useSelector((state) => state.user.user);
   const { user_name, email, id, image } = user;
-//   debugger;
   const errorsBe = useSelector((state) => state.user.errors);
   const preloadedValues = {
     user_name: user_name,
     email: email,
-    image: image
+    image: image,
   };
   const dispatch = useDispatch();
   const {
@@ -41,9 +40,9 @@ export default function User() {
   };
 
   const handleCancel = () => {
-      reset()
-      setShowForm(false)
-  }
+    reset();
+    setShowForm(false);
+  };
 
   return (
     <>
@@ -57,7 +56,14 @@ export default function User() {
                 </div>
               ))
             : null}
-            <div className="button-regular-inv" onClick={handleCancel} style={{fontSize: "15px"}}> &#8592;Back to profile</div>
+          <div
+            className="button-regular-inv"
+            onClick={handleCancel}
+            style={{ fontSize: "15px" }}
+          >
+            {" "}
+            &#8592;Back to profile
+          </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <input
               className="input-field-gray"
@@ -124,7 +130,15 @@ export default function User() {
               Delete profile
             </button>
           </div>
-          <img className="user-avatar" src={image ? image.url : "https://live.staticflickr.com/65535/51434875121_54db17d433_o.png"} alt="user" />
+          <img
+            className="user-avatar"
+            src={
+              image
+                ? image.url
+                : "https://live.staticflickr.com/65535/51434875121_54db17d433_o.png"
+            }
+            alt="user"
+          />
           <p>Hello {user_name}!</p>
           <p>
             You can create or edit your profile here. Below is the list of pets

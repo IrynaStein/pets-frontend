@@ -9,6 +9,7 @@ import { gameActions } from "../store/gameSlice";
 import WellnessBar from "../components/WellnessBar";
 import { updatePet } from "../store/petSlice";
 import Timer from "../functions/Timer";
+import Loader from "../functions/Loader";
 
 export default function GameContainer() {
   const params = useParams();
@@ -16,14 +17,14 @@ export default function GameContainer() {
   const pets = useSelector((state) => state.pets.petList);
   const pet = useSelector((state) => state.pets.pet);
   const gamePaused = useSelector((state) => state.game.gamePaused);
-const user = useSelector((state) => state.user.user);
-  
+  const user = useSelector((state) => state.user.user);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchPets());
   }, [dispatch]);
- 
+
   dispatch(petActions.gamePet(pets.find((pet) => pet.name === params.petName)));
 
   const saveGameHandler = () => {
@@ -34,23 +35,27 @@ const user = useSelector((state) => state.user.user);
   };
 
   return (
- 
-   
     <div className="game-container">
       <div className="centered-buttons">
         <Timer />
-        {user.user_name === "iryna" ?  <button onClick={pauseGameHandler} className="button-green">
-          {gamePaused ? "Resume Game" : "Pause Game"}
-        </button>: null}
-       
+        {user.user_name === "iryna" ? (
+          <button onClick={pauseGameHandler} className="button-green">
+            {gamePaused ? "Resume Game" : "Pause Game"}
+          </button>
+        ) : null}
+
         <button onClick={saveGameHandler} className="button-green">
           Save Game
         </button>
       </div>
-      {pets.length > 0 ? <>
-      <GamePet />
-      <WellnessBar /></> : "Loading"}
-    </div> 
- 
+      {pets.length > 0 ? (
+        <>
+          <GamePet />
+          <WellnessBar />
+        </>
+      ) : (
+        <Loader />
+      )}
+    </div>
   );
 }

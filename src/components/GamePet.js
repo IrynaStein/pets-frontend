@@ -1,13 +1,14 @@
 import "./GamePet.css";
 import Birthday from "../functions/Birthday";
 import { useSelector } from "react-redux";
+import Loader from "../functions/Loader";
 
 export default function GamePet() {
   
 const pet =  useSelector(state => state.pets.pet)
 const notification = useSelector(state => state.pets.notification)
 
-  if (!pet) return "Loading..."
+  if (!pet) return <Loader/>
   return (
     <> 
     {notification !== "" ? <div className="info-container"><div className="notification-container">{notification}</div></div> : <div className="info-container">
