@@ -1,4 +1,4 @@
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { createUser } from "../store/userSlice";
 import { useForm } from "react-hook-form";
