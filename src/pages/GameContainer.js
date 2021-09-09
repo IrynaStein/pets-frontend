@@ -16,8 +16,8 @@ export default function GameContainer() {
   const pets = useSelector((state) => state.pets.petList);
   const pet = useSelector((state) => state.pets.pet);
   const gamePaused = useSelector((state) => state.game.gamePaused);
-
-  console.log(pets);
+const user = useSelector((state) => state.user.user);
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -39,9 +39,10 @@ export default function GameContainer() {
     <div className="game-container">
       <div className="centered-buttons">
         <Timer />
-        <button onClick={pauseGameHandler} className="button-green">
+        {user.user_name === "iryna" ?  <button onClick={pauseGameHandler} className="button-green">
           {gamePaused ? "Resume Game" : "Pause Game"}
-        </button>
+        </button>: null}
+       
         <button onClick={saveGameHandler} className="button-green">
           Save Game
         </button>

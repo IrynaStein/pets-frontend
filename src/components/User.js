@@ -8,12 +8,13 @@ import { updateUser } from "../store/userSlice";
 export default function User() {
   const [showForm, setShowForm] = useState(false);
   const user = useSelector((state) => state.user.user);
-  const { user_name, email, avatar, id, image } = user;
+  const { user_name, email, id, image } = user;
 //   debugger;
   const errorsBe = useSelector((state) => state.user.errors);
   const preloadedValues = {
     user_name: user_name,
     email: email,
+    image: image
   };
   const dispatch = useDispatch();
   const {
@@ -96,6 +97,14 @@ export default function User() {
               {...register("email")}
             ></input>
             <br />
+            {/* <input
+            type="file"
+              className="input-field-gray"
+              name="image"
+              placeholder="image..."
+              {...register("image")}
+            ></input>
+            <br /> */}
             <div className="centered-buttons">
               <button className="button-gray" type="submit">
                 Update my profile
@@ -115,7 +124,7 @@ export default function User() {
               Delete profile
             </button>
           </div>
-          <img className="user-avatar" src={image !==null ? image.url : "https://live.staticflickr.com/65535/51434875121_54db17d433_o.png"} alt="user" />
+          <img className="user-avatar" src={image ? image.url : "https://live.staticflickr.com/65535/51434875121_54db17d433_o.png"} alt="user" />
           <p>Hello {user_name}!</p>
           <p>
             You can create or edit your profile here. Below is the list of pets

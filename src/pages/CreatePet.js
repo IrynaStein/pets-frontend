@@ -37,7 +37,7 @@ export default function CreatePet() {
   const handleSubmit = (e) => {
     console.log(formData);
     e.preventDefault();
-    dispatch(createPet(formData)).then(() => history.push("/home"));
+    dispatch(createPet(formData)).then(() => history.push("/"));
   };
 
   return (

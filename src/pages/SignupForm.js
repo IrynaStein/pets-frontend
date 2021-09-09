@@ -1,39 +1,37 @@
-import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { createUser } from "../store/userSlice";
 import { useForm } from "react-hook-form";
-import { userActions } from "../store/userSlice";
 
 function SignupForm() {
   const dispatch = useDispatch();
-  const errors = useSelector((state) => state.user.errors);
+  const errorsBE = useSelector((state) => state.user.errors);
   const history = useHistory();
-  
-  const { register, handleSubmit } = useForm();
 
+  const { register, handleSubmit } = useForm();
 
   const onSubmit = (data, e) => {
     console.log(data.image[0]);
     e.preventDefault();
     const formData = new FormData();
-    if (data.image[0]){
+    if (data.image[0]) {
       formData.append("image", data.image[0]);
       formData.append("user_name", data.user_name);
       formData.append("password", data.password);
       formData.append("password_confirmation", data.password_confirmation);
       formData.append("email", data.email);
-    } 
-    else {
+    } else {
       formData.append("user_name", data.user_name);
       formData.append("password", data.password);
       formData.append("password_confirmation", data.password_confirmation);
       formData.append("email", data.email);
     }
-      dispatch(createUser(formData));
-      history.push("/home");
+    dispatch(createUser(formData)).then(() => {
+      if (errorsBE.length === 0) {
+        history.push("/");
+      }
+    });
   };
-
 
   return (
     <div className="App">
@@ -41,12 +39,16 @@ function SignupForm() {
         &#8592;Back to Login
       </Link>
 
-      <form enctype="multipart/form-data" className="centered-form-signup" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        encType="multipart/form-data"
+        className="centered-form-signup"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <input
           className="input-field-orange"
           name="user-name"
           placeholder="user name..."
-          {...register("user_name", {required: true})}
+          {...register("user_name", { required: true })}
         ></input>
         <br />
         <input
@@ -54,7 +56,7 @@ function SignupForm() {
           name="password"
           type="password"
           placeholder="password..."
-          {...register("password", {required: true})}
+          {...register("password", { required: true })}
         ></input>
         <br />
         <input
@@ -62,132 +64,35 @@ function SignupForm() {
           name="password_confirmation"
           type="password"
           placeholder="confirm password..."
-          {...register("password_confirmation", {required: true})}
+          {...register("password_confirmation", { required: true })}
         ></input>
         <br />
         <input
           className="input-field-orange"
           name="email"
           placeholder="email..."
-          {...register("email", {required: true})}
+          {...register("email", { required: true })}
         ></input>
         <br />
-        <input className="input-field-orange" type="file" name="image" {...register("image")}></input>
-        
+        <div className="upload-btn-wrapper">
+          <button class="btn">Avatar &#128206;</button>
+          <input
+            className="input-field-orange"
+            type="file"
+            name="image"
+            {...register("image")}
+          ></input>
+        </div>
         <br />
-        <button className="button-regular" type="submit" >
-          Signup</button>
-        {errors}
+        <button className="button-regular" type="submit">
+          Signup
+        </button>
       </form>
-
+      <br />
+      {errorsBE.length !== 0 ? (
+        <div className="pop-up-message">{errorsBE}</div>
+      ) : null}
     </div>
   );
-
-
-
-
-  
-  // const defaultForm = {
-  //   user_name: "",
-  //   password: "",
-  //   password_confirmation: "",
-  //   email: "",
-  //   image: "",
-  // };
-  // const [formData, setFormdData] = useState(defaultForm);
-  // console.log(errors);
-  // // debugger;
-  // function handleChange(e) {
-  //   console.log(e.target.value);
-  //   setFormdData({ ...formData, [e.target.name]: e.target.value });
-  // }
-  // function handleFileUpload(e) {
-  //   console.log(e.target.value);
-  //   setFormdData({ ...formData, image: e.target.files[0] });
-  // }
-
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-  //   console.log(formData);
-  //   const fD = new FormData();
-  //   // debugger;
-  //   fD.append("image", formData.image);
-  //   fD.append("user_name", formData.user_name);
-  //   fD.append("password", formData.password);
-  //   fD.append("password_confirmation", formData.password_confirmation);
-  //   fD.append("email", formData.email);
-  //   // dispatch(createUser(formData))
-  //   // .then(errors.length === 0 ? history.push("/home") : () => setFormdData(defaultForm))
-  //   fetch("/signup", {
-  //     method: "POST",
-  //     credentials: "include",
-  //     body: fD,
-  //   });
-  // }
-  // return (
-  //   <div className="App">
-  //     <Link to="login">
-  //       <button className="button-regular">&#8592;Back to Login</button>
-  //     </Link>
-  //     <br />
-  //     {errors.length > 0
-  //       ? errors[0].map((err, ind) => (
-  //           <div style={{ fontSize: "12px" }}>
-  //             {ind + 1}. {err}
-  //             <br />
-  //           </div>
-  //         ))
-  //       : null}
-  //     <form className="centered-form-signup" onSubmit={handleSubmit}>
-  //       <input
-  //         className="input-field-orange"
-  //         name="user_name"
-  //         value={formData.user_name}
-  //         onChange={(e) => handleChange(e)}
-  //         placeholder="user name..."
-  //       ></input>
-  //       <br />
-  //       <input
-  //         className="input-field-orange"
-  //         type="password"
-  //         name="password"
-  //         value={formData.password}
-  //         onChange={(e) => handleChange(e)}
-  //         placeholder="password..."
-  //       ></input>
-  //       <br />
-  //       <input
-  //         className="input-field-orange"
-  //         type="password"
-  //         name="password_confirmation"
-  //         value={formData.password_confirmation}
-  //         onChange={(e) => handleChange(e)}
-  //         placeholder="confirm password..."
-  //       ></input>
-  //       <br />
-  //       <input
-  //         className="input-field-orange"
-  //         name="email"
-  //         value={formData.email}
-  //         onChange={(e) => handleChange(e)}
-  //         placeholder="email..."
-  //       ></input>
-  //       <br />
-  //       <input
-  //         id="fileupload"
-  //         type="file"
-  //         name="image"
-  //         onChange={(e) => handleFileUpload(e)}
-  //         placeholder="email..."
-  //         hidden
-  //       ></input>
-  //       <label for="fileupload">Add image</label>
-  //       <br />
-  //       <button className="button-regular-inv" type="submit">
-  //         Signup
-  //       </button>
-  //     </form>
-    // </div>
-  // );
 }
 export default SignupForm;
