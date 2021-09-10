@@ -10,6 +10,7 @@ function SignupForm() {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data, e) => {
+    console.log(data.image[0])
     e.preventDefault();
     const formData = new FormData();
     if (data.image[0]) {
@@ -71,7 +72,7 @@ function SignupForm() {
         ></input>
         <br />
         <div className="upload-btn-wrapper">
-          <button class="btn">Avatar &#128206;</button>
+          <button className="btn">Avatar &#128206;</button>
           <input
             className="input-field-orange"
             type="file"

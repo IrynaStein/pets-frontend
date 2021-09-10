@@ -20,7 +20,7 @@ function App() {
 
   useEffect(() => {
     // auto-login
-    fetch("http://localhost:5000/me", {
+    fetch("/me", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

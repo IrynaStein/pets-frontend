@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const fetchPets = createAsyncThunk("pets/fetchPets", async () => {
-  const response = await fetch("http://localhost:5000/pets", {
+  const response = await fetch("/pets", {
     method: "GET",
     credentials: "include"
   });
@@ -9,7 +9,7 @@ export const fetchPets = createAsyncThunk("pets/fetchPets", async () => {
   return data;
 });
 
-export const deletePet = createAsyncThunk("http://localhost:5000/pets/deletePet", async (id) => {
+export const deletePet = createAsyncThunk("/pets/deletePet", async (id) => {
   const response = await fetch(`pets/${id}`, { 
     method: "DELETE",
     credentials: "include" 
@@ -19,7 +19,7 @@ export const deletePet = createAsyncThunk("http://localhost:5000/pets/deletePet"
 });
 
 export const createPet = createAsyncThunk("pets/createPet", async (pet) => {
-  const response = await fetch("http://localhost:5000/pets", {
+  const response = await fetch("/pets", {
     method: "POST",
     headers: { "Content-Type": "application/json", "Accept": "application/json" },
     credentials: "include",
@@ -30,7 +30,7 @@ export const createPet = createAsyncThunk("pets/createPet", async (pet) => {
 });
 
 export const updatePet = createAsyncThunk("pets/updatePet", async (pet) => {
-  const response = await fetch(`http://localhost:5000/pets/${pet.id}`, {
+  const response = await fetch(`/pets/${pet.id}`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
     credentials: "include",
