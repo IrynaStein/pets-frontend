@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const fetchCemetery = createAsyncThunk("cemetery/fetchCemetery", async() => {
-    const response = await fetch('https://ancient-sands-09925.herokuapp.com/cemetery', {
+    const response = await fetch('http://ancient-sands-09925.herokuapp.com/cemetery', {
         method: "GET",
         credentials: "include"
     }
