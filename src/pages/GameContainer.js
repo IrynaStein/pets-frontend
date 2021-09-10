@@ -13,7 +13,6 @@ import Loader from "../functions/Loader";
 
 export default function GameContainer() {
   const params = useParams();
-  console.log(params.petName);
   const pets = useSelector((state) => state.pets.petList);
   const pet = useSelector((state) => state.pets.pet);
   const gamePaused = useSelector((state) => state.game.gamePaused);
