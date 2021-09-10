@@ -5,10 +5,6 @@ export default function Birthday({pet}){
   
     const currentAge = today - age[1];
   
-    console.log(age);
-    console.log(today);
-    console.log(currentAge);
-  
     function image() {
       switch (currentAge) {
         case 0:

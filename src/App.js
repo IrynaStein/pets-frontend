@@ -20,7 +20,7 @@ function App() {
 
   useEffect(() => {
     // auto-login
-    fetch("https://ancient-sands-09925.herokuapp.com/me", {
+    fetch("http://localhost:5000/me", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
