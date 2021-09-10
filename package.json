@@ -42,6 +42,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy": "https://ancient-sands-09925.herokuapp.com"
+  }
 }
