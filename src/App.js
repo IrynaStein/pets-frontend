@@ -38,7 +38,7 @@ function App() {
       }
     });
   }, [dispatch]);
-
+console.log(user)
   return (
     <>
       <Header />

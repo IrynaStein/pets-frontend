@@ -35,11 +35,13 @@ export const onLogin = createAsyncThunk("user/onLogin", async (user) => {
 export const onLogout = createAsyncThunk("user/onLogout", async() => {
     const response = await fetch("/logout", {
         method: "DELETE",
-        credentials: "include"
+        // credentials: "include"
     })
-    const data = await response.json()
-    console.log(data)
-    return data
+    console.log(response)
+    // const data = await response.json()
+    // console.log(data)
+    // return data
+    return {}
 })
 
 export const updateUser = createAsyncThunk(
@@ -157,9 +159,11 @@ const userSlice = createSlice({
     },
     [onLogout.pending](state){
         state.status = "pending"
+
     },
     [onLogout.fulfilled](state, action){
         state.status = "completed"
+        console.log(action.payload)
         if (action.payload.errors){
             state.errors = action.payload.errors
         }
@@ -169,6 +173,7 @@ const userSlice = createSlice({
         }
     },
     [onLogout.rejected](state, action){
+      console.log(action.payload)
         if (action.payload) {
             state.errors = action.payload.errorMessage;
           } else {
