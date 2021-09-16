@@ -35,13 +35,10 @@ export const onLogin = createAsyncThunk("user/onLogin", async (user) => {
 export const onLogout = createAsyncThunk("user/onLogout", async() => {
     const response = await fetch("/logout", {
         method: "DELETE",
-        // credentials: "include"
+        credentials: "include"
     })
-    console.log(response)
-    // const data = await response.json()
-    // console.log(data)
-    // return data
-    return {}
+    const data = await response.json()
+    return data
 })
 
 export const updateUser = createAsyncThunk(

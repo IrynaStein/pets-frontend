@@ -87,7 +87,7 @@ function SignupForm() {
       </form>
       <br />
       {errorsBE.length !== 0 ? (
-        <div className="pop-up-message">{errorsBE}</div>
+        <div className="pop-up-message-signup">{errorsBE}</div>
       ) : null}
     </div>
   );

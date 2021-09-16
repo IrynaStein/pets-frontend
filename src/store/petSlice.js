@@ -201,11 +201,17 @@ const petSlice = createSlice({
       state.status = "loading";
     },
     [createPet.fulfilled](state, action) {
+
       state.status = "completed";
-     
+      // debugger;
       if (action.payload.errors) {
+        // debugger;
         state.errors = action.payload.errors
-      } else {
+      }
+      else if (action.payload.error){
+        state.errors = "Please make sure that all fields are completed"
+      } 
+      else {
         state.petList.push(action.payload);
         state.errors = [];
       }

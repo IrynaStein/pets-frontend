@@ -189,7 +189,20 @@ button[disabled] {
   opacity: 0;
 }
 
-.pop-up-message {
+.pop-up-message-create{
+  display: flex;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.7);
+  overflow: scroll;
+  border-radius: 10px;
+  padding: 5px;
+  position: relative;
+  bottom: 40px;
+  box-shadow: 1px 2px 3px 3px #ff8787;
+  text-decoration: none;
+}
+
+.pop-up-message-signup {
   display: flex;
   justify-content: center;
   background: rgba(255, 255, 255, 0.7);

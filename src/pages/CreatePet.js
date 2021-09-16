@@ -37,13 +37,22 @@ export default function CreatePet() {
   const handleSubmit = (e) => {
     console.log(formData);
     e.preventDefault();
-    dispatch(createPet(formData)).then(() => history.push("/"));
+    dispatch(createPet(formData)).then( ()=> {
+      if (errors){
+        return errors
+      }
+      else {
+       history.push("/")
+      }
+    }
+    );
   };
 
   return (
     <div>
-      <>{errors}</>
+    
       <form className="createform-container" onSubmit={handleSubmit}>
+      
         <label style={{fontSize: "20px"}}>Choose your pet's breed</label>
         <div className="feature-container">
           <div className="feature-item">
@@ -190,6 +199,7 @@ export default function CreatePet() {
           Create
         </button>
       </form>
+      <div> {errors.length > 0 ? <div className="pop-up-message-create">{errors}</div> : null}</div>
     </div>
   );
 }
